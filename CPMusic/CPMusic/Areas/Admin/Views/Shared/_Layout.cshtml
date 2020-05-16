@@ -1,0 +1,58 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CPMusic - @ViewData["Title"]</title>
+    <meta name="description" content=""/>
+    <meta name="author" content="Chu Phong">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/img/brand/favicon.png" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="~/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" type="text/css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/css/argon.css" type="text/css">
+</head>
+<body>
+    <!-- Sidenav -->
+    <partial name="Partials/_SidenavPartial"/>
+
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+        <!-- Navbar -->
+        <partial name="Partials/_NavbarPartial"/>
+
+        <!-- Header -->
+        <partial name="Partials/_HeaderPartial"/>
+
+        <!-- Page Content -->
+        <div class="container-fluid mt--6">
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <partial name="Partials/_FooterPartial"/>
+    </div>
+
+    <!-- Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-scroll-lock@3.1.3/jquery-scrollLock.min.js"></script>
+
+    <!-- Optional JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="~/vendor/chart.js/dist/Chart.extension.js"></script>
+
+    <script src="~/js/argon.js"></script>
+
+    @await RenderSectionAsync("Scripts", false)
+</body>
+</html>
