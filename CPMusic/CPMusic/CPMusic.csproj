@@ -16,13 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Areas\Identity\Pages\Account\_Layout.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="Resources\DataAnnotations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DataAnnotations.Designer.cs</LastGenOutput>
@@ -44,6 +37,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Validation.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Pages\Shared\_Layout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
