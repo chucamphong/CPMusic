@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization
+
+@functions
+{
+    private static string ToTitleCase(string text)
+    {
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(text);
+    }
+}
+
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +39,7 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-md-10 px-5">
-                            <h1 class="text-white">Chào Mừng</h1>
+                            <h1 class="text-white">@ToTitleCase(ViewData["Title"].ToString())</h1>
                             <p class="text-lead text-white">Chúc bạn một ngày tốt lành</p>
                         </div>
                     </div>
