@@ -12,6 +12,8 @@ namespace CPMusic.Data
         
         // Bảng nghệ sĩ
         public DbSet<Artist> Artists { get; set; } = null!;
+
+        public DbSet<Category> Categories { get; set; } = null!;
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

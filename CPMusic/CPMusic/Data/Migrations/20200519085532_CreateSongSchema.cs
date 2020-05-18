@@ -20,11 +20,13 @@ namespace CPMusic.Data.Migrations
                     Thumbnail = builder.Column<string>(maxLength: 255),
                     Url = builder.Column<string>(maxLength: 255),
                     Year = builder.Column<ushort>(),
-                    Views = builder.Column<ulong>(defaultValue: 0)
+                    Views = builder.Column<ulong>(defaultValue: 0),
+                    CategoryId = builder.Column<int>()
                 },
                 constraints: builder =>
                 {
                     builder.PrimaryKey("PK_SongId", col => col.Id);
+                    builder.ForeignKey("FK_Song_CategoryId", col => col.CategoryId, "Categories", "Id");
                 }
             );
         }
