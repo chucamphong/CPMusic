@@ -30,6 +30,7 @@ namespace CPMusic.Areas.Identity.Pages.Account
         {
             [Required(ErrorMessage = "Required")]
             [Display(Name = "Tài khoản")]
+            [StringLength(30, MinimumLength = 6, ErrorMessage = "StringLength")]
             public string? UserName { get; set; }
 
             [Required(ErrorMessage = "Required")]

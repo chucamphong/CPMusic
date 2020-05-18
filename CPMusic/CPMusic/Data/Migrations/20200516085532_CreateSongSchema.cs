@@ -1,7 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CPMusic.Data.Migrations
 {
+    /// <summary>
+    /// Tạo bảng bài hát
+    /// </summary>
+    /// ReSharper disable once UnusedType.Global
     public partial class CreateSongSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -10,7 +15,12 @@ namespace CPMusic.Data.Migrations
                 "Songs",
                 builder => new {
                     Id = builder.Column<int>(),
-                    Name = builder.Column<string>()
+                    Name = builder.Column<string>(maxLength: 255),
+                    OtherName = builder.Column<string>(maxLength: 255, nullable: true),
+                    Thumbnail = builder.Column<string>(maxLength: 255),
+                    Url = builder.Column<string>(maxLength: 255),
+                    Year = builder.Column<ushort>(),
+                    Views = builder.Column<ulong>(defaultValue: 0)
                 },
                 constraints: builder =>
                 {

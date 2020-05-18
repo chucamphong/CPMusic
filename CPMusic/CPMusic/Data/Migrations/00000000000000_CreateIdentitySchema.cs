@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CPMusic.Data.Migrations
 {
+    /// <summary>
+    /// Tạo bảng để phục vụ cho việc đăng nhập, đăng ký, phân quyền
+    /// </summary>
+    /// ReSharper disable once UnusedType.Global
     public partial class CreateIdentitySchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,21 +30,21 @@ namespace CPMusic.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(),
+                    UserName = table.Column<string>(maxLength: 30),
+                    NormalizedUserName = table.Column<string>(maxLength: 30),
+                    Email = table.Column<string>(maxLength: 255),
+                    NormalizedEmail = table.Column<string>(maxLength: 255),
+                    EmailConfirmed = table.Column<bool>(),
+                    PasswordHash = table.Column<string>(),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    PhoneNumberConfirmed = table.Column<bool>(),
+                    TwoFactorEnabled = table.Column<bool>(),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    LockoutEnabled = table.Column<bool>(),
+                    AccessFailedCount = table.Column<int>()
                 },
                 constraints: table =>
                 {
@@ -191,30 +195,38 @@ namespace CPMusic.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+            
+            migrationBuilder.RenameTable("AspNetRoleClaims", "dbo", "RoleClaims", "dbo");
+            migrationBuilder.RenameTable("AspNetUserClaims", "dbo", "UserClaims", "dbo");
+            migrationBuilder.RenameTable("AspNetUserLogins", "dbo", "UserLogins", "dbo");
+            migrationBuilder.RenameTable("AspNetUserRoles", "dbo", "UserRoles", "dbo");
+            migrationBuilder.RenameTable("AspNetUserTokens", "dbo", "UserTokens", "dbo");
+            migrationBuilder.RenameTable("AspNetRoles", "dbo", "Roles", "dbo");
+            migrationBuilder.RenameTable("AspNetUsers", "dbo", "Users", "dbo");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                name: "RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                name: "UserClaims");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                name: "UserLogins");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Users");
         }
     }
 }
