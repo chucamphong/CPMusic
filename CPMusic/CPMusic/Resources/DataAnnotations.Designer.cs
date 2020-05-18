@@ -61,11 +61,29 @@ namespace CPMusic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} không khớp.
+        /// </summary>
+        public static string ComparePassword {
+            get {
+                return ResourceManager.GetString("ComparePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} không được để trống.
         /// </summary>
         public static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} tối thiểu {2} ký tự và tối đa {1} ký tự.
+        /// </summary>
+        public static string StringLength {
+            get {
+                return ResourceManager.GetString("StringLength", resourceCulture);
             }
         }
     }

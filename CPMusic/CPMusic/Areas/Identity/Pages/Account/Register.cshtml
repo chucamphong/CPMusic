@@ -1,0 +1,77 @@
+﻿@page
+@model RegisterModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["Title"] = "Đăng ký";
+}
+
+<div class="card bg-secondary border-0 mb-0">
+    <div class="card-body px-lg-5 py-lg-5">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="form-group">
+                <div class="input-group input-group-merge input-group-alternative mb-3">
+                    <label asp-for="Input.UserName" class="input-group-prepend mb-0">
+                        <span class="input-group-text">
+                            <i class="ni ni-single-02"></i>
+                        </span>
+                    </label>
+                    <input asp-for="Input.UserName" class="form-control" placeholder="Nhập họ và tên"/>
+                    <span asp-validation-for="Input.UserName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-merge input-group-alternative mb-3">
+                    <label asp-for="Input.Email" class="input-group-prepend mb-0">
+                        <span class="input-group-text">
+                            <i class="ni ni-email-83"></i>
+                        </span>
+                    </label>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Nhập địa chỉ email"/>
+                    <span asp-validation-for="Input.Email"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-merge input-group-alternative mb-3">
+                    <label asp-for="Input.Password" class="input-group-prepend mb-0">
+                        <span class="input-group-text">
+                            <i class="ni ni-lock-circle-open"></i>
+                        </span>
+                    </label>
+                    <input asp-for="Input.Password" class="form-control" placeholder="Nhập mật khẩu"/>
+                    <span asp-validation-for="Input.Password"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-merge input-group-alternative">
+                    <label asp-for="Input.Password" class="input-group-prepend mb-0">
+                        <span class="input-group-text">
+                            <i class="ni ni-lock-circle-open"></i>
+                        </span>
+                    </label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Nhập lại mật khẩu"/>
+                    <span asp-validation-for="Input.ConfirmPassword"></span>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary mt-4">Tạo tài khoản</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <a asp-controller="Home" asp-action="Index" class="text-light">
+            <small>Quay về trang chủ</small>
+        </a>
+    </div>
+    <div class="col text-right">
+        <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/" class="text-light">
+            <small>Đăng nhập</small>
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
