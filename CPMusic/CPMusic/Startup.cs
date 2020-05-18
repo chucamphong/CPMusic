@@ -1,4 +1,5 @@
 using CPMusic.Data;
+using CPMusic.Helpers;
 using CPMusic.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,8 @@ namespace CPMusic
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddErrorDescriber<CustomIdentityErrorDescriber>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
             
             services.AddControllersWithViews();
             
