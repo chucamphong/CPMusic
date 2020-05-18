@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
+// ReSharper disable ClassNeverInstantiated.Global
+
 namespace CPMusic.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -20,23 +22,26 @@ namespace CPMusic.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel Input { get; set; } = null!;
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; private set; }
 
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         [TempData]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
 
         public class InputModel
         {
             [Required(ErrorMessage = "Required")]
             [Display(Name = "Tài khoản")]
-            public string UserName { get; set; }
+            [StringLength(30, MinimumLength = 6, ErrorMessage = "StringLength")]
+            public string? UserName { get; set; }
 
             [Required(ErrorMessage = "Required")]
             [Display(Name = "Mật khẩu")]
             [DataType(DataType.Password)]
-            public string Password { get; set; }
+            public string? Password { get; set; }
 
             [Display(Name = "Ghi nhớ đăng nhập?")]
             public bool RememberMe { get; set; }
@@ -48,12 +53,14 @@ namespace CPMusic.Areas.Identity.Pages.Account
         /// ReSharper disable once UnusedMember.Global
         public async Task<IActionResult> OnGetAsync(string? returnUrl)
         {
+            ReturnUrl = returnUrl ?? Url.Content("~/");
+
             // Nếu đã đăng nhập rồi thì chuyển về trang chủ
             if (_signInManager.IsSignedIn(User))
             {
-                return LocalRedirect("~/");
+                return LocalRedirect(ReturnUrl);
             }
-
+            
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -61,8 +68,6 @@ namespace CPMusic.Areas.Identity.Pages.Account
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            ReturnUrl = returnUrl ?? Url.Content("~/");
 
             return Page();
         }
