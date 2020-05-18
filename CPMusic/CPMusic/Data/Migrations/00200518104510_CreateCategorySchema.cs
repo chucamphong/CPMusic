@@ -2,6 +2,10 @@
 
 namespace CPMusic.Data.Migrations
 {
+    /// <summary>
+    /// Tạo bảng thể loại
+    /// </summary>
+    /// ReSharper disable once UnusedType.Global
     public partial class CreateCategorySchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
