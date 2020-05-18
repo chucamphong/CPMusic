@@ -120,6 +120,9 @@
   <data name="ComparePassword" xml:space="preserve">
     <value>{0} không khớp</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Địa chỉ email không hợp lệ</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>{0} không được để trống</value>
   </data>

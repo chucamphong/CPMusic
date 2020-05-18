@@ -70,6 +70,15 @@ namespace CPMusic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Địa chỉ email không hợp lệ.
+        /// </summary>
+        public static string EmailAddress {
+            get {
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} không được để trống.
         /// </summary>
         public static string Required {
