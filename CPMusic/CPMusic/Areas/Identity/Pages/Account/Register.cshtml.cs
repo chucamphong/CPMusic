@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using CPMusic.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,10 @@ namespace CPMusic.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
-        public RegisterModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public RegisterModel(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -80,7 +81,7 @@ namespace CPMusic.Areas.Identity.Pages.Account
             // ReSharper disable once InvertIf
             if (ModelState.IsValid)
             {
-                IdentityUser user = new IdentityUser {UserName = Input.UserName, Email = Input.Email};
+                User user = new User {UserName = Input.UserName, Email = Input.Email};
                 IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
 
                 // Tạo tài khoản thành công thì đăng nhập
