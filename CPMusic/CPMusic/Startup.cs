@@ -33,8 +33,10 @@ namespace CPMusic
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
-            }).AddErrorDescriber<CustomIdentityErrorDescriber>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            })
+                .AddRoles<IdentityRole>()
+                .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             
             services.AddControllersWithViews();
             
