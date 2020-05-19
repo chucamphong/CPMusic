@@ -232,17 +232,21 @@ namespace CPMusic.Migrations
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Nhạc trẻ" });
+                values: new object[,]
+                {
+                    { 1, "Nhạc trẻ" },
+                    { 2, "Nhạc Hàn Quốc" },
+                    { 3, "Nhạc Trung Quốc" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Nhạc Hàn Quốc" });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 3, "Nhạc Trung Quốc" });
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "eb1cec5f-30f7-49c8-bf0d-4ab87be2960f", "b3b23433-f4d5-4977-bc0c-1f24b8824358", "Admin", "ADMIN" },
+                    { "464180ce-21d7-4138-b671-0c6eb4ed4791", "29ec5fb0-8166-49bd-92fb-6ed1f21bde44", "Member", "MEMBER" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Artists_Name",

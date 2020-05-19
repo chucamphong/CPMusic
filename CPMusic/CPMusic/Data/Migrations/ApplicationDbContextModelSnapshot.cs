@@ -230,6 +230,22 @@ namespace CPMusic.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "eb1cec5f-30f7-49c8-bf0d-4ab87be2960f",
+                            ConcurrencyStamp = "b3b23433-f4d5-4977-bc0c-1f24b8824358",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "464180ce-21d7-4138-b671-0c6eb4ed4791",
+                            ConcurrencyStamp = "29ec5fb0-8166-49bd-92fb-6ed1f21bde44",
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

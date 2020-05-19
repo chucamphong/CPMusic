@@ -33,6 +33,20 @@ namespace CPMusic.Data
             builder.Entity<IdentityRole>().ToTable("Roles");
 
             #endregion
+            
+            #region Bảng Roles
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            });
+            
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "Member",
+                NormalizedName = "MEMBER"
+            });
+            #endregion
 
             #region Bảng nghệ sĩ
 
