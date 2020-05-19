@@ -87,6 +87,7 @@ namespace CPMusic.Areas.Identity.Pages.Account
                 // Tạo tài khoản thành công thì đăng nhập
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Member");
                     await _signInManager.SignInAsync(user, false);
                     return LocalRedirect(ReturnUrl);
                 }
