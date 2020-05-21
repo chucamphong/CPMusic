@@ -103,6 +103,9 @@ namespace CPMusic.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -234,15 +237,15 @@ namespace CPMusic.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eb1cec5f-30f7-49c8-bf0d-4ab87be2960f",
-                            ConcurrencyStamp = "b3b23433-f4d5-4977-bc0c-1f24b8824358",
+                            Id = "47fd1f27-e443-4cdc-b893-0ced52941fc8",
+                            ConcurrencyStamp = "f1022951-6ba1-4b5a-8191-638fe46c1fb6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "464180ce-21d7-4138-b671-0c6eb4ed4791",
-                            ConcurrencyStamp = "29ec5fb0-8166-49bd-92fb-6ed1f21bde44",
+                            Id = "4dbc207b-e770-4094-90d3-6a5b3dc3f575",
+                            ConcurrencyStamp = "9760fb8d-3d7a-41ef-b2e3-4743546251b6",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
