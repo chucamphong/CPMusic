@@ -41,7 +41,7 @@ namespace CPMusic
             services.AddControllersWithViews();
             
             services.AddRazorPages();
-
+            
             services.AddMvc()
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>

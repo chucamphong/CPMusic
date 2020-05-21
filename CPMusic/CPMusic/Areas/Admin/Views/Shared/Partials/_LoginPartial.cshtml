@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<ul class="navbar-nav align-items-center ml-auto ml-md-0">
+
+    <li class="nav-item dropdown">
+
+        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                    @if (string.IsNullOrEmpty(user.Avatar?.Trim()))
+                    {
+                        <img src="~/img/theme/team-4.jpg" alt="@User.Identity.Name"/>
+                    }
+                    else
+                    {
+                        <img src="@user.Avatar" alt="@User.Identity.Name"/>
+                    }
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                    <span class="mb-0 text-sm font-weight-bold">@User.Identity.Name</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </div>
+    </li>
+</ul>

@@ -18,23 +18,59 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="~/css/argon.css" type="text/css">
+    
+    @await RenderSectionAsync("Styles", false);
 </head>
 <body>
     <!-- Sidenav -->
     <partial name="Partials/_SidenavPartial"/>
 
-    <!-- Main content -->
     <div class="main-content" id="panel">
         <!-- Navbar -->
         <partial name="Partials/_NavbarPartial"/>
 
         <!-- Header -->
-        <partial name="Partials/_HeaderPartial"/>
+        <header class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0">@ViewData["Title"]</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item">
+                                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                            <i class="fas fa-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        @ViewData["Title"]
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- Card stats -->
+                    @await RenderSectionAsync("HeaderCardStats", false)                    
+                </div>
+            </div>
+        </header>
 
-        <!-- Page Content -->
-        <div class="container-fluid mt--6">
-            @RenderBody()
-        </div>
+        <!-- Main content -->
+        <main class="container-fluid mt--6">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header bg-transparent">
+                            <h3 class="mb-0">@ViewData["CardHeader"]</h3>
+                        </div>
+                        <div class="card-body">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
 
         <!-- Footer -->
         <partial name="Partials/_FooterPartial"/>
