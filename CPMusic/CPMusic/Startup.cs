@@ -1,4 +1,6 @@
 using CPMusic.Data;
+using CPMusic.Data.Interfaces;
+using CPMusic.Data.Repositories;
 using CPMusic.Helpers;
 using CPMusic.Models;
 using CPMusic.Resources;
@@ -46,6 +48,11 @@ namespace CPMusic
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                         factory.Create(typeof(DataAnnotations));
                 });
+
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
