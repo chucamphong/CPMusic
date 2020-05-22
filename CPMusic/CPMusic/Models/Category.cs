@@ -1,13 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CPMusic.Models.Interfaces;
 
 namespace CPMusic.Models
 {
-    public class Category
+    /// <summary>
+    /// Bảng thể loại
+    /// </summary>
+    public class Category : IEntity
     {
-        public int Id { get; set; }
+        /// <summary>
+        /// ID thể loại
+        /// </summary>
+        public Guid Id { get; set; } = Guid.NewGuid();
 
+        /// <summary>
+        /// Tên thể loại
+        /// </summary>
         public string Name { get; set; } = null!;
 
-        public ICollection<Song> Songs { get; set; } = null!;
+        /// <summary>
+        /// Ngày thêm thể loại vào trong cơ sở dữ liệu
+        /// </summary>
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// Danh sách bài hát thuộc thể loại này
+        /// </summary>
+        public ICollection<Song> Songs { get; set; } = new LinkedList<Song>();
     }
 }

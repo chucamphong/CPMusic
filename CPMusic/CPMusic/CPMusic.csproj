@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200519120819_CreateDatabase.cs" />
-    <Compile Remove="Migrations\20200519120819_CreateDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20200519121709_CreateDatabase.cs" />
-    <Compile Remove="Migrations\20200519121709_CreateDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20200519122712_CreateDatabase.cs" />
-    <Compile Remove="Migrations\20200519122712_CreateDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20200519122826_CreateDatabase.cs" />
-    <Compile Remove="Migrations\20200519122826_CreateDatabase.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200519120819_CreateDatabase.cs" />
+    <Compile Remove="Data\Migrations\20200519120819_CreateDatabase.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200519121709_CreateDatabase.cs" />
+    <Compile Remove="Data\Migrations\20200519121709_CreateDatabase.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200519122712_CreateDatabase.cs" />
+    <Compile Remove="Data\Migrations\20200519122712_CreateDatabase.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200519122826_CreateDatabase.cs" />
+    <Compile Remove="Data\Migrations\20200519122826_CreateDatabase.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,6 +59,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Config\" />
   </ItemGroup>
 
 </Project>

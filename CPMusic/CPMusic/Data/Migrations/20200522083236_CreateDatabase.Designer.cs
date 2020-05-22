@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CPMusic.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200521133913_CreateDatabase")]
+    [Migration("20200522083236_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,14 +23,16 @@ namespace CPMusic.Migrations
 
             modelBuilder.Entity("CPMusic.Models.Artist", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -38,33 +40,68 @@ namespace CPMusic.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Avatar")
+                        .IsUnique();
+
                     b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Artists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"),
+                            Avatar = "Image/ChiPu.png",
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(5125),
+                            Name = "Chi Pu"
+                        },
+                        new
+                        {
+                            Id = new Guid("de704ce1-72de-48a2-bd9a-71e2d57bfab0"),
+                            Avatar = "Image/BlackPink.png",
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(6726),
+                            Name = "BlackPink"
+                        },
+                        new
+                        {
+                            Id = new Guid("7b6409e9-50c7-44a6-9c9d-c3b576d966b9"),
+                            Avatar = "Image/VoHoangYen.png",
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(6752),
+                            Name = "Võ Hoàng Yến"
+                        });
                 });
 
             modelBuilder.Entity("CPMusic.Models.ArtistSong", b =>
                 {
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ArtistId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("SongId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SongId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ArtistId", "SongId");
 
                     b.HasIndex("SongId");
 
                     b.ToTable("ArtistSong");
+
+                    b.HasData(
+                        new
+                        {
+                            ArtistId = new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"),
+                            SongId = new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5")
+                        });
                 });
 
             modelBuilder.Entity("CPMusic.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -80,30 +117,76 @@ namespace CPMusic.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(6412),
                             Name = "Nhạc trẻ"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"),
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(7705),
                             Name = "Nhạc Hàn Quốc"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"),
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(7736),
                             Name = "Nhạc Trung Quốc"
+                        });
+                });
+
+            modelBuilder.Entity("CPMusic.Models.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"),
+                            ConcurrencyStamp = "7a98b3b4-2283-43fc-a89b-de4a527f907a",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"),
+                            ConcurrencyStamp = "64a2fc61-f20a-4482-982c-e6b2a97177a9",
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
                         });
                 });
 
             modelBuilder.Entity("CPMusic.Models.Song", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -126,8 +209,8 @@ namespace CPMusic.Migrations
                     b.Property<decimal>("Views")
                         .HasColumnType("decimal(20,0)");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
+                    b.Property<long>("Year")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -140,12 +223,27 @@ namespace CPMusic.Migrations
                         .IsUnique();
 
                     b.ToTable("Songs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 193, DateTimeKind.Local).AddTicks(2936),
+                            Name = "Anh ơi ở lại",
+                            OtherName = "Cám Tấm",
+                            Thumbnail = "Images/AnhOiOLai.png",
+                            Url = "Url/AnhOiOLai.mp3",
+                            Views = 3213213213m,
+                            Year = 2019L
+                        });
                 });
 
             modelBuilder.Entity("CPMusic.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -156,6 +254,9 @@ namespace CPMusic.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -169,6 +270,10 @@ namespace CPMusic.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
@@ -208,52 +313,29 @@ namespace CPMusic.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("Roles");
 
                     b.HasData(
                         new
                         {
-                            Id = "47fd1f27-e443-4cdc-b893-0ced52941fc8",
-                            ConcurrencyStamp = "f1022951-6ba1-4b5a-8191-638fe46c1fb6",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "4dbc207b-e770-4094-90d3-6a5b3dc3f575",
-                            ConcurrencyStamp = "9760fb8d-3d7a-41ef-b2e3-4743546251b6",
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
+                            Id = new Guid("0336da83-36b2-49d2-ae14-be954ad51370"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5e67d59c-9058-4d72-b7b0-d53da9ba7842",
+                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 179, DateTimeKind.Local).AddTicks(5846),
+                            Email = "chucamphong1999@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Chu Cẩm Phong",
+                            NormalizedEmail = "CHUCAMPHONG1999@GMAIL.COM",
+                            NormalizedUserName = "CHUCAMPHONG",
+                            PasswordHash = "AQAAAAEAACcQAAAAEInAYIelkRl1jSqhM7wJSpjpMw/8a8JKjiHFvLPbdSFItlX57xsrOc5g316q8Y5nxQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1551209c-0ad7-45e3-8b87-51642dc88d0b",
+                            TwoFactorEnabled = false,
+                            UserName = "chucamphong"
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -266,9 +348,8 @@ namespace CPMusic.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -277,7 +358,7 @@ namespace CPMusic.Migrations
                     b.ToTable("RoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,9 +371,8 @@ namespace CPMusic.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -301,7 +381,7 @@ namespace CPMusic.Migrations
                     b.ToTable("UserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(128)")
@@ -314,9 +394,8 @@ namespace CPMusic.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -325,25 +404,32 @@ namespace CPMusic.Migrations
                     b.ToTable("UserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("0336da83-36b2-49d2-ae14-be954ad51370"),
+                            RoleId = new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae")
+                        });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(128)")
@@ -385,16 +471,16 @@ namespace CPMusic.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("CPMusic.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("CPMusic.Models.User", null)
                         .WithMany()
@@ -403,7 +489,7 @@ namespace CPMusic.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("CPMusic.Models.User", null)
                         .WithMany()
@@ -412,9 +498,9 @@ namespace CPMusic.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("CPMusic.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -427,7 +513,7 @@ namespace CPMusic.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("CPMusic.Models.User", null)
                         .WithMany()

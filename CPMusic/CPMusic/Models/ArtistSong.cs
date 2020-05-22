@@ -1,13 +1,24 @@
-﻿namespace CPMusic.Models
+﻿using System;
+
+namespace CPMusic.Models
 {
+    /// <summary>
+    /// Lớp này thể hiện quan hệ n - n giữa bảng nghệ sĩ và thể loại
+    /// </summary>
     public class ArtistSong
     {
-        public int ArtistId { get; set; }
-        
-        public Artist Artist { get; set; }
-        
-        public int SongId { get; set; }
-        
-        public Song Song { get; set; }
+        /// <summary>
+        /// ID nghệ sĩ
+        /// </summary>
+        public Guid ArtistId { get; set; }
+
+        // Nghệ sĩ
+        public Artist Artist { get; set; } = null!;
+
+        // ID bài hát
+        public Guid SongId { get; set; }
+
+        // Bài hát
+        public Song Song { get; set; } = null!;
     }
 }
