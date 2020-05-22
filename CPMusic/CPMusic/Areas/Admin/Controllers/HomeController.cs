@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using CPMusic.Areas.Admin.Models;
 using CPMusic.Data;
 using CPMusic.Models;
 using CPMusic.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CPMusic.Areas.Admin.Controllers
 {
@@ -17,64 +20,59 @@ namespace CPMusic.Areas.Admin.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
 
-        public class StaticialStats
-        {
-            public string Name { get; set; } = null!;
-            public int Total { get; set; }
-            public double Percent { get; set; }
-        }
-
         public HomeController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        private (int, double) EntityGrowth(IQueryable<IEntity> entity)
+        private async Task<(int, double)> EntityGrowth(IQueryable<IEntity> entity)
         {
             double growth = 0;
             int month = DateTime.Now.Month;
-            int totalNumberOfEntityPrevMonth = entity.Count(col => col.CreatedAt.Month == month - 1);
-            int totalNumberOfEntityThisMonth = entity.Count(col => col.CreatedAt.Month == month);
-            int totalNumberOfEntity = entity.Count();
-
-            if (totalNumberOfEntityPrevMonth == 0)
+            var record = await entity.Select(_ => new
             {
-                growth = totalNumberOfEntityThisMonth;
+                prevMonth = entity.Count(col => col.CreatedAt.Month == month - 1),
+                thisMonth = entity.Count(col => col.CreatedAt.Month == month),
+                total = entity.Select(col => col.Id).Count(),
+            }).Distinct().SingleAsync();
+
+            if (record.prevMonth == 0)
+            {
+                growth = record.thisMonth;
             }
 
-            if (totalNumberOfEntityPrevMonth != 0)
+            if (record.prevMonth != 0)
             {
-                growth = (totalNumberOfEntityThisMonth - totalNumberOfEntityPrevMonth) /
-                         (double)totalNumberOfEntityPrevMonth;
+                growth = (record.thisMonth - record.prevMonth) / (double) record.prevMonth;
             }
 
-            return (totalNumberOfEntity, growth);
+            return (record.total, growth);
         }
 
         // GET
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<StaticialStats> staticialStatses = new List<StaticialStats>();
+            List<Statistical> statisticals = new List<Statistical>();
 
-            var (totalNumberOfSongsThisMonth, songGrowth) = EntityGrowth(_context.Songs);
-            var (totalNumberOfUsersThisMonth, userGrowth) = EntityGrowth(_userManager.Users);
+            (int totalNumberOfSongs, double songGrowth) = await EntityGrowth(_context.Songs);
+            (int totalNumberOfUsers, double userGrowth) = await EntityGrowth(_userManager.Users);
 
-            staticialStatses.Add(new StaticialStats
+            statisticals.Add(new Statistical
             {
                 Name = "Bài hát",
-                Total = totalNumberOfSongsThisMonth,
-                Percent = songGrowth
+                Total = totalNumberOfSongs,
+                Percent = songGrowth,
             });
 
-            staticialStatses.Add(new StaticialStats
+            statisticals.Add(new Statistical
             {
                 Name = "Người dùng",
-                Total = totalNumberOfUsersThisMonth,
-                Percent = userGrowth
+                Total = totalNumberOfUsers,
+                Percent = userGrowth,
             });
 
-            return View(staticialStatses);
+            return View(statisticals);
         }
     }
 }
