@@ -3,6 +3,7 @@ using CPMusic.Data.Config;
 using CPMusic.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace CPMusic.Data
 {
@@ -12,8 +13,17 @@ namespace CPMusic.Data
         public DbSet<Artist> Artists { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
 
+        public static readonly ILoggerFactory LoggerFactory
+            = Microsoft.Extensions.Logging.LoggerFactory.Create(builder => { builder.AddConsole(); });
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLoggerFactory(LoggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
