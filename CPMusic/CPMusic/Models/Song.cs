@@ -47,7 +47,7 @@ namespace CPMusic.Models
         /// <summary>
         /// Thể loại của bài hát
         /// </summary>
-        public Category Category { get; set; } = null!;
+        public virtual Category Category { get; set; } = null!;
 
         /// <summary>
         /// Ngày mà bài hát được tạo trong cơ sở dữ liệu
@@ -58,6 +58,6 @@ namespace CPMusic.Models
         /// Danh sách nghệ sĩ hát bài hát này
         /// Có thể là 1 nghệ sĩ hoặc nhiều nghệ sĩ
         /// </summary>
-        public ICollection<ArtistSong> ArtistSongs { get; set; } = new LinkedList<ArtistSong>();
+        public virtual ICollection<ArtistSong> ArtistSongs { get; set; } = new LinkedList<ArtistSong>();
     }
 }

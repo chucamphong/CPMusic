@@ -27,6 +27,6 @@ namespace CPMusic.Models
         /// <summary>
         /// Danh sách bài hát thuộc thể loại này
         /// </summary>
-        public ICollection<Song> Songs { get; set; } = new LinkedList<Song>();
+        public virtual ICollection<Song> Songs { get; set; } = new LinkedList<Song>();
     }
 }

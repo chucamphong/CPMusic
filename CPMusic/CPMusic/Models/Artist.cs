@@ -32,6 +32,6 @@ namespace CPMusic.Models
         /// <summary>
         /// Danh sách bài hát mà nghệ sĩ này hát
         /// </summary>
-        public ICollection<ArtistSong> ArtistSongs { get; set; } = new LinkedList<ArtistSong>();
+        public virtual ICollection<ArtistSong> ArtistSongs { get; set; } = new LinkedList<ArtistSong>();
     }
 }
