@@ -1,5 +1,5 @@
 ﻿using System;
-using CPMusic.Models.Interfaces;
+using CPMusic.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace CPMusic.Models

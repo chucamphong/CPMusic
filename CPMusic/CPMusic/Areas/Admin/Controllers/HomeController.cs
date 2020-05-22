@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CPMusic.Areas.Admin.Models;
 using CPMusic.Data;
 using CPMusic.Models;
-using CPMusic.Models.Interfaces;
+using CPMusic.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

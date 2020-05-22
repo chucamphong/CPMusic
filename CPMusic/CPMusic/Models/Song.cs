@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CPMusic.Models.Interfaces;
+using CPMusic.Data.Interfaces;
 
 namespace CPMusic.Models
 {

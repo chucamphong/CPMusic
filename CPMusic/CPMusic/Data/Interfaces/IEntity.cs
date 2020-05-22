@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CPMusic.Models.Interfaces
+namespace CPMusic.Data.Interfaces
 {
     public interface IEntity : IEntity<Guid>
     {
