@@ -18,7 +18,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="~/css/argon.css" type="text/css">
-    
+
     @await RenderSectionAsync("Styles", false);
 </head>
 <body>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <!-- Card stats -->
-                    @await RenderSectionAsync("HeaderCardStats", false)                    
+                    @await RenderSectionAsync("HeaderCardStats", false)
                 </div>
             </div>
         </header>
@@ -73,8 +73,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-scroll-lock@3.1.3/jquery-scrollLock.min.js"></script>
 
     <!-- Optional JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="~/vendor/chart.js/dist/Chart.extension.js"></script>
+    @if (Convert.ToBoolean(ViewData["UseChartJs"]))
+    {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="~/vendor/chart.js/dist/Chart.extension.js"></script>
+    }
 
     <script src="~/js/argon.js"></script>
 
