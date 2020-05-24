@@ -29,9 +29,9 @@ namespace CPMusic.Areas.Admin.Controllers
             ViewData["SongStatisticsPerMonth"] = songRepository.StatisticsPerMonth();
             ViewData["AccountStatisticsPerMonth"] = userRepository.StatisticsPerMonth();
 
-            List<Statistical> statisticals = new List<Statistical>
+            List<StatisticalViewModel> statisticals = new List<StatisticalViewModel>
             {
-                new Statistical
+                new StatisticalViewModel
                 {
                     Name = "Tài khoản",
                     Icon = "user-run",
@@ -39,7 +39,7 @@ namespace CPMusic.Areas.Admin.Controllers
                     Total = totalNumberOfUsers,
                     Percent = userGrowth,
                 },
-                new Statistical
+                new StatisticalViewModel
                 {
                     Name = "Bài hát",
                     Icon = "note-03",
@@ -47,7 +47,7 @@ namespace CPMusic.Areas.Admin.Controllers
                     Total = totalNumberOfSongs,
                     Percent = songGrowth,
                 },
-                new Statistical
+                new StatisticalViewModel
                 {
                     Name = "Nghệ sĩ",
                     Icon = "air-baloon",
@@ -55,7 +55,7 @@ namespace CPMusic.Areas.Admin.Controllers
                     Total = totalNumberOfArtists,
                     Percent = artistGrowth,
                 },
-                new Statistical
+                new StatisticalViewModel
                 {
                     Name = "Thể loại",
                     Icon = "books",

@@ -1,5 +1,5 @@
 ﻿@using System.Text.Json
-@model List<Statistical>
+@model List<StatisticalViewModel>
 
 @{
     ViewData["Title"] = "Trang Chủ";
@@ -9,7 +9,7 @@
 @section HeaderCardStats
 {
     <div class="row">
-        @foreach (Statistical statistical in Model)
+        @foreach (StatisticalViewModel statistical in Model)
         {
             <div class="col-xl-3 col-md-6">
                 <div class="card card-stats">

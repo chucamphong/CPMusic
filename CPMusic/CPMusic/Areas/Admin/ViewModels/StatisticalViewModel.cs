@@ -1,6 +1,6 @@
 ﻿namespace CPMusic.Areas.Admin.ViewModels
 {
-    public class Statistical
+    public class StatisticalViewModel
     {
         public string Name { get; set; } = null!;
 
