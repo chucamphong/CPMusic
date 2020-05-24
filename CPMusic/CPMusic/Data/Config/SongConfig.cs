@@ -17,7 +17,7 @@ namespace CPMusic.Data.Config
                 Id = Guid.Parse("18F94F44-2CB8-4DC7-BCC5-CD721BA1E2F5"),
                 Name = "Anh ơi ở lại",
                 OtherName = "Cám Tấm",
-                Thumbnail = "Images/AnhOiOLai.png",
+                Thumbnail = "~/img/songs/thumbnails/AnhOiOLai.png",
                 Url = "Url/AnhOiOLai.mp3",
                 Year = 2019u,
                 Views = 3213213213ul,
