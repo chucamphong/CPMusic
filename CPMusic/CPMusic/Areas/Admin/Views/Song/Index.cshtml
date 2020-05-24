@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CPMusic.Models.Song>
+
+@{
+    ViewData["Title"] = "Danh sách bài hát";
+}
+
+<h1>Index</h1>
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card border-0">
+            <div class="card-header">
+                <h6 class="text-uppercase ls-1 mb-1">Quản lý bài hát</h6>
+                <div class="heading-title mb-0">Tạo bài hát</div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div>
+                        <table class="table align-items-center">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.OtherName)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Thumbnail)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Url)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Year)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Views)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.CreatedAt)
+                                </th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody class="list">
+                            @foreach (Song item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OtherName)
+                                    </td>
+                                    <th scope="row">
+                                        @Html.DisplayFor(modelItem => item.Thumbnail)
+                                        @* <img class="w-25" src="@Url.Content(item.Thumbnail)" alt="@item.Name"/> *@
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Url)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Year)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Views)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
