@@ -17,9 +17,9 @@ namespace CPMusic.Data.Repositories
             Context = context;
         }
 
-        public Task<IEnumerable<TEntity>> All()
+        public async Task<IEnumerable<TEntity>> All()
         {
-            throw new NotImplementedException();
+            return await Context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
         public Task<TEntity> Get(Guid id)
