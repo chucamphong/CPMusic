@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>CPMusic - @ViewData["Title"]</title>
-    <meta name="description" content=""/>
+    <meta name="description" content="" />
     <meta name="author" content="Chu Phong">
     <!-- Favicon -->
     <link rel="shortcut icon" href="~/img/brand/favicon.png" type="image/x-icon">
@@ -13,21 +13,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="~/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" type="text/css">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="~/css/argon.css" type="text/css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/argon.min.css?v=1.2.0" type="text/css">
 
     @await RenderSectionAsync("Styles", false);
 </head>
 <body>
     <!-- Sidenav -->
-    <partial name="Partials/_SidenavPartial"/>
+    <partial name="Partials/_SidenavPartial" />
 
     <div class="main-content" id="panel">
         <!-- Navbar -->
-        <partial name="Partials/_NavbarPartial"/>
+        <partial name="Partials/_NavbarPartial" />
 
         <!-- Header -->
         <header class="header bg-primary pb-6">
@@ -62,7 +62,7 @@
         </main>
 
         <!-- Footer -->
-        <partial name="Partials/_FooterPartial"/>
+        <partial name="Partials/_FooterPartial" />
     </div>
 
     <!-- Core -->
@@ -76,10 +76,10 @@
     @if (Convert.ToBoolean(ViewData["UseChartJs"]))
     {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <script src="~/vendor/chart.js/dist/Chart.extension.js"></script>
+        <script src="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/chart.js/dist/Chart.extension.js"></script>
     }
 
-    <script src="~/js/argon.js"></script>
+    <script src="https://demos.creative-tim.com/argon-dashboard-pro/assets/js/argon.min.js?v=1.2.0"></script>
 
     @await RenderSectionAsync("Scripts", false)
 </body>
