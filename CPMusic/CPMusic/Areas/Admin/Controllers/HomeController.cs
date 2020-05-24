@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CPMusic.Areas.Admin.Models;
+using CPMusic.Areas.Admin.ViewModels;
 using CPMusic.Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
