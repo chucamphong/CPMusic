@@ -24,10 +24,10 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-retunUrl="@Url.Action("Index", "Home", new { area = "" })">Register</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-retunUrl="@Url.Action("Index", "Home", new { area = "" })">Login</a>
     </li>
 }
 </ul>
