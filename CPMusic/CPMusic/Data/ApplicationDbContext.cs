@@ -12,7 +12,6 @@ namespace CPMusic.Data
         public DbSet<Song> Songs { get; set; } = null!;
         public DbSet<Artist> Artists { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<User> Users { get; set; } = null!;
 
         public static readonly ILoggerFactory LoggerFactory
             = Microsoft.Extensions.Logging.LoggerFactory.Create(builder => { builder.AddConsole(); });
