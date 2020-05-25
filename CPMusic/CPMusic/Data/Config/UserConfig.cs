@@ -22,6 +22,7 @@ namespace CPMusic.Data.Config
                 Email = "chucamphong1999@gmail.com",
                 NormalizedEmail = "CHUCAMPHONG1999@GMAIL.COM",
                 SecurityStamp = Guid.NewGuid().ToString(),
+                Avatar = "/img/avatars/users/ChuPhong.jpg",
             };
             user.PasswordHash = passwordHasher.HashPassword(user, "123456789aS");
             

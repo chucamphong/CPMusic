@@ -1,7 +1,9 @@
+using AutoMapper;
 using CPMusic.Data;
 using CPMusic.Data.Interfaces;
 using CPMusic.Data.Repositories;
 using CPMusic.Helpers;
+using CPMusic.Mapping;
 using CPMusic.Models;
 using CPMusic.Resources;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +22,7 @@ namespace CPMusic
             Configuration = configuration;
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -49,13 +52,13 @@ namespace CPMusic
                         factory.Create(typeof(DataAnnotations));
                 });
 
-            services.AddScoped<ISongRepository, SongRepository>();
-            services.AddScoped<IArtistRepository, ArtistRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            AddRepository(services);
+
+            AddAutoMapper(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // ReSharper disable once UnusedMember.Global
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -81,15 +84,33 @@ namespace CPMusic
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    "areas",
+                    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
             });
+        }
+
+        private void AddRepository(IServiceCollection services)
+        {
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+        }
+
+        private void AddAutoMapper(IServiceCollection services)
+        {
+            MapperConfiguration mappingConfig = new MapperConfiguration(config =>
+            {
+                config.AddProfile(new MappingUser());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }
