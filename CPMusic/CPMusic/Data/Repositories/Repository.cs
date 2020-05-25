@@ -22,9 +22,9 @@ namespace CPMusic.Data.Repositories
             return await Context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
-        public Task<TEntity> Get(Guid id)
+        public async Task<TEntity> Get(Guid id)
         {
-            throw new NotImplementedException();
+            return await Context.Set<TEntity>().FindAsync(id);
         }
 
         public async Task<TEntity> Add(TEntity entity)
