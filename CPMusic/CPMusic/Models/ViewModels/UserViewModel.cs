@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CPMusic.ViewModels
+namespace CPMusic.Models.ViewModels
 {
     public class UserViewModel
     {
