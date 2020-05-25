@@ -73,6 +73,8 @@ namespace CPMusic
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -107,6 +109,7 @@ namespace CPMusic
         {
             MapperConfiguration mappingConfig = new MapperConfiguration(config =>
             {
+                config.AddProfile(new MappingSong());
                 config.AddProfile(new MappingUser());
             });
             IMapper mapper = mappingConfig.CreateMapper();
