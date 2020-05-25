@@ -13,12 +13,12 @@ namespace CPMusic.Models
         public Guid ArtistId { get; set; }
 
         // Nghệ sĩ
-        public Artist Artist { get; set; } = null!;
+        public virtual Artist Artist { get; set; } = null!;
 
         // ID bài hát
         public Guid SongId { get; set; }
 
         // Bài hát
-        public Song Song { get; set; } = null!;
+        public virtual Song Song { get; set; } = null!;
     }
 }
