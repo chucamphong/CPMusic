@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CPMusic.Migrations
+namespace CPMusic.Data.Migrations
 {
     public partial class CreateDatabase : Migration
     {
@@ -236,9 +236,9 @@ namespace CPMusic.Migrations
                 columns: new[] { "Id", "Avatar", "CreatedAt", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"), "Image/ChiPu.png", new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(5125), "Chi Pu" },
-                    { new Guid("de704ce1-72de-48a2-bd9a-71e2d57bfab0"), "Image/BlackPink.png", new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(6726), "BlackPink" },
-                    { new Guid("7b6409e9-50c7-44a6-9c9d-c3b576d966b9"), "Image/VoHoangYen.png", new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(6752), "Võ Hoàng Yến" }
+                    { new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"), "Image/ChiPu.png", new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(9944), "Chi Pu" },
+                    { new Guid("473b84d6-a631-413e-a913-2e56664ae1b5"), "Image/BlackPink.png", new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(1116), "BlackPink" },
+                    { new Guid("2531b0d0-ab9b-4d7c-9b39-83e460dccc13"), "Image/VoHoangYen.png", new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(1126), "Võ Hoàng Yến" }
                 });
 
             migrationBuilder.InsertData(
@@ -246,9 +246,9 @@ namespace CPMusic.Migrations
                 columns: new[] { "Id", "CreatedAt", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(6412), "Nhạc trẻ" },
-                    { new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(7705), "Nhạc Hàn Quốc" },
-                    { new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"), new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(7736), "Nhạc Trung Quốc" }
+                    { new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(3187), "Nhạc trẻ" },
+                    { new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(4143), "Nhạc Hàn Quốc" },
+                    { new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"), new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(4161), "Nhạc Trung Quốc" }
                 });
 
             migrationBuilder.InsertData(
@@ -256,19 +256,19 @@ namespace CPMusic.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"), "7a98b3b4-2283-43fc-a89b-de4a527f907a", "Admin", "ADMIN" },
-                    { new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"), "64a2fc61-f20a-4482-982c-e6b2a97177a9", "Member", "MEMBER" }
+                    { new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"), "5410656f-b03c-45c0-8c8f-5badb5e9c1a7", "Admin", "ADMIN" },
+                    { new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"), "8f165688-aa32-4e23-8037-7bafd802c0b7", "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "Avatar", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("0336da83-36b2-49d2-ae14-be954ad51370"), 0, null, "5e67d59c-9058-4d72-b7b0-d53da9ba7842", new DateTime(2020, 5, 22, 15, 32, 36, 179, DateTimeKind.Local).AddTicks(5846), "chucamphong1999@gmail.com", false, false, null, "Chu Cẩm Phong", "CHUCAMPHONG1999@GMAIL.COM", "CHUCAMPHONG", "AQAAAAEAACcQAAAAEInAYIelkRl1jSqhM7wJSpjpMw/8a8JKjiHFvLPbdSFItlX57xsrOc5g316q8Y5nxQ==", null, false, "1551209c-0ad7-45e3-8b87-51642dc88d0b", false, "chucamphong" });
+                values: new object[] { new Guid("0336da83-36b2-49d2-ae14-be954ad51370"), 0, "/img/avatars/users/ChuPhong.jpg", "17ef24f1-4103-4a92-b30e-097842b61112", new DateTime(2020, 5, 26, 14, 37, 38, 153, DateTimeKind.Local).AddTicks(1562), "chucamphong1999@gmail.com", false, false, null, "Chu Cẩm Phong", "CHUCAMPHONG1999@GMAIL.COM", "CHUCAMPHONG", "AQAAAAEAACcQAAAAENBhU43a7NBtpTY8xgXbh+f7NscPnfHXVMWUPrtdEU2mDmS1Pq+ftwzcPytwauCnWw==", null, false, "a17928eb-341e-4d30-80e4-55ddb236edaa", false, "chucamphong" });
 
             migrationBuilder.InsertData(
                 table: "Songs",
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "Name", "OtherName", "Thumbnail", "Url", "Views", "Year" },
-                values: new object[] { new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 5, 22, 15, 32, 36, 193, DateTimeKind.Local).AddTicks(2936), "Anh ơi ở lại", "Cám Tấm", "Images/AnhOiOLai.png", "Url/AnhOiOLai.mp3", 3213213213m, 2019L });
+                values: new object[] { new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(6334), "Anh ơi ở lại", "Cám Tấm", "/img/songs/thumbnails/AnhOiOLai.jpg", "Url/AnhOiOLai.mp3", 3213213213m, 2019L });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",

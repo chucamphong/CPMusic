@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CPMusic.Migrations
+namespace CPMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200522083236_CreateDatabase")]
+    [Migration("20200526073738_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,21 +53,21 @@ namespace CPMusic.Migrations
                         {
                             Id = new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"),
                             Avatar = "Image/ChiPu.png",
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(5125),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(9944),
                             Name = "Chi Pu"
                         },
                         new
                         {
-                            Id = new Guid("de704ce1-72de-48a2-bd9a-71e2d57bfab0"),
+                            Id = new Guid("473b84d6-a631-413e-a913-2e56664ae1b5"),
                             Avatar = "Image/BlackPink.png",
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(6726),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(1116),
                             Name = "BlackPink"
                         },
                         new
                         {
-                            Id = new Guid("7b6409e9-50c7-44a6-9c9d-c3b576d966b9"),
+                            Id = new Guid("2531b0d0-ab9b-4d7c-9b39-83e460dccc13"),
                             Avatar = "Image/VoHoangYen.png",
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 192, DateTimeKind.Local).AddTicks(6752),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(1126),
                             Name = "Võ Hoàng Yến"
                         });
                 });
@@ -118,19 +118,19 @@ namespace CPMusic.Migrations
                         new
                         {
                             Id = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(6412),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(3187),
                             Name = "Nhạc trẻ"
                         },
                         new
                         {
                             Id = new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"),
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(7705),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(4143),
                             Name = "Nhạc Hàn Quốc"
                         },
                         new
                         {
                             Id = new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"),
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 191, DateTimeKind.Local).AddTicks(7736),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(4161),
                             Name = "Nhạc Trung Quốc"
                         });
                 });
@@ -166,14 +166,14 @@ namespace CPMusic.Migrations
                         new
                         {
                             Id = new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"),
-                            ConcurrencyStamp = "7a98b3b4-2283-43fc-a89b-de4a527f907a",
+                            ConcurrencyStamp = "5410656f-b03c-45c0-8c8f-5badb5e9c1a7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"),
-                            ConcurrencyStamp = "64a2fc61-f20a-4482-982c-e6b2a97177a9",
+                            ConcurrencyStamp = "8f165688-aa32-4e23-8037-7bafd802c0b7",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -229,10 +229,10 @@ namespace CPMusic.Migrations
                         {
                             Id = new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"),
                             CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 193, DateTimeKind.Local).AddTicks(2936),
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(6334),
                             Name = "Anh ơi ở lại",
                             OtherName = "Cám Tấm",
-                            Thumbnail = "Images/AnhOiOLai.png",
+                            Thumbnail = "/img/songs/thumbnails/AnhOiOLai.jpg",
                             Url = "Url/AnhOiOLai.mp3",
                             Views = 3213213213m,
                             Year = 2019L
@@ -319,17 +319,18 @@ namespace CPMusic.Migrations
                         {
                             Id = new Guid("0336da83-36b2-49d2-ae14-be954ad51370"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e67d59c-9058-4d72-b7b0-d53da9ba7842",
-                            CreatedAt = new DateTime(2020, 5, 22, 15, 32, 36, 179, DateTimeKind.Local).AddTicks(5846),
+                            Avatar = "/img/avatars/users/ChuPhong.jpg",
+                            ConcurrencyStamp = "17ef24f1-4103-4a92-b30e-097842b61112",
+                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 153, DateTimeKind.Local).AddTicks(1562),
                             Email = "chucamphong1999@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Chu Cẩm Phong",
                             NormalizedEmail = "CHUCAMPHONG1999@GMAIL.COM",
                             NormalizedUserName = "CHUCAMPHONG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEInAYIelkRl1jSqhM7wJSpjpMw/8a8JKjiHFvLPbdSFItlX57xsrOc5g316q8Y5nxQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENBhU43a7NBtpTY8xgXbh+f7NscPnfHXVMWUPrtdEU2mDmS1Pq+ftwzcPytwauCnWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1551209c-0ad7-45e3-8b87-51642dc88d0b",
+                            SecurityStamp = "a17928eb-341e-4d30-80e4-55ddb236edaa",
                             TwoFactorEnabled = false,
                             UserName = "chucamphong"
                         });
