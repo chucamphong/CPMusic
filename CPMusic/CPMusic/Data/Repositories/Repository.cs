@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CPMusic.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace CPMusic.Data.Repositories
 {
@@ -19,12 +21,57 @@ namespace CPMusic.Data.Repositories
 
         public async Task<IEnumerable<TEntity>> All()
         {
-            return await Context.Set<TEntity>().AsNoTracking().ToListAsync();
+            return await Query(entity => entity).ToListAsync();
         }
 
-        public async Task<TEntity> Get(Guid id)
+        public async Task<IEnumerable<TResult>> All<TResult>(
+            Expression<Func<TEntity, TResult>> selector,
+            Expression<Func<TEntity, bool>>? predicate = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? includes = null,
+            bool disableTracking = true)
         {
-            return await Context.Set<TEntity>().FindAsync(id);
+            return await Query(selector, predicate, orderBy, includes, disableTracking).ToListAsync();
+        }
+
+        public async Task<TEntity?> GetByIdAsync(Guid id)
+        {
+            return await Query(entity => entity, entity => entity.Id == id).SingleOrDefaultAsync();
+        }
+
+        public async Task<TEntity?> GetByIdAsync(
+            Guid id,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include)
+        {
+            return await Query(entity => entity, entity => entity.Id == id, include: include)
+                .SingleOrDefaultAsync();
+        }
+
+        public IQueryable<TResult> Query<TResult>(
+            Expression<Func<TEntity, TResult>> selector,
+            Expression<Func<TEntity, bool>>? predicate = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+            bool disableTracking = true)
+        {
+            IQueryable<TEntity> query = Context.Set<TEntity>().AsQueryable();
+            
+            if (disableTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            return orderBy != null ? orderBy(query).Select(selector) : query.Select(selector);
         }
 
         public async Task<TEntity> Add(TEntity entity)
@@ -34,9 +81,13 @@ namespace CPMusic.Data.Repositories
             return entity;
         }
 
-        public Task<TEntity> Update(TEntity id)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            Context.Set<TEntity>().Attach(entity);
+            var entry = Context.Entry(entity);
+            entry.State = EntityState.Modified;
+            await Context.SaveChangesAsync();
+            return entity;
         }
 
         public Task<TEntity> Delete(Guid id)
@@ -48,11 +99,11 @@ namespace CPMusic.Data.Repositories
         {
             double growth = 0;
             int month = DateTime.Now.Month;
-            var record = await Context.Set<TEntity>().Select(_ => new
+            var record = await Context.Set<TEntity>().AsNoTracking().Select(_ => new
             {
-                prevMonth = Context.Set<TEntity>().Count(col => col.CreatedAt.Month == month - 1),
-                thisMonth = Context.Set<TEntity>().Count(col => col.CreatedAt.Month == month),
-                total = Context.Set<TEntity>().Select(col => col.Id).Count(),
+                prevMonth = Context.Set<TEntity>().AsNoTracking().Count(col => col.CreatedAt.Month == month - 1),
+                thisMonth = Context.Set<TEntity>().AsNoTracking().Count(col => col.CreatedAt.Month == month),
+                total = Context.Set<TEntity>().AsNoTracking().Select(col => col.Id).Count(),
             }).Distinct().SingleAsync();
 
             if (record.prevMonth == 0)
@@ -68,20 +119,12 @@ namespace CPMusic.Data.Repositories
             return (record.total, growth);
         }
 
-        /// <summary>
-        /// Lấy số lượng bản ghi của từng tháng, tính từ tháng 1 đến tháng hiện tại, năm hiện tại
-        /// </summary>
-        /// <example>
-        /// Tháng hiện tại: 5
-        /// Kết quả [0, 1, 2, 3, 4]
-        /// Nghĩa là tháng 1 có 0 bản ghi, tháng 2 có 1 bản ghi, tháng 3 có 2 bản ghi và tháng 4 có 4 bản ghi
-        /// </example>
-        /// <returns>Một mảng số nguyên có độ dài là n (n là tháng hiện tại)</returns>
         public IEnumerable<int> StatisticsPerMonth(int? month = null)
         {
             return Enumerable.Range(1, month ?? DateTime.Now.Month)
                              .GroupJoin(
-                                 Context.Set<TEntity>().Where(song => song.CreatedAt.Year == DateTime.Now.Year)
+                                 Context.Set<TEntity>().AsNoTracking()
+                                        .Where(song => song.CreatedAt.Year == DateTime.Now.Year)
                                         .Select(song => song.CreatedAt.Month),
                                  month => month,
                                  createdAtMonth => createdAtMonth,
