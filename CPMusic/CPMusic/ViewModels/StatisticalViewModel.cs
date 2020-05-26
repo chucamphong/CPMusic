@@ -1,4 +1,4 @@
-﻿namespace CPMusic.Areas.Admin.ViewModels
+﻿namespace CPMusic.ViewModels
 {
     public class StatisticalViewModel
     {

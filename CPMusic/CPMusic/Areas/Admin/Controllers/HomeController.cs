@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CPMusic.Areas.Admin.ViewModels;
 using CPMusic.Data.Interfaces;
+using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +25,7 @@ namespace CPMusic.Areas.Admin.Controllers
             var (totalNumberOfArtists, artistGrowth) = await artistRepository.GrowthRate();
             var (totalNumberOfCategories, categoryGrowth) = await categoryRepository.GrowthRate();
             var (totalNumberOfUsers, userGrowth) = await userRepository.GrowthRate();
-            
+
             ViewData["SongStatisticsPerMonth"] = songRepository.StatisticsPerMonth();
             ViewData["AccountStatisticsPerMonth"] = userRepository.StatisticsPerMonth();
 
