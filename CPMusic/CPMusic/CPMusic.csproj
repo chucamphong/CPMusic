@@ -64,7 +64,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\ViewModels" />
     <Folder Include="Data\Config\" />
   </ItemGroup>
 
