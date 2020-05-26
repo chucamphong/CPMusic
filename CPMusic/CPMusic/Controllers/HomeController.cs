@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using CPMusic.Models.ViewModels;
+using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CPMusic.Controllers

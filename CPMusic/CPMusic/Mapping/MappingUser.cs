@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CPMusic.Models;
-using CPMusic.Models.ViewModels;
+using CPMusic.ViewModels;
 
 namespace CPMusic.Mapping
 {
