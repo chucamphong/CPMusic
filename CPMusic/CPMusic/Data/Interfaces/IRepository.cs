@@ -48,9 +48,9 @@ namespace CPMusic.Data.Interfaces
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool disableTracking = true);
 
-        Task<T> Add(T id);
+        Task<T> Add(T entity);
 
-        Task<T> Update(T id);
+        Task<T> Update(T entity);
         
         Task<T> Delete(Guid id);
         
