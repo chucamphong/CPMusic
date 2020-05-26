@@ -2,31 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 using CPMusic.Data;
+using CPMusic.Data.Interfaces;
+using CPMusic.InputModels;
 using CPMusic.Models;
+using CPMusic.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CPMusic.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SongController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly ISongRepository _songRepository;
 
-        public SongController(ApplicationDbContext context)
+        public SongController(ApplicationDbContext context, IMapper mapper, ISongRepository songRepository)
         {
             _context = context;
+            _mapper = mapper;
+            _songRepository = songRepository;
         }
 
-        // GET: Admin/Song
+        /// <summary>
+        /// GET: /Admin/Song
+        /// Trang xem tất cả bài hát
+        /// </summary>
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Songs.ToListAsync());
+            IEnumerable<Song> songs = await _songRepository.All(
+                song => song,
+                includes: song => song.Include(song => song.Category)
+                                      .Include(song => song.ArtistSongs)
+                                      .ThenInclude(artistSong => artistSong.Artist));
+
+            IEnumerable<SongViewModel> songViewModel = _mapper.Map<IEnumerable<SongViewModel>>(songs);
+
+            return View(songViewModel);
         }
 
-        // GET: Admin/Song/Details/5
+        /// <summary>
+        /// GET: Admin/Song/Details/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f2
+        /// Trang xem thông tin của bài hát
+        /// </summary>
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -35,7 +58,7 @@ namespace CPMusic.Areas.Admin.Controllers
             }
 
             var song = await _context.Songs
-                .FirstOrDefaultAsync(m => m.Id == id);
+                                     .FirstOrDefaultAsync(m => m.Id == id);
             if (song == null)
             {
                 return NotFound();
@@ -44,18 +67,23 @@ namespace CPMusic.Areas.Admin.Controllers
             return View(song);
         }
 
-        // GET: Admin/Song/Create
+        /// <summary>
+        /// GET: Admin/Song/Create
+        /// Trạng tạo bài hát
+        /// </summary>
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Song/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Admin/Song/Create
+        /// Xử lý dữ liệu của bài hát, nếu hợp lệ thì sẽ tạo bài hát và ngược lại thì trả về lỗi
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,OtherName,Thumbnail,Url,Year,Views,CreatedAt")] Song song)
+        public async Task<IActionResult> Create([Bind("Id,Name,OtherName,Thumbnail,Url,Year,Views,CreatedAt")]
+            Song song)
         {
             if (ModelState.IsValid)
             {
@@ -64,31 +92,43 @@ namespace CPMusic.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(song);
         }
 
-        // GET: Admin/Song/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        /// <summary>
+        /// GET: Admin/Song/Edit/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f2
+        /// Trang sửa bài hát
+        /// </summary>
+        [HttpGet]
+        [Route("{area}/{controller}/{action}/{id}")]
+        public async Task<IActionResult> Edit(Guid id, [FromServices] ICategoryRepository categoryRepository)
         {
-            if (id == null)
+            Song? song = await _songRepository.GetByIdAsync(id,
+                song => song.Include(song => song.Category)
+                            .Include(song => song.ArtistSongs)
+                            .ThenInclude(artistSong => artistSong.Artist)
+            );
+
+            if (song is null)
             {
                 return NotFound();
             }
 
-            var song = await _context.Songs.FindAsync(id);
-            if (song == null)
-            {
-                return NotFound();
-            }
-            return View(song);
+            ViewBag.Categories = await categoryRepository.All();
+
+            var mapper = _mapper.Map<SongInputModel>(song);
+
+            return View(mapper);
         }
 
-        // POST: Admin/Song/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Admin/Song/Edit/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f2
+        /// Xử lý dữ liệu của việc chỉnh sửa bài hát, nếu hợp lệ thì chỉnh sửa không thì báo lỗi
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,OtherName,Thumbnail,Url,Year,Views,CreatedAt")] Song song)
+        public async Task<IActionResult> Edit(Guid id, SongInputModel song)
         {
             if (id != song.Id)
             {
@@ -99,8 +139,9 @@ namespace CPMusic.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(song);
-                    await _context.SaveChangesAsync();
+                    Song entity = _mapper.Map<Song>(song);
+
+                    await _songRepository.Update(entity);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -108,17 +149,20 @@ namespace CPMusic.Areas.Admin.Controllers
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(song);
         }
 
-        // GET: Admin/Song/Delete/5
+        /// <summary>
+        /// GET: Admin/Song/Delete/5
+        /// Trang xóa bài hát
+        /// </summary>
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -127,7 +171,7 @@ namespace CPMusic.Areas.Admin.Controllers
             }
 
             var song = await _context.Songs
-                .FirstOrDefaultAsync(m => m.Id == id);
+                                     .FirstOrDefaultAsync(m => m.Id == id);
             if (song == null)
             {
                 return NotFound();
@@ -136,7 +180,10 @@ namespace CPMusic.Areas.Admin.Controllers
             return View(song);
         }
 
-        // POST: Admin/Song/Delete/5
+        /// <summary>
+        /// POST: Admin/Song/Delete/5
+        /// Xử lý xóa bài hát
+        /// </summary>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -147,6 +194,9 @@ namespace CPMusic.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Xác nhận xem bài hát có đã tồn tại hay chưa
+        /// </summary>
         private bool SongExists(Guid id)
         {
             return _context.Songs.Any(e => e.Id == id);

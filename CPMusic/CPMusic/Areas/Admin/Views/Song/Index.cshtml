@@ -1,10 +1,8 @@
-﻿@model IEnumerable<CPMusic.Models.Song>
+﻿@model IEnumerable<SongViewModel>
 
 @{
     ViewData["Title"] = "Danh sách bài hát";
 }
-
-<h1>Index</h1>
 
 <div class="row justify-content-center">
     <div class="col-12">
@@ -19,14 +17,14 @@
                         <table class="table align-items-center">
                             <thead class="thead-light">
                             <tr>
+                                <th scope="col" style="width: 10%;">
+                                    @Html.DisplayNameFor(model => model.Thumbnail)
+                                </th>
                                 <th scope="col">
                                     @Html.DisplayNameFor(model => model.Name)
                                 </th>
                                 <th scope="col">
                                     @Html.DisplayNameFor(model => model.OtherName)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Thumbnail)
                                 </th>
                                 <th scope="col">
                                     @Html.DisplayNameFor(model => model.Url)
@@ -38,41 +36,52 @@
                                     @Html.DisplayNameFor(model => model.Views)
                                 </th>
                                 <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Category)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.Artists)
+                                </th>
+                                <th scope="col">
                                     @Html.DisplayNameFor(model => model.CreatedAt)
                                 </th>
-                                <th scope="col"></th>
+                                <th scope="col">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody class="list">
-                            @foreach (Song item in Model)
+                            @foreach (SongViewModel song in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
+                                        <img class="img-fluid" src="@song.Thumbnail" alt="@song.Name" />
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.OtherName)
-                                    </td>
-                                    <th scope="row">
-                                        @Html.DisplayFor(modelItem => item.Thumbnail)
-                                        @* <img class="w-25" src="@Url.Content(item.Thumbnail)" alt="@item.Name"/> *@
-                                    </th>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Url)
+                                        @Html.DisplayFor(_ => song.Name)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Year)
+                                        @Html.DisplayFor(_ => song.OtherName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Views)
+                                        @Html.DisplayFor(_ => song.Url)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                                        @Html.DisplayFor(_ => song.Year)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        @Html.DisplayFor(_ => song.Views)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(_ => song.Category)
+                                    </td>
+                                    <td>
+                                        @string.Join(", ", song.Artists.Select(artist => artist?.Name))
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(_ => song.CreatedAt)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@song.Id">Chỉnh sửa</a> |
+                                        <a asp-action="Details" asp-route-id="@song.Id">Thông tin</a> |
+                                        <a asp-action="Delete" asp-route-id="@song.Id">Xóa</a>
                                     </td>
                                 </tr>
                             }
