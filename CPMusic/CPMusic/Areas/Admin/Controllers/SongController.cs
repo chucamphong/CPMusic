@@ -50,16 +50,13 @@ namespace CPMusic.Areas.Admin.Controllers
         /// GET: Admin/Song/Details/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f2
         /// Trang xem thông tin của bài hát
         /// </summary>
-        public async Task<IActionResult> Details(Guid? id)
+        [HttpGet]
+        [Route("{area}/{controller}/{action}/{id}")]
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var song = await _context.Songs
-                                     .FirstOrDefaultAsync(m => m.Id == id);
-            if (song == null)
+            Song? song = await _songRepository.GetByIdAsync(id);
+            
+            if (song is null)
             {
                 return NotFound();
             }
@@ -102,7 +99,9 @@ namespace CPMusic.Areas.Admin.Controllers
         /// </summary>
         [HttpGet]
         [Route("{area}/{controller}/{action}/{id}")]
-        public async Task<IActionResult> Edit(Guid id, [FromServices] ICategoryRepository categoryRepository)
+        public async Task<IActionResult> Edit(Guid id,
+            [FromServices] IArtistRepository artistRepository,
+            [FromServices] ICategoryRepository categoryRepository)
         {
             Song? song = await _songRepository.GetByIdAsync(id,
                 song => song.Include(song => song.Category)
@@ -115,11 +114,10 @@ namespace CPMusic.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            ViewBag.Artists = await artistRepository.All();
             ViewBag.Categories = await categoryRepository.All();
 
-            var mapper = _mapper.Map<SongInputModel>(song);
-
-            return View(mapper);
+            return View(_mapper.Map<SongInputModel>(song));
         }
 
         /// <summary>
@@ -135,28 +133,28 @@ namespace CPMusic.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    Song entity = _mapper.Map<Song>(song);
-
-                    await _songRepository.Update(entity);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SongExists(song.Id))
-                    {
-                        return NotFound();
-                    }
-
-                    throw;
-                }
-
-                return RedirectToAction(nameof(Index));
+                return View(song);
             }
 
-            return View(song);
+            try
+            {
+                Song entity = _mapper.Map<Song>(song);
+
+                await _songRepository.Update(entity);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await _songRepository.GetByIdAsync(song.Id) is null)
+                {
+                    return NotFound();
+                }
+
+                throw;
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         /// <summary>
@@ -192,14 +190,6 @@ namespace CPMusic.Areas.Admin.Controllers
             _context.Songs.Remove(song);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        /// <summary>
-        /// Xác nhận xem bài hát có đã tồn tại hay chưa
-        /// </summary>
-        private bool SongExists(Guid id)
-        {
-            return _context.Songs.Any(e => e.Id == id);
         }
     }
 }

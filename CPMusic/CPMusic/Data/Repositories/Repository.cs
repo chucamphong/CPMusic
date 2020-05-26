@@ -81,7 +81,7 @@ namespace CPMusic.Data.Repositories
             return entity;
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public virtual async Task<TEntity> Update(TEntity entity)
         {
             Context.Set<TEntity>().Attach(entity);
             var entry = Context.Entry(entity);
