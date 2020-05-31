@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CPMusic.Data;
@@ -36,10 +35,11 @@ namespace CPMusic.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<Song> songs = await _songRepository.All(
-                song => song,
-                includes: song => song.Include(song => song.Category)
-                                      .Include(song => song.ArtistSongs)
-                                      .ThenInclude(artistSong => artistSong.Artist));
+                col => col,
+                includes: query =>
+                    query.Include(column => column.Category)
+                         .Include(column => column.ArtistSongs)
+                         .ThenInclude(column => column.Artist));
 
             IEnumerable<SongViewModel> songViewModel = _mapper.Map<IEnumerable<SongViewModel>>(songs);
 
@@ -55,7 +55,7 @@ namespace CPMusic.Areas.Admin.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             Song? song = await _songRepository.GetByIdAsync(id);
-            
+
             if (song is null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace CPMusic.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,OtherName,Thumbnail,Url,Year,Views,CreatedAt")]
-            Song song)
+                                                Song song)
         {
             if (ModelState.IsValid)
             {
@@ -100,13 +100,13 @@ namespace CPMusic.Areas.Admin.Controllers
         [HttpGet]
         [Route("{area}/{controller}/{action}/{id}")]
         public async Task<IActionResult> Edit(Guid id,
-            [FromServices] IArtistRepository artistRepository,
-            [FromServices] ICategoryRepository categoryRepository)
+                                              [FromServices] IArtistRepository artistRepository,
+                                              [FromServices] ICategoryRepository categoryRepository)
         {
             Song? song = await _songRepository.GetByIdAsync(id,
-                song => song.Include(song => song.Category)
-                            .Include(song => song.ArtistSongs)
-                            .ThenInclude(artistSong => artistSong.Artist)
+                query => query.Include(column => column.Category)
+                              .Include(column => column.ArtistSongs)
+                              .ThenInclude(artistSong => artistSong.Artist)
             );
 
             if (song is null)
