@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Linq;
 using CPMusic.Models;
+using SQLitePCL;
 
 namespace CPMusic.ViewModels
 {
@@ -36,5 +39,9 @@ namespace CPMusic.ViewModels
         [Display(Name = "Ngày tạo")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy - HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime CreatedAt { get; set; }
+        
+        public string CapitalizeName => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Name);
+        
+        public string? ArtistsToString => string.Join(", ", Artists.Select(artist => artist?.Name));
     }
 }
