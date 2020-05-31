@@ -1,6 +1,7 @@
 ﻿@using AutoMapper
 @using CPMusic.Data
 @using Microsoft.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore.Internal
 @inject ApplicationDbContext DbContext
 @inject IMapper Mapper
 
@@ -35,7 +36,9 @@
                             <h5 class="m-0 text-capitalize text-truncate">@song.OtherName</h5>
                         }
                     </a>
-                    <h5 class="text-muted text-truncate">@song.ArtistsToString</h5>
+                    <h5 class="text-muted text-truncate">
+                        @Html.Raw(song.Artists.Select(artist => $"<a href='/nghe-si/{artist?.Id.ToString()}'>{artist?.Name}</a>").Join(", "))
+                    </h5>
                 </div>
             </div>
         </div>
