@@ -1,10 +1,12 @@
-﻿@functions
+﻿@using CPMusic.Controllers
+@functions
 {
-    string? IsMenuSelected(string actionName, string controllerName, string className)
+    string? IsMenuSelected(string actionName, string controllerName, string className = "active")
     {
         var conname = ViewContext.RouteData.Values["controller"].ToString()?.ToLower();
         var actname = ViewContext.RouteData.Values["action"].ToString()?.ToLower();
-
+        controllerName = controllerName.Replace("controller", "");
+        
         if (conname == controllerName.ToLower() && actname == actionName.ToLower())
         {
             return className;
@@ -37,13 +39,13 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a asp-action="Index" asp-controller="Home" class="nav-link @IsMenuSelected("Index", "Home", "active")">
+                            <a asp-action="Index" asp-controller="Home" class="nav-link @IsMenuSelected(nameof(HomeController.Index), nameof(HomeController))">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Trang chủ</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a asp-action="NewSongsReleased" asp-controller="Song" class="nav-link @IsMenuSelected("NewSongsReleased", "Song", "active")">
+                            <a asp-action="MoiPhatHanh" asp-controller="Song" class="nav-link @IsMenuSelected(nameof(SongController.MoiPhatHanh), nameof(SongController))">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Mới phát hành</span>
                             </a>
