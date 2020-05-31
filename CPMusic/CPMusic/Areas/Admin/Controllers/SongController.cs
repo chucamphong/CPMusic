@@ -32,15 +32,18 @@ namespace CPMusic.Areas.Admin.Controllers
         /// GET: /Admin/Song
         /// Trang xem tất cả bài hát
         /// </summary>
+        /// TODO: Làm phân trang
         public async Task<IActionResult> Index()
         {
+            // Truy vấn lấy tất cả các cột trong bảng cùng với quan hệ của bảng thể loại và nghệ sĩ
             IEnumerable<Song> songs = await _songRepository.All(
                 col => col,
                 includes: query =>
-                    query.Include(column => column.Category)
-                         .Include(column => column.ArtistSongs)
-                         .ThenInclude(column => column.Artist));
+                    query.Include(col => col.Category)
+                         .Include(col => col.ArtistSongs)
+                         .ThenInclude(artistSong => artistSong.Artist)); 
 
+            // Chuyển đổi Domain Model -> View Model
             IEnumerable<SongViewModel> songViewModel = _mapper.Map<IEnumerable<SongViewModel>>(songs);
 
             return View(songViewModel);
