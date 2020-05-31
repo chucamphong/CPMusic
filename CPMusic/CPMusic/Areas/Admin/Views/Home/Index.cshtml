@@ -11,13 +11,13 @@
     <div class="row">
         @foreach (StatisticalViewModel statistical in Model)
         {
-            <div class="col-xl-3 col-md-6">
+            <div class="col-md-6 col-xl-3">
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">@statistical.Name</h5>
-                                <span class="h2 font-weight-bold mb-0">
+                                <h5 class="card-title mb-0 text-muted text-uppercase">@statistical.Name</h5>
+                                <span class="font-weight-bold h2 mb-0">
                                     @Convert.ToInt32(statistical.Total).ToString("N0")
                                 </span>
                             </div>
@@ -27,16 +27,16 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-3 mb-0 text-sm">
+                        <p class="mb-0 mt-3 text-sm">
                             @if (statistical.Percent >= 0)
                             {
-                                <span class="text-success mr-2">
+                                <span class="mr-2 text-success">
                                     <i class="fa fa-arrow-up"></i> @statistical.Percent.ToString("0%")
                                 </span>
                             }
                             else
                             {
-                                <span class="text-danger mr-2">
+                                <span class="mr-2 text-danger">
                                     <i class="fa fa-arrow-down"></i> @statistical.Percent.ToString("0%")
                                 </span>
                             }
@@ -50,14 +50,14 @@
 }
 
 <!-- Thống kê bài hát -->
-<div class="row justify-content-center">
+<div class="justify-content-center row">
     <div class="col-12 col-xl-6">
-        <div class="card bg-default">
-            <div class="card-header bg-transparent">
-                <div class="row align-items-center">
+        <div class="bg-default card">
+            <div class="bg-transparent card-header">
+                <div class="align-items-center row">
                     <div class="col">
-                        <h6 class="text-light text-uppercase ls-1 mb-1">Thống kê</h6>
-                        <h5 class="h3 text-white mb-0">Bài Hát</h5>
+                        <h6 class="ls-1 mb-1 text-light text-uppercase">Thống kê</h6>
+                        <h5 class="h3 mb-0 text-white">Bài Hát</h5>
                     </div>
                 </div>
             </div>
@@ -69,22 +69,22 @@
         </div>
     </div>
     <div class="col-12 col-xl-6">
-            <div class="card bg-default">
-                <div class="card-header bg-transparent">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="text-light text-uppercase ls-1 mb-1">Thống kê</h6>
-                            <h5 class="h3 text-white mb-0">Tài khoản</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <canvas id="chart-account"></canvas>
+        <div class="bg-default card">
+            <div class="bg-transparent card-header">
+                <div class="align-items-center row">
+                    <div class="col">
+                        <h6 class="ls-1 mb-1 text-light text-uppercase">Thống kê</h6>
+                        <h5 class="h3 mb-0 text-white">Tài khoản</h5>
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="chart">
+                    <canvas id="chart-account"></canvas>
+                </div>
+            </div>
         </div>
+    </div>
 </div>
 
 @section Scripts

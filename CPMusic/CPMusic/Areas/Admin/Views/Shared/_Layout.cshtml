@@ -2,25 +2,25 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <title>CPMusic - @ViewData["Title"]</title>
-    <meta name="description" content="" />
-    <meta name="author" content="Chu Phong">
+    <meta content="" name="description" />
+    <meta content="Chu Phong" name="author">
     <!-- Favicon -->
-    <link rel="shortcut icon" href="~/img/brand/favicon.png" type="image/x-icon">
+    <link href="~/img/brand/favicon.png" rel="shortcut icon" type="image/x-icon">
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" type="text/css">
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/argon.min.css?v=1.2.0" type="text/css">
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/argon.min.css?v=1.2.0" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
-    @await RenderSectionAsync("Styles", false);
+    @await RenderSectionAsync("Styles", false)
 </head>
 <body>
     <!-- Sidenav -->
@@ -31,20 +31,20 @@
         <partial name="Partials/_NavbarPartial" />
 
         <!-- Header -->
-        <header class="header bg-primary pb-6">
+        <header class="bg-primary header pb-6">
             <div class="container-fluid">
                 <div class="header-body">
-                    <div class="row align-items-center py-4">
+                    <div class="align-items-center py-4 row">
                         <div class="col-12">
-                            <h6 class="h2 text-white d-inline-block mb-0">@ViewData["Title"]</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <h6 class="d-inline-block h2 mb-0 text-white">@ViewData["Title"]</h6>
+                            <nav aria-label="breadcrumb" class="d-md-inline-block d-none ml-md-4">
+                                <ol class="breadcrumb breadcrumb-dark breadcrumb-links">
                                     <li class="breadcrumb-item">
-                                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">
-                                            <i class="fas fa-home"></i>
+                                        <a asp-action="Index" asp-area="Admin" asp-controller="Home">
+                                            <i class="fa-home fas"></i>
                                         </a>
                                     </li>
-                                    <li class="breadcrumb-item active" aria-current="page">
+                                    <li aria-current="page" class="active breadcrumb-item">
                                         @ViewData["Title"]
                                     </li>
                                 </ol>
