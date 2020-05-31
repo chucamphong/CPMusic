@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CPMusic.Data.Migrations
+namespace CPMusic.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -50,23 +50,72 @@ namespace CPMusic.Data.Migrations
                         new
                         {
                             Id = new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"),
-                            Avatar = "Image/ChiPu.png",
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(9944),
+                            Avatar = "/img/avatars/artists/ChiPu.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(1314),
                             Name = "Chi Pu"
                         },
                         new
                         {
-                            Id = new Guid("473b84d6-a631-413e-a913-2e56664ae1b5"),
-                            Avatar = "Image/BlackPink.png",
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(1116),
-                            Name = "BlackPink"
+                            Id = new Guid("a3616670-4fd8-49cf-b3fc-82dc29f7e94f"),
+                            Avatar = "/img/avatars/artists/LouHoang.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2840),
+                            Name = "Lou Hoàng"
                         },
                         new
                         {
-                            Id = new Guid("2531b0d0-ab9b-4d7c-9b39-83e460dccc13"),
-                            Avatar = "Image/VoHoangYen.png",
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(1126),
-                            Name = "Võ Hoàng Yến"
+                            Id = new Guid("1c9307ea-95ff-42d5-8883-2138e87b1acf"),
+                            Avatar = "/img/avatars/artists/BlackPink.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2885),
+                            Name = "BLACKPINK"
+                        },
+                        new
+                        {
+                            Id = new Guid("961f8b25-ae91-4b8b-940a-8caa7503e7ea"),
+                            Avatar = "/img/avatars/artists/HuongTram.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2891),
+                            Name = "Hương Tràm"
+                        },
+                        new
+                        {
+                            Id = new Guid("47720334-d5e6-445d-9871-3336634824c5"),
+                            Avatar = "/img/avatars/artists/HoaMinzy.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2896),
+                            Name = "Hòa Minzy"
+                        },
+                        new
+                        {
+                            Id = new Guid("77133a0f-eed5-47cf-b6f1-9db1c9c78009"),
+                            Avatar = "/img/avatars/artists/MrSiro.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2903),
+                            Name = "Mr Siro"
+                        },
+                        new
+                        {
+                            Id = new Guid("cfd5c125-09fd-4490-a237-22696d309e23"),
+                            Avatar = "/img/avatars/artists/TrucNhan.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2912),
+                            Name = "Trúc Nhân"
+                        },
+                        new
+                        {
+                            Id = new Guid("e0cef1be-fafd-4979-9f32-3ad2fa27ce71"),
+                            Avatar = "/img/avatars/artists/MIN.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2917),
+                            Name = "MIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("3a17d74c-2b66-469f-a07e-e110906ed263"),
+                            Avatar = "/img/avatars/artists/MrA.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2922),
+                            Name = "Mr.A"
+                        },
+                        new
+                        {
+                            Id = new Guid("db28e1b6-6e88-46ee-bad6-4cb381c2e8c3"),
+                            Avatar = "/img/avatars/artists/TruongThaoNhi.jpg",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 988, DateTimeKind.Local).AddTicks(2927),
+                            Name = "Trương Thảo Nhi"
                         });
                 });
 
@@ -116,19 +165,19 @@ namespace CPMusic.Data.Migrations
                         new
                         {
                             Id = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(3187),
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 987, DateTimeKind.Local).AddTicks(527),
                             Name = "Nhạc trẻ"
                         },
                         new
                         {
                             Id = new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"),
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(4143),
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 987, DateTimeKind.Local).AddTicks(1665),
                             Name = "Nhạc Hàn Quốc"
                         },
                         new
                         {
                             Id = new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"),
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 164, DateTimeKind.Local).AddTicks(4161),
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 987, DateTimeKind.Local).AddTicks(1695),
                             Name = "Nhạc Trung Quốc"
                         });
                 });
@@ -164,14 +213,14 @@ namespace CPMusic.Data.Migrations
                         new
                         {
                             Id = new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"),
-                            ConcurrencyStamp = "5410656f-b03c-45c0-8c8f-5badb5e9c1a7",
+                            ConcurrencyStamp = "881663c6-3d4e-48f5-8a6b-df0a5b0b1c76",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"),
-                            ConcurrencyStamp = "8f165688-aa32-4e23-8037-7bafd802c0b7",
+                            ConcurrencyStamp = "cb133bcd-1341-4ac1-a060-843bbb13bc9c",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -227,13 +276,112 @@ namespace CPMusic.Data.Migrations
                         {
                             Id = new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"),
                             CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 165, DateTimeKind.Local).AddTicks(6334),
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(4808),
                             Name = "Anh ơi ở lại",
                             OtherName = "Cám Tấm",
-                            Thumbnail = "/img/songs/thumbnails/AnhOiOLai.jpg",
-                            Url = "Url/AnhOiOLai.mp3",
+                            Thumbnail = "/img/songs/AnhOiOLai.jpg",
+                            Url = "/songs/AnhOiOLai.mp3",
                             Views = 3213213213m,
                             Year = 2019L
+                        },
+                        new
+                        {
+                            Id = new Guid("b5a14be6-f859-40d5-ab01-1814f0c72b61"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2020, 7, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(6645),
+                            Name = "Cảm giác lúc ấy sẽ ra sao",
+                            Thumbnail = "/img/songs/CamGiacLucAySeRaSao.jpg",
+                            Url = "/songs/CamGiacLucAySeRaSao.mp3",
+                            Views = 4213219841m,
+                            Year = 2018L
+                        },
+                        new
+                        {
+                            Id = new Guid("df23feb6-d98f-4484-bdd2-aeef0f567213"),
+                            CategoryId = new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"),
+                            CreatedAt = new DateTime(2020, 2, 29, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7707),
+                            Name = "Kill this love",
+                            Thumbnail = "/img/songs/KillThisLove.jpg",
+                            Url = "/songs/KillThisLove.mp3",
+                            Views = 42841m,
+                            Year = 2012L
+                        },
+                        new
+                        {
+                            Id = new Guid("21e0d421-a233-4f6c-863c-3c99e01bf405"),
+                            CategoryId = new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"),
+                            CreatedAt = new DateTime(2020, 2, 29, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7739),
+                            Name = "Du ddu du ddu",
+                            Thumbnail = "/img/songs/DuDduDuDdu.jpg",
+                            Url = "/songs/DuDduDuDdu.mp3",
+                            Views = 42444841m,
+                            Year = 2013L
+                        },
+                        new
+                        {
+                            Id = new Guid("e93cc63f-062d-419e-8cb9-161298b5d532"),
+                            CategoryId = new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"),
+                            CreatedAt = new DateTime(2020, 11, 30, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7746),
+                            Name = "Boombayah",
+                            Thumbnail = "/img/songs/Boombayah.jpg",
+                            Url = "/songs/Boombayah.mp3",
+                            Views = 5544841m,
+                            Year = 2023L
+                        },
+                        new
+                        {
+                            Id = new Guid("4df89010-89c1-47a2-a9fb-1e0e72beb906"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2024, 12, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7756),
+                            Name = "Em gái mưa",
+                            Thumbnail = "/img/songs/EmGaiMua.jpg",
+                            Url = "/songs/EmGaiMua.mp3",
+                            Views = 222244841m,
+                            Year = 2017L
+                        },
+                        new
+                        {
+                            Id = new Guid("9da35767-6827-420a-a104-7d4839382db8"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2024, 12, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7762),
+                            Name = "Không thể cùng nhau suốt kiếp",
+                            Thumbnail = "/img/songs/KhongTheCungNhauSuotKiep.jpg",
+                            Url = "/songs/KhongTheCungNhauSuotKiep.mp3",
+                            Views = 255841m,
+                            Year = 2015L
+                        },
+                        new
+                        {
+                            Id = new Guid("a7d834f3-6bda-4c81-bbf5-9834edfb0cd1"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2021, 5, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7767),
+                            Name = "Muốn khóc thật to",
+                            Thumbnail = "/img/songs/MuonKhocThatTo.jpg",
+                            Url = "/songs/MuonKhocThatTo.mp3",
+                            Views = 2321321312m,
+                            Year = 2012L
+                        },
+                        new
+                        {
+                            Id = new Guid("322b6882-f77b-44b4-93f7-5d614bec4f09"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2021, 5, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7774),
+                            Name = "Bốn chữ lắm",
+                            Thumbnail = "/img/songs/BonChuLam.jpg",
+                            Url = "/songs/BonChuLam.mp3",
+                            Views = 2344321312m,
+                            Year = 2013L
+                        },
+                        new
+                        {
+                            Id = new Guid("70f850b5-5b05-4df6-844e-a477c4150ed5"),
+                            CategoryId = new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"),
+                            CreatedAt = new DateTime(2021, 5, 31, 18, 54, 46, 989, DateTimeKind.Local).AddTicks(7781),
+                            Name = "Tìm",
+                            Thumbnail = "/img/songs/Tim.jpg",
+                            Url = "/songs/Tim.mp3",
+                            Views = 2421312m,
+                            Year = 2011L
                         });
                 });
 
@@ -318,17 +466,17 @@ namespace CPMusic.Data.Migrations
                             Id = new Guid("0336da83-36b2-49d2-ae14-be954ad51370"),
                             AccessFailedCount = 0,
                             Avatar = "/img/avatars/users/ChuPhong.jpg",
-                            ConcurrencyStamp = "17ef24f1-4103-4a92-b30e-097842b61112",
-                            CreatedAt = new DateTime(2020, 5, 26, 14, 37, 38, 153, DateTimeKind.Local).AddTicks(1562),
+                            ConcurrencyStamp = "874e41fa-ac40-486b-827c-850a159ef28b",
+                            CreatedAt = new DateTime(2020, 5, 31, 18, 54, 46, 975, DateTimeKind.Local).AddTicks(7355),
                             Email = "chucamphong1999@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Chu Cẩm Phong",
                             NormalizedEmail = "CHUCAMPHONG1999@GMAIL.COM",
                             NormalizedUserName = "CHUCAMPHONG",
-                            PasswordHash = "AQAAAAEAACcQAAAAENBhU43a7NBtpTY8xgXbh+f7NscPnfHXVMWUPrtdEU2mDmS1Pq+ftwzcPytwauCnWw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFlHNLnRWLSofXbpSJwd/maj+M1U6BL8s3MDyBl0d+kuta/BQbslgMiWg0pKFSof4A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a17928eb-341e-4d30-80e4-55ddb236edaa",
+                            SecurityStamp = "b46cf82d-dfbc-441f-90c4-bbf90ca5c66a",
                             TwoFactorEnabled = false,
                             UserName = "chucamphong"
                         });
