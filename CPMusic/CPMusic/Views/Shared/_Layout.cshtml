@@ -1,49 +1,88 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<!doctype html>
+<html lang="vi">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CPMusic</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>CPMusic - @ViewData["Title"]</title>
+    <meta content="" name="description" />
+    <meta content="Chu Phong" name="author">
+    <!-- Favicon -->
+    <link href="~/img/brand/favicon.png" rel="shortcut icon" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Stylesheets -->
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/argon.min.css?v=1.2.0" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+    @await RenderSectionAsync("Styles", false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CPMusic</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <!-- Sidenav -->
+    <partial name="Partials/_SidenavPartial" />
+
+    <div class="main-content" id="panel">
+        <!-- Navbar -->
+        <partial name="Partials/_NavbarPartial" />
+
+        <!-- Header -->
+        <header class="bg-primary header pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="align-items-center py-4 row">
+                        <div class="col-12">
+                            <h6 class="d-inline-block h2 mb-0 text-white">@ViewData["Title"]</h6>
+                            <nav aria-label="breadcrumb" class="d-md-inline-block d-none ml-md-4">
+                                <ol class="breadcrumb breadcrumb-dark breadcrumb-links">
+                                    <li class="breadcrumb-item">
+                                        <a asp-action="Index" asp-area="Admin" asp-controller="Home">
+                                            <i class="fa-home fas"></i>
+                                        </a>
+                                    </li>
+                                    <li aria-current="page" class="active breadcrumb-item">
+                                        @ViewData["Title"]
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- Card stats -->
+                    @await RenderSectionAsync("HeaderCardStats", false)
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+        </header>
+
+        <!-- Main content -->
+        <main class="container-fluid mt--6">
             @RenderBody()
         </main>
+
+        <!-- Footer -->
+        <partial name="Partials/_FooterPartial" />
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - CPMusic - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    <!-- Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-scroll-lock@3.1.3/jquery-scrollLock.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <!-- Optional JS -->
+    @if (Convert.ToBoolean(ViewData["UseChartJs"]))
+    {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+    }
+
+    <script src="https://demos.creative-tim.com/argon-dashboard-pro/assets/js/argon.min.js?v=1.2.0"></script>
+
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

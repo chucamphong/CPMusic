@@ -1,0 +1,62 @@
+﻿@using static System.IO.File
+@using static System.IO.Path
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Identity
+@using AutoMapper
+@inject IWebHostEnvironment Environment
+@inject IMapper Mapper
+@inject UserManager<User> UserManager
+
+@{
+    UserViewModel user = Mapper.Map<UserViewModel>(await UserManager.GetUserAsync(User));
+}
+
+@functions
+{
+    string GetPathImage(string path)
+    {
+        if (IsPathRooted(path))
+        {
+            path = path.Substring(1, path.Length - 1);
+        }
+
+        return Combine(Environment.WebRootPath, path);
+    }
+}
+
+<ul class="navbar-nav align-items-center ml-auto ml-md-0">
+    <li class="nav-item dropdown">
+        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                    @* Tài khoản không có avatar thì hiển thị icon user mặc định *@
+                    @if (string.IsNullOrEmpty(user.Avatar) || !Exists(GetPathImage(user.Avatar)))
+                    {
+                        <i class="ni ni-single-02"></i>
+                    }
+                    else
+                    {
+                        <img src="@user.Avatar" alt="@user.Name - @user.Email" />
+                    }
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                    <span class="mb-0 text-sm font-weight-bold">@user.Name</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-header">
+                <h6 class="text-overflow m-0">Xin chào!</h6>
+            </div>
+            <a type="button" class="dropdown-item" onclick="$('#logoutFrm').submit();">
+                <i class="ni ni-user-run"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
+
+        <form id="logoutFrm" class="d-none" asp-area="Identity" asp-page="/Account/Logout"
+              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        </form>
+    </li>
+</ul>
