@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CPMusic.Data.Interfaces;
 using CPMusic.Models;
@@ -22,6 +24,21 @@ namespace CPMusic.Data.Repositories
             );
 
             return await base.Update(song);
+        }
+
+        public IAsyncEnumerable<Song> RandomSongs(int take)
+        {
+            if (take <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bản ghi cần lấy phải > 0.");
+            }
+            
+            return Context.Songs
+                          .Include(song => song.ArtistSongs)
+                          .ThenInclude(artistSong => artistSong.Artist)
+                          .OrderBy(col => Guid.NewGuid())
+                          .Take(take)
+                          .AsAsyncEnumerable();
         }
     }
 }

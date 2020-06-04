@@ -13,7 +13,7 @@ namespace CPMusic.Data.Interfaces
         /// Lấy tất cả các bản ghi
         /// </summary>
         Task<IEnumerable<T>> All();
-        
+
         /// <summary>
         /// Lấy tất cả các bản ghi cùng với các quan hệ
         /// </summary>
@@ -23,7 +23,7 @@ namespace CPMusic.Data.Interfaces
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null,
             bool disableTracking = true);
-        
+
         /// <summary>
         /// Lấy bản ghi phù hợp với Id
         /// </summary>
@@ -33,7 +33,7 @@ namespace CPMusic.Data.Interfaces
         /// Lấy bản ghi phù hợp với Id cùng với dữ liệu có liên quan
         /// </summary>
         Task<T?> GetByIdAsync(Guid id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include);
-        
+
         /// <summary>
         /// Là một hàm query được viết lại để dễ dàng tái sử dụng
         /// </summary>
@@ -43,17 +43,17 @@ namespace CPMusic.Data.Interfaces
         /// <param name="include">Các mối quan hệ</param>
         /// <param name="disableTracking">Tắt theo dõi sự thay đổi của bản ghi</param>
         IQueryable<TResult> Query<TResult>(Expression<Func<T, TResult>> selector,
-            Expression<Func<T, bool>>? predicate = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
-            bool disableTracking = true);
+                                           Expression<Func<T, bool>>? predicate = null,
+                                           Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+                                           Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+                                           bool disableTracking = true);
 
         Task<T> Add(T entity);
 
         Task<T> Update(T entity);
-        
+
         Task<T> Delete(Guid id);
-        
+
         /// <summary>
         /// Thống kê tốc độ tăng trưởng dữ liệu giữa tháng hiện tại và tháng trước
         /// </summary>
@@ -62,7 +62,7 @@ namespace CPMusic.Data.Interfaces
         /// dữ liệu của tháng hiện tại
         /// </returns>
         Task<(int, double)> GrowthRate();
-        
+
         /// <summary>
         /// Lấy số lượng bản ghi của từng tháng, tính từ tháng 1 đến tháng hiện tại, năm hiện tại
         /// </summary>
@@ -72,6 +72,6 @@ namespace CPMusic.Data.Interfaces
         /// Nghĩa là tháng 1 có 0 bản ghi, tháng 2 có 1 bản ghi, tháng 3 có 2 bản ghi và tháng 4 có 4 bản ghi
         /// </example>
         /// <returns>Một mảng số nguyên có độ dài là n (n là tháng hiện tại)</returns>
-        IEnumerable<int> StatisticsPerMonth(int? month = null);
+        IEnumerable<int> StatisticsPerMonth();
     }
 }

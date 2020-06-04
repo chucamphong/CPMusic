@@ -1,19 +1,6 @@
-﻿@using AutoMapper
-@using CPMusic.Data
-@using Microsoft.EntityFrameworkCore
-@using Microsoft.EntityFrameworkCore.Internal
-@inject ApplicationDbContext DbContext
-@inject IMapper Mapper
+﻿@using Microsoft.EntityFrameworkCore.Internal
 
-@{
-    IEnumerable<Song> songs = DbContext.Songs
-                                       .Include(col => col.ArtistSongs)
-                                       .ThenInclude(artistSong => artistSong.Artist)
-                                       .OrderByDescending(col => col.CreatedAt)
-                                       .Take(6);
-
-    IEnumerable<SongViewModel> songsViewModel = Mapper.Map<IEnumerable<SongViewModel>>(songs);
-}
+@model IEnumerable<SongViewModel>
 
 <!-- Hôm nay nghe gì? -->
 <div class="row">
@@ -21,7 +8,7 @@
         <h2 class="mb-0 text-uppercase">Hôm nay nghe gì?</h2>
     </div>
 
-    @foreach (SongViewModel song in songsViewModel)
+    @foreach (SongViewModel song in Model)
     {
         <div class="col-6 col-lg-2 col-sm-4">
             <div class="bg-transparent card mb-0 shadow-none">

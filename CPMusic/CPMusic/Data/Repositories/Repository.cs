@@ -14,7 +14,7 @@ namespace CPMusic.Data.Repositories
     {
         protected readonly ApplicationDbContext Context;
 
-        public Repository(ApplicationDbContext context)
+        protected Repository(ApplicationDbContext context)
         {
             Context = context;
         }
@@ -55,7 +55,7 @@ namespace CPMusic.Data.Repositories
             bool disableTracking = true)
         {
             IQueryable<TEntity> query = Context.Set<TEntity>().AsQueryable();
-            
+
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -119,9 +119,9 @@ namespace CPMusic.Data.Repositories
             return (record.total, growth);
         }
 
-        public IEnumerable<int> StatisticsPerMonth(int? month = null)
+        public IEnumerable<int> StatisticsPerMonth()
         {
-            return Enumerable.Range(1, month ?? DateTime.Now.Month)
+            return Enumerable.Range(1, DateTime.Now.Month)
                              .GroupJoin(
                                  Context.Set<TEntity>().AsNoTracking()
                                         .Where(song => song.CreatedAt.Year == DateTime.Now.Year)

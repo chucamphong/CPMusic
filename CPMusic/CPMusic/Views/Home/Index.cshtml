@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Dictionary<string, IEnumerable<SongViewModel>>
+@{
     ViewData["Title"] = "Trang Chủ";
 }
 
@@ -27,4 +28,4 @@
     </div>
 </div>
 
-<partial name="Partials/HomNayNgheGi" />
+<partial name="Partials/HomNayNgheGi" model="@Model.GetValueOrDefault("randomSongs")" />

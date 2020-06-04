@@ -13,18 +13,23 @@ namespace CPMusic.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ISongRepository _songRepository;
         private readonly IMapper _mapper;
 
-        public HomeController(ApplicationDbContext context, IMapper mapper)
+        public HomeController(ISongRepository songRepository, IMapper mapper)
         {
-            _context = context;
+            _songRepository = songRepository;
             _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var songViewModels = new Dictionary<string, IEnumerable<SongViewModel>>
+            {
+                { "randomSongs", _mapper.Map<IEnumerable<SongViewModel>>(_songRepository.RandomSongs(6)) },
+            };
+
+            return View(songViewModels);
         }
     }
 }
