@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<SongViewModel>
 
-<div class="row">
+<div class="mb-4 row">
     <div class="align-items-center col-12 d-flex justify-content-between mb-2">
         <h2 class="mb-0 text-uppercase">Hôm nay nghe gì?</h2>
+        <h6 class="mb-0 text-uppercase">Xem thêm</h6>
     </div>
 
-    @foreach (SongViewModel song in Model)
+    @foreach (var song in Model)
     {
         <div class="col-6 col-lg-2 col-sm-4">
             @await Component.InvokeAsync("Song", song)
