@@ -51,13 +51,21 @@ namespace CPMusic.Controllers
                             .ThenInclude(artistSong => artistSong.Artist)
                             .Include(song => song.Category);
             });
-            
+
             if (song is null)
             {
                 return NotFound();
             }
 
-            return View(_mapper.Map<SongViewModel>(song));
+            IEnumerable<Song> randomSongs = await _songRepository.RandomSongs(6);
+
+            ListenViewModel listenViewModel = new ListenViewModel()
+            {
+                Song = _mapper.Map<SongViewModel>(song),
+                Suggestions = _mapper.Map<IEnumerable<SongViewModel>>(randomSongs)
+            };
+
+            return View(listenViewModel);
         }
     }
 }
