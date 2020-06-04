@@ -1,0 +1,55 @@
+﻿@model SongViewModel
+
+@*
+    TODO: Chỉnh sửa url của thể loại
+*@
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = $"{Model.Name} - {Model.ArtistsToString}";
+}
+
+@section Styles
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+}
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+    <!--suppress JSUnresolvedFunction -->
+    <script>
+        (() => {
+            new APlayer({
+                container: document.getElementById('player'),
+                theme: '#5e72e4',
+                audio: {
+                    name: '@Model.Name',
+                    artist: '@Model.ArtistsToString',
+                    url: '@Model.Url',
+                    cover: '@Model.Thumbnail'
+                }
+            });
+        })();
+    </script>
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2 class="mb-0">Đang phát bài hát: @Model.Name - @Model.ArtistsToString</h2>
+                <p class="m-0">Lượt nghe: @Model.Views.ToString("N0")</p>
+                <p class="m-0">Năm phát hành: @Model.Year.ToString()</p>
+                <p class="m-0">
+                    Thể loại:
+                    <a href="">@Model.Category</a>
+                </p>
+            </div>
+
+            <div class="col-12 m-0">
+                <div class="rounded" id="player"></div>
+            </div>
+        </div>
+    </div>
+</div>

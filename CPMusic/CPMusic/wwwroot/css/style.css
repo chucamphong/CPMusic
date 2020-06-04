@@ -1,3 +1,29 @@
 ﻿.navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
     background: #c3e1ff;
 }
+
+.aplayer {
+    background: #e8f0ff !important;
+}
+
+.aplayer-title {
+    font-size: 1.1rem !important;
+}
+.aplayer-author {
+    font-size: .8rem !important;
+}
+.aplayer .aplayer-pic {
+    height: 100px !important;
+    width: 100px !important;
+}
+.aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+    fill: white;
+}
+.aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path:hover {
+    fill: white;
+}
+.aplayer .aplayer-info {
+    margin-left: 100px !important;
+    padding: 30px 7px 0 10px !important;
+    height: 100px !important;
+}
