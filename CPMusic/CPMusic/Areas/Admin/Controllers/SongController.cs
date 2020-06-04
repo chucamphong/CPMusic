@@ -39,7 +39,7 @@ namespace CPMusic.Areas.Admin.Controllers
             // Truy vấn lấy tất cả các cột trong bảng cùng với quan hệ của bảng thể loại và nghệ sĩ
             IEnumerable<Song> songs = await _songRepository.All(
                 col => col,
-                includes: query =>
+                include: query =>
                     query.Include(col => col.Category)
                          .Include(col => col.ArtistSongs)
                          .ThenInclude(artistSong => artistSong.Artist)); 

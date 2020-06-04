@@ -28,10 +28,11 @@ namespace CPMusic.Data.Repositories
             Expression<Func<TEntity, TResult>> selector,
             Expression<Func<TEntity, bool>>? predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? includes = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+            int take = 0,
             bool disableTracking = true)
         {
-            return await Query(selector, predicate, orderBy, includes, disableTracking).ToListAsync();
+            return await Query(selector, predicate, orderBy, include, take, disableTracking).ToListAsync();
         }
 
         public async Task<TEntity?> GetByIdAsync(Guid id)
@@ -52,6 +53,7 @@ namespace CPMusic.Data.Repositories
             Expression<Func<TEntity, bool>>? predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+            int take = 0,
             bool disableTracking = true)
         {
             IQueryable<TEntity> query = Context.Set<TEntity>().AsQueryable();
@@ -69,6 +71,11 @@ namespace CPMusic.Data.Repositories
             if (predicate != null)
             {
                 query = query.Where(predicate);
+            }
+
+            if (take > 0)
+            {
+                query = query.Take(take);
             }
 
             return orderBy != null ? orderBy(query).Select(selector) : query.Select(selector);

@@ -15,13 +15,20 @@ namespace CPMusic.Data.Interfaces
         Task<IEnumerable<T>> All();
 
         /// <summary>
-        /// Lấy tất cả các bản ghi cùng với các quan hệ
+        /// Lấy tất cả bản ghi
         /// </summary>
+        /// <param name="selector">Các cột cần chọn</param>
+        /// <param name="predicate">Điều kiện</param>
+        /// <param name="orderBy">Sắp xếp</param>
+        /// <param name="include">Các mối quan hệ</param>
+        /// <param name="take">Số bản ghi cần lấy</param>
+        /// <param name="disableTracking">Tắt theo dõi sự thay đổi của bản ghi</param>
         Task<IEnumerable<TResult>> All<TResult>(
             Expression<Func<T, TResult>> selector,
             Expression<Func<T, bool>>? predicate = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+            int take = 0,
             bool disableTracking = true);
 
         /// <summary>
@@ -41,11 +48,13 @@ namespace CPMusic.Data.Interfaces
         /// <param name="predicate">Điều kiện</param>
         /// <param name="orderBy">Sắp xếp</param>
         /// <param name="include">Các mối quan hệ</param>
+        /// <param name="take">Số bản ghi cần lấy</param>
         /// <param name="disableTracking">Tắt theo dõi sự thay đổi của bản ghi</param>
         IQueryable<TResult> Query<TResult>(Expression<Func<T, TResult>> selector,
                                            Expression<Func<T, bool>>? predicate = null,
                                            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
                                            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+                                           int take = 0,
                                            bool disableTracking = true);
 
         Task<T> Add(T entity);
