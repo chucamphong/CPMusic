@@ -105,6 +105,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="wwwroot\css\style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -113,6 +117,80 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\_ValidationScriptsPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\argon.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\argon.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\charts\chart-bars.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\charts\chart-bars.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\charts\chart-line.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\charts\chart-line.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\custom\form-control.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\custom\form-control.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\chart-init.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\chart-init.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\copy-icon.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\copy-icon.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\navbar.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\navbar.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\popover.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\popover.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\scroll-to.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\scroll-to.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\tooltip.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\init\tooltip.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\maps\maps-default.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\maps\maps-default.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\vendor\bootstrap-datepicker.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\vendor\bootstrap-datepicker.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\vendor\nouislider.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\vendor\nouislider.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\vendor\scrollbar.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\components\vendor\scrollbar.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\angular.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\bootstrap.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\img-1-1000x600.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\profile-cover.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\react.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\sketch.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\team-1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\team-2.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\team-3.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\team-4.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\team-5.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\img\theme\vue.jpg" />
   </ItemGroup>
 
 </Project>
