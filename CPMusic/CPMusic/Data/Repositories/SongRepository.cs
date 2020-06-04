@@ -26,49 +26,43 @@ namespace CPMusic.Data.Repositories
             return await base.Update(song);
         }
 
-        public IAsyncEnumerable<Song> RandomSongs(int take)
+        public async Task<IEnumerable<Song>> RandomSongs(int take)
         {
-            if (take <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bài hát cần lấy phải > 0.");
-            }
-            
-            return Context.Songs
-                          .Include(song => song.ArtistSongs)
-                          .ThenInclude(artistSong => artistSong.Artist)
-                          .OrderBy(col => Guid.NewGuid())
-                          .Take(take)
-                          .AsAsyncEnumerable();
+            return await All(song => song,
+                include: query =>
+                {
+                    return query.Include(song => song.ArtistSongs)
+                                .ThenInclude(artistSong => artistSong.Artist);
+                },
+                orderBy: query => query.OrderByDescending(song => Guid.NewGuid()),
+                take: take
+            );
         }
 
-        public IAsyncEnumerable<Song> Ranking(int take = 0)
+        public async Task<IEnumerable<Song>> Ranking(int take = 0)
         {
-            if (take <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bài hát cần lấy phải > 0.");
-            }
-            
-            return Context.Songs
-                          .Include(song => song.ArtistSongs)
-                          .ThenInclude(artistSong => artistSong.Artist)
-                          .OrderBy(song => song.Views)
-                          .Take(take)
-                          .AsAsyncEnumerable();
+            return await All(song => song,
+                include: query =>
+                {
+                    return query.Include(song => song.ArtistSongs)
+                                .ThenInclude(artistSong => artistSong.Artist);
+                },
+                orderBy: query => query.OrderByDescending(song => song.Views),
+                take: take
+            );
         }
 
-        public IAsyncEnumerable<Song> NewSongsReleased(int take = 0)
+        public async Task<IEnumerable<Song>> NewSongsReleased(int take = 0)
         {
-            if (take <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bài hát cần lấy phải > 0.");
-            }
-            
-            return Context.Songs
-                          .Include(song => song.ArtistSongs)
-                          .ThenInclude(artistSong => artistSong.Artist)
-                          .OrderBy(song => song.CreatedAt)
-                          .Take(take)
-                          .AsAsyncEnumerable();
+            return await All(song => song,
+                include: query =>
+                {
+                    return query.Include(song => song.ArtistSongs)
+                                .ThenInclude(artistSong => artistSong.Artist);
+                },
+                orderBy: query => query.OrderByDescending(song => song.CreatedAt),
+                take: take
+            );
         }
     }
 }
