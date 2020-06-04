@@ -18,6 +18,11 @@ namespace CPMusic.Models
         /// Tên thể loại
         /// </summary>
         public string Name { get; set; } = null!;
+        
+        /// <summary>
+        /// Ảnh minh họa
+        /// </summary>
+        public string Thumbnail { get; set; } = null!;
 
         /// <summary>
         /// Ngày thêm thể loại vào trong cơ sở dữ liệu

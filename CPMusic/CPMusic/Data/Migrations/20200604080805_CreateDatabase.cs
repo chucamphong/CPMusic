@@ -27,6 +27,7 @@ namespace CPMusic.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    Thumbnail = table.Column<string>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -236,26 +237,31 @@ namespace CPMusic.Migrations
                 columns: new[] { "Id", "Avatar", "CreatedAt", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"), "/img/avatars/artists/ChiPu.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 578, DateTimeKind.Local).AddTicks(9897), "Chi Pu" },
-                    { new Guid("a3616670-4fd8-49cf-b3fc-82dc29f7e94f"), "/img/avatars/artists/LouHoang.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1418), "Lou Hoàng" },
-                    { new Guid("1c9307ea-95ff-42d5-8883-2138e87b1acf"), "/img/avatars/artists/BlackPink.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1463), "BLACKPINK" },
-                    { new Guid("961f8b25-ae91-4b8b-940a-8caa7503e7ea"), "/img/avatars/artists/HuongTram.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1469), "Hương Tràm" },
-                    { new Guid("47720334-d5e6-445d-9871-3336634824c5"), "/img/avatars/artists/HoaMinzy.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1473), "Hòa Minzy" },
-                    { new Guid("77133a0f-eed5-47cf-b6f1-9db1c9c78009"), "/img/avatars/artists/MrSiro.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1480), "Mr Siro" },
-                    { new Guid("cfd5c125-09fd-4490-a237-22696d309e23"), "/img/avatars/artists/TrucNhan.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1485), "Trúc Nhân" },
-                    { new Guid("e0cef1be-fafd-4979-9f32-3ad2fa27ce71"), "/img/avatars/artists/MIN.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1494), "MIN" },
-                    { new Guid("3a17d74c-2b66-469f-a07e-e110906ed263"), "/img/avatars/artists/MrA.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1499), "Mr.A" },
-                    { new Guid("db28e1b6-6e88-46ee-bad6-4cb381c2e8c3"), "/img/avatars/artists/TruongThaoNhi.jpg", new DateTime(2020, 5, 31, 19, 19, 13, 579, DateTimeKind.Local).AddTicks(1505), "Trương Thảo Nhi" }
+                    { new Guid("09c1bfe7-d884-4484-8f66-8225536214c9"), "/img/avatars/artists/ChiPu.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(4054), "Chi Pu" },
+                    { new Guid("a3616670-4fd8-49cf-b3fc-82dc29f7e94f"), "/img/avatars/artists/LouHoang.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5495), "Lou Hoàng" },
+                    { new Guid("1c9307ea-95ff-42d5-8883-2138e87b1acf"), "/img/avatars/artists/BlackPink.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5543), "BLACKPINK" },
+                    { new Guid("961f8b25-ae91-4b8b-940a-8caa7503e7ea"), "/img/avatars/artists/HuongTram.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5549), "Hương Tràm" },
+                    { new Guid("47720334-d5e6-445d-9871-3336634824c5"), "/img/avatars/artists/HoaMinzy.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5560), "Hòa Minzy" },
+                    { new Guid("77133a0f-eed5-47cf-b6f1-9db1c9c78009"), "/img/avatars/artists/MrSiro.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5567), "Mr Siro" },
+                    { new Guid("cfd5c125-09fd-4490-a237-22696d309e23"), "/img/avatars/artists/TrucNhan.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5572), "Trúc Nhân" },
+                    { new Guid("e0cef1be-fafd-4979-9f32-3ad2fa27ce71"), "/img/avatars/artists/MIN.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5576), "MIN" },
+                    { new Guid("3a17d74c-2b66-469f-a07e-e110906ed263"), "/img/avatars/artists/MrA.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5581), "Mr.A" },
+                    { new Guid("db28e1b6-6e88-46ee-bad6-4cb381c2e8c3"), "/img/avatars/artists/TruongThaoNhi.jpg", new DateTime(2020, 6, 4, 15, 8, 4, 692, DateTimeKind.Local).AddTicks(5586), "Trương Thảo Nhi" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "CreatedAt", "Name" },
+                columns: new[] { "Id", "CreatedAt", "Name", "Thumbnail" },
                 values: new object[,]
                 {
-                    { new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 5, 31, 19, 19, 13, 577, DateTimeKind.Local).AddTicks(9437), "Nhạc trẻ" },
-                    { new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 5, 31, 19, 19, 13, 578, DateTimeKind.Local).AddTicks(541), "Nhạc Hàn Quốc" },
-                    { new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"), new DateTime(2020, 5, 31, 19, 19, 13, 578, DateTimeKind.Local).AddTicks(579), "Nhạc Trung Quốc" }
+                    { new Guid("d599df0e-a82e-49fd-84e4-dfaf4b40a070"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4477), "Nhạc Trữ Tình", "/img/categories/NhacTruTinh.jpg" },
+                    { new Guid("9426b9b8-4b85-459c-9f82-79bddee93e56"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4473), "Nhạc Nhật Bản", "/img/categories/NhacNhatBan.jpg" },
+                    { new Guid("57ec071d-9986-424f-9dae-ed54e2316214"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4468), "Nhạc Latin", "/img/categories/NhacLatin.jpg" },
+                    { new Guid("917da125-164f-4d97-ba01-59ac6e93f5c3"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4461), "Nhạc Âu Mỹ", "/img/categories/NhacAuMy.jpg" },
+                    { new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(2904), "Nhạc trẻ", "/img/categories/NhacTre.jpg" },
+                    { new Guid("0ebe2395-6106-4c6f-827a-29400045b39f"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4444), "Nhạc Trung Quốc", "/img/categories/NhacTrungQuoc.jpg" },
+                    { new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4407), "Nhạc Hàn Quốc", "/img/categories/NhacHanQuoc.jpg" },
+                    { new Guid("bcc390f6-f78e-468c-a158-6dd23e6a28bc"), new DateTime(2020, 6, 4, 15, 8, 4, 691, DateTimeKind.Local).AddTicks(4450), "Nhạc EDM", "/img/categories/NhacEDM.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -263,30 +269,30 @@ namespace CPMusic.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"), "c05378d2-d920-47ac-a5f7-f211e1f860c9", "Admin", "ADMIN" },
-                    { new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"), "6fbb1760-c26f-4a32-a55e-4660b350f892", "Member", "MEMBER" }
+                    { new Guid("dd56b0e4-1fcf-4e63-9b28-6afae71002f7"), "01ee3f17-d52e-4d97-8180-b25cdc082e0c", "Member", "MEMBER" },
+                    { new Guid("ff6ec874-59a6-497d-a644-6fa59fb7f3ae"), "83125a6c-b400-423e-ba09-7be0c33d9d7b", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "Avatar", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("0336da83-36b2-49d2-ae14-be954ad51370"), 0, "/img/avatars/users/ChuPhong.jpg", "ec83a0c6-2f43-4872-ba52-6f320f664506", new DateTime(2020, 5, 31, 19, 19, 13, 566, DateTimeKind.Local).AddTicks(6061), "chucamphong1999@gmail.com", false, false, null, "Chu Cẩm Phong", "CHUCAMPHONG1999@GMAIL.COM", "CHUCAMPHONG", "AQAAAAEAACcQAAAAEBTynBErjOkTzgVEjflWKhaOUJ25RNKEqJMtXNf+sDzudXUNBx/z+DJ8NHeYpAwVdQ==", null, false, "3ce00f1a-4b39-4329-8b8f-b493328301e2", false, "chucamphong" });
+                values: new object[] { new Guid("0336da83-36b2-49d2-ae14-be954ad51370"), 0, "/img/avatars/users/ChuPhong.jpg", "e0c672a6-09de-4a28-9a32-71780950f668", new DateTime(2020, 6, 4, 15, 8, 4, 679, DateTimeKind.Local).AddTicks(1202), "chucamphong1999@gmail.com", false, false, null, "Chu Cẩm Phong", "CHUCAMPHONG1999@GMAIL.COM", "CHUCAMPHONG", "AQAAAAEAACcQAAAAEKkwPfT30O2b8PjukG5sYyTtbd0y4nPNDar5wMAFF1Th3CsYWVACreQ3bRufMMpFrQ==", null, false, "3d28aa29-36d4-4ffc-b65e-b2b19c2bb344", false, "chucamphong" });
 
             migrationBuilder.InsertData(
                 table: "Songs",
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "Name", "OtherName", "Thumbnail", "Url", "Views", "Year" },
                 values: new object[,]
                 {
-                    { new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 5, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(2497), "Anh ơi ở lại", "Cám Tấm", "/img/songs/AnhOiOLai.jpg", "/songs/AnhOiOLai.mp3", 3213213213m, 2019L },
-                    { new Guid("b5a14be6-f859-40d5-ab01-1814f0c72b61"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 7, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(4220), "Cảm giác lúc ấy sẽ ra sao", null, "/img/songs/CamGiacLucAySeRaSao.jpg", "/songs/CamGiacLucAySeRaSao.mp3", 4213219841m, 2018L },
-                    { new Guid("4df89010-89c1-47a2-a9fb-1e0e72beb906"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2024, 12, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5315), "Em gái mưa", null, "/img/songs/EmGaiMua.jpg", "/songs/EmGaiMua.mp3", 222244841m, 2017L },
-                    { new Guid("9da35767-6827-420a-a104-7d4839382db8"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2024, 12, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5321), "Không thể cùng nhau suốt kiếp", null, "/img/songs/KhongTheCungNhauSuotKiep.jpg", "/songs/KhongTheCungNhauSuotKiep.mp3", 255841m, 2015L },
-                    { new Guid("a7d834f3-6bda-4c81-bbf5-9834edfb0cd1"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2021, 5, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5327), "Muốn khóc thật to", null, "/img/songs/MuonKhocThatTo.jpg", "/songs/MuonKhocThatTo.mp3", 2321321312m, 2012L },
-                    { new Guid("322b6882-f77b-44b4-93f7-5d614bec4f09"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2021, 5, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5336), "Bốn chữ lắm", null, "/img/songs/BonChuLam.jpg", "/songs/BonChuLam.mp3", 2344321312m, 2013L },
-                    { new Guid("70f850b5-5b05-4df6-844e-a477c4150ed5"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2021, 5, 31, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5343), "Tìm", null, "/img/songs/Tim.jpg", "/songs/Tim.mp3", 2421312m, 2011L },
-                    { new Guid("df23feb6-d98f-4484-bdd2-aeef0f567213"), new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 2, 29, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5267), "Kill this love", null, "/img/songs/KillThisLove.jpg", "/songs/KillThisLove.mp3", 42841m, 2012L },
-                    { new Guid("21e0d421-a233-4f6c-863c-3c99e01bf405"), new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 2, 29, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5298), "Du ddu du ddu", null, "/img/songs/DuDduDuDdu.jpg", "/songs/DuDduDuDdu.mp3", 42444841m, 2013L },
-                    { new Guid("e93cc63f-062d-419e-8cb9-161298b5d532"), new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 11, 30, 19, 19, 13, 580, DateTimeKind.Local).AddTicks(5306), "Boombayah", null, "/img/songs/Boombayah.jpg", "/songs/Boombayah.mp3", 5544841m, 2023L }
+                    { new Guid("18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 6, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(7020), "Anh ơi ở lại", "Cám Tấm", "/img/songs/AnhOiOLai.jpg", "/songs/AnhOiOLai.mp3", 3213213213m, 2019L },
+                    { new Guid("b5a14be6-f859-40d5-ab01-1814f0c72b61"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2020, 8, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(8818), "Cảm giác lúc ấy sẽ ra sao", null, "/img/songs/CamGiacLucAySeRaSao.jpg", "/songs/CamGiacLucAySeRaSao.mp3", 4213219841m, 2018L },
+                    { new Guid("4df89010-89c1-47a2-a9fb-1e0e72beb906"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2025, 1, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9977), "Em gái mưa", null, "/img/songs/EmGaiMua.jpg", "/songs/EmGaiMua.mp3", 222244841m, 2017L },
+                    { new Guid("9da35767-6827-420a-a104-7d4839382db8"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2025, 1, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9983), "Không thể cùng nhau suốt kiếp", null, "/img/songs/KhongTheCungNhauSuotKiep.jpg", "/songs/KhongTheCungNhauSuotKiep.mp3", 255841m, 2015L },
+                    { new Guid("a7d834f3-6bda-4c81-bbf5-9834edfb0cd1"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2021, 6, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9989), "Muốn khóc thật to", null, "/img/songs/MuonKhocThatTo.jpg", "/songs/MuonKhocThatTo.mp3", 2321321312m, 2012L },
+                    { new Guid("322b6882-f77b-44b4-93f7-5d614bec4f09"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2021, 6, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9995), "Bốn chữ lắm", null, "/img/songs/BonChuLam.jpg", "/songs/BonChuLam.mp3", 2344321312m, 2013L },
+                    { new Guid("70f850b5-5b05-4df6-844e-a477c4150ed5"), new Guid("1bb78812-0c2a-4bef-9e29-91bd45cc3311"), new DateTime(2021, 6, 4, 15, 8, 4, 694, DateTimeKind.Local).AddTicks(1), "Tìm", null, "/img/songs/Tim.jpg", "/songs/Tim.mp3", 2421312m, 2011L },
+                    { new Guid("df23feb6-d98f-4484-bdd2-aeef0f567213"), new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 3, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9928), "Kill this love", null, "/img/songs/KillThisLove.jpg", "/songs/KillThisLove.mp3", 42841m, 2012L },
+                    { new Guid("21e0d421-a233-4f6c-863c-3c99e01bf405"), new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 3, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9960), "Du ddu du ddu", null, "/img/songs/DuDduDuDdu.jpg", "/songs/DuDduDuDdu.mp3", 42444841m, 2013L },
+                    { new Guid("e93cc63f-062d-419e-8cb9-161298b5d532"), new Guid("557a2270-276b-43eb-94cb-171cbf0cc9c5"), new DateTime(2020, 12, 4, 15, 8, 4, 693, DateTimeKind.Local).AddTicks(9968), "Boombayah", null, "/img/songs/Boombayah.jpg", "/songs/Boombayah.mp3", 5544841m, 2023L }
                 });
 
             migrationBuilder.InsertData(
