@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using CPMusic.Data;
 using CPMusic.Data.Interfaces;
 using CPMusic.Models;
 using CPMusic.ViewModels;
@@ -25,13 +22,21 @@ namespace CPMusic.Controllers
             _categoryRepository = categoryRepository;
         }
 
+        /// <summary>
+        /// GET: /
+        /// Trang chủ
+        /// </summary>
         public async Task<ViewResult> Index()
         {
+            IEnumerable<Song> randomSongs = await _songRepository.RandomSongs(6);
+            IEnumerable<Song> newSnewSongsReleased = await _songRepository.NewSongsReleased(6);
+            IEnumerable<Category> categories = await _categoryRepository.All(col => col, take: 6);
+
             Dictionary<string, IEnumerable> songViewModels = new Dictionary<string, IEnumerable>
             {
-                { "randomSongs", _mapper.Map<IEnumerable<SongViewModel>>(await _songRepository.RandomSongs(6)) },
-                { "newSongsReleased", _mapper.Map<IEnumerable<SongViewModel>>(await _songRepository.NewSongsReleased(6)) },
-                { "categories", _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryRepository.All(col => col, take: 6)) },
+                { "randomSongs", _mapper.Map<IEnumerable<SongViewModel>>(randomSongs) },
+                { "newSongsReleased", _mapper.Map<IEnumerable<SongViewModel>>(newSnewSongsReleased) },
+                { "categories", _mapper.Map<IEnumerable<CategoryViewModel>>(categories) },
             };
 
             return View(songViewModels);
