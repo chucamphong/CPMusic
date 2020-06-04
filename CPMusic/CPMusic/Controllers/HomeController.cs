@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,21 +14,24 @@ namespace CPMusic.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISongRepository _songRepository;
         private readonly IMapper _mapper;
+        private readonly ISongRepository _songRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public HomeController(ISongRepository songRepository, IMapper mapper)
+        public HomeController(IMapper mapper, ISongRepository songRepository, ICategoryRepository categoryRepository)
         {
-            _songRepository = songRepository;
             _mapper = mapper;
+            _songRepository = songRepository;
+            _categoryRepository = categoryRepository;
         }
 
-        public IActionResult Index()
+        public async Task<ViewResult> Index()
         {
-            var songViewModels = new Dictionary<string, IEnumerable<SongViewModel>>
+            Dictionary<string, IEnumerable> songViewModels = new Dictionary<string, IEnumerable>
             {
                 { "randomSongs", _mapper.Map<IEnumerable<SongViewModel>>(_songRepository.RandomSongs(6)) },
                 { "newSongsReleased", _mapper.Map<IEnumerable<SongViewModel>>(_songRepository.NewSongsReleased(6)) },
+                { "categories", _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryRepository.All(col => col, take: 6)) },
             };
 
             return View(songViewModels);
