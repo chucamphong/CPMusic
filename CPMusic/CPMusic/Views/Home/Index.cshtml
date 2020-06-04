@@ -1,6 +1,4 @@
-﻿@using System.Collections
-
-@model Dictionary<string, IEnumerable>
+﻿@model HomeViewModel
 
 @{
     ViewData["Title"] = "Trang Chủ";
@@ -10,10 +8,10 @@
 <partial name="Partials/BangXepHang" />
 
 <!-- Hôm nay nghe gì? -->
-<partial name="Partials/HomNayNgheGi" model="@Model.GetValueOrDefault("randomSongs")" />
+<partial name="Partials/HomNayNgheGi" model="@Model.RandomSongs" />
 
 <!-- Mới phát hành -->
-<partial name="Partials/MoiPhatHanh" model="@Model.GetValueOrDefault("newSongsReleased")" />
+<partial name="Partials/MoiPhatHanh" model="@Model.NewSongsReleased" />
 
 <!-- Thể loại -->
-<partial name="Partials/TheLoai" model="@Model.GetValueOrDefault("categories")" />
+<partial name="Partials/TheLoai" model="@Model.Categories" />
