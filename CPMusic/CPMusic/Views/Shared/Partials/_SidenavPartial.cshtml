@@ -6,7 +6,7 @@
     {
         var conname = ViewContext.RouteData.Values["controller"].ToString()?.ToLower();
         var actname = ViewContext.RouteData.Values["action"].ToString()?.ToLower();
-        controllerName = controllerName.Replace("controller", "");
+        controllerName = controllerName.Replace("Controller", "");
 
         if (conname == controllerName.ToLower() && actname == actionName.ToLower())
         {
@@ -41,7 +41,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a asp-action="Index" asp-controller="Home" class="nav-link @IsMenuSelected(nameof(HomeController.Index), nameof(HomeController))">
-                                <i class="ni ni-shop text-primary"></i>
+                                <i class="fas fa-h-square text-primary"></i>
                                 <span class="nav-link-text">Trang chủ</span>
                             </a>
                         </li>
