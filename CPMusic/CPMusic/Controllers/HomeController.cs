@@ -27,6 +27,7 @@ namespace CPMusic.Controllers
             var songViewModels = new Dictionary<string, IEnumerable<SongViewModel>>
             {
                 { "randomSongs", _mapper.Map<IEnumerable<SongViewModel>>(_songRepository.RandomSongs(6)) },
+                { "newSongsReleased", _mapper.Map<IEnumerable<SongViewModel>>(_songRepository.NewSongsReleased(6)) },
             };
 
             return View(songViewModels);

@@ -1,31 +1,14 @@
 ﻿@model Dictionary<string, IEnumerable<SongViewModel>>
+
 @{
     ViewData["Title"] = "Trang Chủ";
 }
 
 <!-- Bảng xếp hạng -->
-<div class="mb-4 row">
-    <div class="align-items-center col-12 d-flex justify-content-between mb-2">
-        <h2 class="mb-0 text-uppercase">Bảng xếp hạng</h2>
-    </div>
-    <div class="col-12 col-md-6 col-xl-4 mb-2">
-        <a href="{{ route('song.top-songs', ['country' => 'Việt Nam']) }}">
-            <img alt="Bảng xếp hạng bài hát Việt Nam" class="img-fluid"
-                 src="//static-zmp3.zadn.vn/dev/skins/zmp3-v5.2/images/chart-song-vn.png">
-        </a>
-    </div>
-    <div class="col-12 col-md-6 col-xl-4 mb-2">
-        <a href="{{ route('song.top-songs', ['country' => 'US-UK']) }}">
-            <img alt="Bảng xếp hạng bài hát US-UK" class="img-fluid"
-                 src="//static-zmp3.zadn.vn/dev/skins/zmp3-v5.2/images/chart-song-us.png">
-        </a>
-    </div>
-    <div class="col-12 col-md-6 col-xl-4 d-md-none d-xl-block mb-2">
-        <a href="{{ route('song.top-songs', ['country' => 'Hàn Quốc']) }}">
-            <img alt="Bảng xếp hạng bài hát Hàn Quốc" class="img-fluid"
-                 src="//static-zmp3.zadn.vn/dev/skins/zmp3-v5.2/images/chart-song-kpop.png">
-        </a>
-    </div>
-</div>
+<partial name="Partials/BangXepHang" />
 
+<!-- Hôm nay nghe gì? -->
 <partial name="Partials/HomNayNgheGi" model="@Model.GetValueOrDefault("randomSongs")" />
+
+<!-- Mới phát hành -->
+<partial name="Partials/MoiPhatHanh" model="@Model.GetValueOrDefault("newSongsReleased")" />

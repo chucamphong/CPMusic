@@ -30,13 +30,43 @@ namespace CPMusic.Data.Repositories
         {
             if (take <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bản ghi cần lấy phải > 0.");
+                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bài hát cần lấy phải > 0.");
             }
             
             return Context.Songs
                           .Include(song => song.ArtistSongs)
                           .ThenInclude(artistSong => artistSong.Artist)
                           .OrderBy(col => Guid.NewGuid())
+                          .Take(take)
+                          .AsAsyncEnumerable();
+        }
+
+        public IAsyncEnumerable<Song> Ranking(int take = 0)
+        {
+            if (take <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bài hát cần lấy phải > 0.");
+            }
+            
+            return Context.Songs
+                          .Include(song => song.ArtistSongs)
+                          .ThenInclude(artistSong => artistSong.Artist)
+                          .OrderBy(song => song.Views)
+                          .Take(take)
+                          .AsAsyncEnumerable();
+        }
+
+        public IAsyncEnumerable<Song> NewSongsReleased(int take = 0)
+        {
+            if (take <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(take), "Số lượng bài hát cần lấy phải > 0.");
+            }
+            
+            return Context.Songs
+                          .Include(song => song.ArtistSongs)
+                          .ThenInclude(artistSong => artistSong.Artist)
+                          .OrderBy(song => song.CreatedAt)
                           .Take(take)
                           .AsAsyncEnumerable();
         }

@@ -1,0 +1,21 @@
+﻿@using Microsoft.EntityFrameworkCore.Internal
+
+@model SongViewModel
+
+<div class="bg-transparent card mb-0 shadow-none">
+    <a asp-action="NgheNhac" asp-controller="Song" asp-route-id="@Model.Id" title="@Model.CapitalizeName - @Model.ArtistsToString">
+        <img alt="@Model.Name" class="card-img-top img-fluid" src="@Model.Thumbnail">
+    </a>
+    <div class="card-body px-0 py-1">
+        <a asp-action="NgheNhac" asp-controller="Song" asp-route-id="@Model.Id" title="@Model.CapitalizeName - @Model.ArtistsToString">
+            <h4 class="m-0 text-capitalize text-truncate">@Model.Name</h4>
+            @if (!string.IsNullOrEmpty(Model.OtherName))
+            {
+                <h5 class="m-0 text-capitalize text-truncate">@Model.OtherName</h5>
+            }
+        </a>
+        <h5 class="text-muted text-truncate">
+            @Html.Raw(Model.Artists.Select(artist => $"<a href='/nghe-si/{artist?.Id.ToString()}'>{artist?.Name}</a>").Join(", "))
+        </h5>
+    </div>
+</div>
