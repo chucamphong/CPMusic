@@ -26,7 +26,7 @@ namespace CPMusic.Data.Repositories
             return await base.Update(song);
         }
 
-        public async Task<IEnumerable<Song>> RandomSongs(int take)
+        public async Task<IEnumerable<Song>> RandomSongs(int take = 0)
         {
             return await All(song => song,
                 include: query =>
@@ -34,7 +34,7 @@ namespace CPMusic.Data.Repositories
                     return query.Include(song => song.ArtistSongs)
                                 .ThenInclude(artistSong => artistSong.Artist);
                 },
-                orderBy: query => query.OrderByDescending(song => Guid.NewGuid()),
+                orderBy: query => query.OrderBy(song => Guid.NewGuid()),
                 take: take
             );
         }
