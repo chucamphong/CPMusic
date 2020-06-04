@@ -73,12 +73,12 @@ namespace CPMusic.Data.Repositories
                 query = query.Where(predicate);
             }
 
-            if (take > 0)
+            if (orderBy != null)
             {
-                query = query.Take(take);
+                query = orderBy(query);
             }
 
-            return orderBy != null ? orderBy(query).Select(selector) : query.Select(selector);
+            return take > 0 ? query.Take(take).Select(selector) : query.Select(selector);
         }
 
         public async Task<TEntity> Add(TEntity entity)
