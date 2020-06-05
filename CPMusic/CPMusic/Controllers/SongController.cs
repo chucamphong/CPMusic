@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using CPMusic.Data;
 using CPMusic.Data.Interfaces;
 using CPMusic.Models;
 using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CPMusic.Controllers
 {
@@ -45,24 +41,20 @@ namespace CPMusic.Controllers
                 return NotFound();
             }
 
-            Song? song = await _songRepository.GetByIdAsync((Guid) id, query =>
-            {
-                return query.Include(song => song.ArtistSongs)
-                            .ThenInclude(artistSong => artistSong.Artist)
-                            .Include(song => song.Category);
-            });
+            // Lấy thông tin bài hát
+            Song? song = await _songRepository.GetByIdAsyncWithRelationShip((Guid) id);
 
             if (song is null)
             {
                 return NotFound();
             }
 
-            IEnumerable<Song> randomSongs = await _songRepository.RandomSongs(6);
+            IEnumerable<Song> randomSongs = await _songRepository.Suggestions(song, 6);
 
             ListenViewModel listenViewModel = new ListenViewModel()
             {
                 Song = _mapper.Map<SongViewModel>(song),
-                Suggestions = _mapper.Map<IEnumerable<SongViewModel>>(randomSongs)
+                Suggestions = _mapper.Map<IEnumerable<SongViewModel>>(randomSongs),
             };
 
             return View(listenViewModel);

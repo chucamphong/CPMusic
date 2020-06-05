@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CPMusic.Data.Interfaces;
 using CPMusic.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CPMusic.Data.Repositories
 {
@@ -63,6 +64,43 @@ namespace CPMusic.Data.Repositories
                 orderBy: query => query.OrderByDescending(song => song.CreatedAt),
                 take: take
             );
+        }
+
+        public async Task<Song?> GetByIdAsyncWithRelationShip(Guid id)
+        {
+            return await Query(song => song,
+                song => song.Id == id,
+                include: query =>
+                {
+                    return query.Include(song => song.ArtistSongs)
+                                .ThenInclude(artistSong => artistSong.Artist)
+                                .Include(song => song.Category);
+                }
+            ).SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Song>> Suggestions(Song song, int take)
+        {
+            // Danh sách ID nghệ sĩ của bài hát cần tìm điểm tương đồng
+            IEnumerable<Guid> artistsId = song.ArtistSongs.Select(artistSong => artistSong.ArtistId);
+
+            return await Context.Songs
+                                .Include(record => record.ArtistSongs)
+                                .ThenInclude(artistSong => artistSong.Artist)
+                                .Where(record =>
+                                    // Loại bỏ bài hát đang nghe
+                                    record.Name != song.Name && (
+                                        // Cùng thể loại hoặc
+                                        record.Category.Id == song.Category.Id ||
+                                        // Cùng nghệ sĩ
+                                        record.ArtistSongs.Any(artistSong =>
+                                            artistsId.Contains(artistSong.ArtistId)
+                                        )
+                                    )
+                                )
+                                .OrderBy(_ => Guid.NewGuid())
+                                .Take(take)
+                                .ToListAsync();
         }
     }
 }
