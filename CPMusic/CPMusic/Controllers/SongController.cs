@@ -24,12 +24,16 @@ namespace CPMusic.Controllers
         /// <summary>
         /// GET: /bai-hat/moi-phat-hanh
         /// Trang chi tiết hiển thị các bài hát mới phát hành
+        /// Hiển thị tối đa 25 bài hát
         /// </summary>
         [Route("moi-phat-hanh")]
         public async Task<ViewResult> NewRelease()
         {
-            IEnumerable<SongViewModel> songsReleased = _mapper.Map<IEnumerable<SongViewModel>>(await _songRepository.NewSongsReleased(25));
-            return View(songsReleased);
+            IEnumerable<SongViewModel> songs = _mapper.Map<IEnumerable<SongViewModel>>(
+                await _songRepository.NewSongsReleased(25)
+            );
+
+            return View(songs);
         }
 
         /// <summary>
