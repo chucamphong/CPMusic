@@ -21,10 +21,15 @@ namespace CPMusic.Controllers
             _songRepository = songRepository;
         }
 
+        /// <summary>
+        /// GET: /bai-hat/moi-phat-hanh
+        /// Trang chi tiết hiển thị các bài hát mới phát hành
+        /// </summary>
         [Route("moi-phat-hanh")]
-        public IActionResult NewRelease()
+        public async Task<ViewResult> NewRelease()
         {
-            return View();
+            IEnumerable<SongViewModel> songsReleased = _mapper.Map<IEnumerable<SongViewModel>>(await _songRepository.NewSongsReleased(25));
+            return View(songsReleased);
         }
 
         /// <summary>

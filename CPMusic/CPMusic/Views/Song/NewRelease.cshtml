@@ -1,6 +1,9 @@
-﻿@{
+﻿@model IEnumerable<SongViewModel>
+
+@{
     Layout = "_Layout";
-    ViewBag.Title = "title";
+    ViewBag.Title = "Mới Phát Hành";
 }
 
-<h2>Mới phát hành</h2>
+<!-- Mới phát hành -->
+<partial name="Partials/_MoiPhatHanh" model="Model" />
