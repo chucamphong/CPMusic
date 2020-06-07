@@ -3,7 +3,10 @@
 <div class="mb-4 row">
     <div class="align-items-center col-12 d-flex justify-content-between mb-2">
         <h2 class="mb-0 text-uppercase">Mới phát hành</h2>
-        <h6 class="mb-0 text-uppercase">Xem thêm</h6>
+        @if (Model.Count() <= 6)
+        {
+            <h6 class="mb-0 text-uppercase">Xem thêm</h6>
+        }
     </div>
 
     @foreach (var song in Model)
