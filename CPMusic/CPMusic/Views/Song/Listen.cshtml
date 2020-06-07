@@ -5,22 +5,21 @@
 *@
 
 @{
-    SongViewModel song = Model.Song;
-
     Layout = "_Layout";
-    ViewBag.Title = $"{song.Name} - {song.ArtistsToString}";
+    ViewBag.Title = $"{Model.Song.Name} - {Model.Song.ArtistsToString}";
 }
 
+<!-- Phần nghe nhạc -->
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-12 mb-3">
-                <h2 class="mb-0">Đang phát bài hát: @song.Name - @song.ArtistsToString</h2>
-                <p class="m-0">Lượt nghe: @song.Views.ToString("N0")</p>
-                <p class="m-0">Năm phát hành: @song.Year.ToString()</p>
+                <h2 class="mb-0">Đang phát bài hát: @Model.Song.Name - @Model.Song.ArtistsToString</h2>
+                <p class="m-0">Lượt nghe: @Model.Song.Views.ToString("N0")</p>
+                <p class="m-0">Năm phát hành: @Model.Song.Year.ToString()</p>
                 <p class="m-0">
                     Thể loại:
-                    <a href="">@song.Category</a>
+                    <a href="">@Model.Song.Category</a>
                 </p>
             </div>
 
@@ -31,7 +30,23 @@
     </div>
 </div>
 
-<partial name="Partials/Suggestions" model="Model.Suggestions" />
+<!-- Gợi ý -->
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="align-items-center col-12 d-flex mb-2">
+                <h2 class="mb-0 text-uppercase">Gợi ý</h2>
+            </div>
+
+            @foreach (SongViewModel song in Model.Suggestions)
+            {
+                <div class="col-6 col-lg-2 col-sm-4">
+                    @await Component.InvokeAsync("Song", song)
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @section Styles
 {
@@ -48,10 +63,10 @@
                 container: document.getElementById('player'),
                 theme: '#5e72e4',
                 audio: {
-                    name: '@song.Name',
-                    artist: '@song.ArtistsToString',
-                    url: '@song.Url',
-                    cover: '@song.Thumbnail'
+                    name: '@Model.Song.Name',
+                    artist: '@Model.Song.ArtistsToString',
+                    url: '@Model.Song.Url',
+                    cover: '@Model.Song.Thumbnail'
                 }
             });
         })();
