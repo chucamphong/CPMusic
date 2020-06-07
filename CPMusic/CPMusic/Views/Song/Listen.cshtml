@@ -5,9 +5,10 @@
 *@
 
 @{
-    Layout = "_Layout";
     SongViewModel song = Model.Song;
-    ViewBag.Title = $"{song?.Name} - {song?.ArtistsToString}";
+
+    Layout = "_Layout";
+    ViewBag.Title = $"{song.Name} - {song.ArtistsToString}";
 }
 
 <div class="card">
