@@ -22,7 +22,7 @@ namespace CPMusic.Controllers
         }
 
         [Route("moi-phat-hanh")]
-        public IActionResult MoiPhatHanh()
+        public IActionResult NewRelease()
         {
             return View();
         }
