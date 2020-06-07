@@ -41,7 +41,6 @@ namespace CPMusic.Controllers
         /// Trang nghe nhạc
         /// </summary>
         /// TODO: Tạo phần gợi ý bài hát
-        [HttpGet]
         [Route("nghe-nhac/{id}")]
         public async Task<IActionResult> Listen(Guid? id)
         {
@@ -67,6 +66,18 @@ namespace CPMusic.Controllers
             };
 
             return View(listenViewModel);
+        }
+
+        /// <summary>
+        /// GET: /bai-hat/bang-xep-hang[?country=(Việt Nam, Âu Mỹ, Hàn Quốc)]
+        /// Trang chi tiết bảng xếp hạng bài hát
+        /// Hiển thị tối đa 25 bài hát
+        /// </summary>
+        /// TODO: Làm giao diện bảng xếp hạng
+        [Route("bang-xep-hang")]
+        public IActionResult Ranking(string? country)
+        {
+            return Content("Bảng xếp hạng");
         }
     }
 }

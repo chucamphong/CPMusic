@@ -18,13 +18,13 @@
 }
 
 <nav class="bg-white fixed-left navbar navbar-expand-xs navbar-light navbar-vertical sidenav" id="sidenav-main">
-    <div class="scrollbar-inner scroll-wrapper" style="position: relative;">
+    <div class="position-relative scrollbar-inner scroll-wrapper">
         <div class="scrollbar-inner scroll-content scroll-scrolly_visible" style="height: auto; margin-bottom: 0; margin-right: 0; max-height: 492px;">
-            <!-- Brand -->
+            <!-- Tiêu đề -->
             <div class="align-items-center d-flex sidenav-header">
                 <h1 class="m-0 navbar-brand text-primary" style="font-size: 28px;">CPMusic</h1>
                 <div class="ml-auto">
-                    <!-- Sidenav toggler -->
+                    <!-- Ẩn/Hiện menu cạnh -->
                     <div class="active d-none d-xl-block sidenav-toggler" data-action="sidenav-unpin" data-target="#sidenav-main">
                         <div class="sidenav-toggler-inner">
                             <i class="sidenav-toggler-line"></i>
@@ -35,16 +35,56 @@
                 </div>
             </div>
             <div class="navbar-inner">
-                <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-                    <!-- Nav items -->
                     <ul class="navbar-nav">
+                        @*  Trang chủ *@
                         <li class="nav-item">
                             <a asp-action="Index" asp-controller="Home" class="nav-link @IsMenuSelected(nameof(HomeController.Index), nameof(HomeController))">
-                                <i class="fas fa-h-square text-primary"></i>
+                                <i class="fa-h-square fas text-primary"></i>
                                 <span class="nav-link-text">Trang chủ</span>
                             </a>
                         </li>
+
+                        @* Bảng xếp hạng *@
+                        <li class="nav-item">
+                            <a aria-controls="navbar-song-charts"
+                               aria-expanded="@(IsMenuSelected(nameof(SongController.Ranking), nameof(SongController)) is null ? "false" : "true")"
+                               class="nav-link @IsMenuSelected(nameof(SongController.Ranking), nameof(SongController))"
+                               data-toggle="collapse" href="#navbar-song-charts" role="button">
+                                <i class="fas fa-star text-yellow"></i>
+                                <span class="nav-link-text">Bảng Xếp Hạng</span>
+                            </a>
+                            <div class="collapse @(IsMenuSelected(nameof(SongController.Ranking), nameof(SongController)) is null ? null : "show")" id="navbar-song-charts">
+                                <ul class="flex-column nav nav-sm">
+                                    <li class="nav-item">
+                                        <a asp-action="Ranking" asp-controller="Song" class="nav-link">
+                                            <span class="sidenav-mini-icon">L</span>
+                                            <span class="sidenav-normal">Lượt nghe nhiều nhất</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-action="Ranking" asp-controller="Song" asp-route-country="Việt Nam" class="nav-link">
+                                            <span class="sidenav-mini-icon">V</span>
+                                            <span class="sidenav-normal">Bài hát Việt Nam</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-action="Ranking" asp-controller="Song" asp-route-country="Âu Mỹ" class="nav-link">
+                                            <span class="sidenav-mini-icon">U</span>
+                                            <span class="sidenav-normal">Bài hát US-UK</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-action="Ranking" asp-controller="Song" asp-route-country="Hàn Quốc" class="nav-link">
+                                            <span class="sidenav-mini-icon">H</span>
+                                            <span class="sidenav-normal">Bài hát Hàn Quốc</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        @*  Mới phát hành *@
                         <li class="nav-item">
                             <a asp-action="NewRelease" asp-controller="Song" class="nav-link @IsMenuSelected(nameof(SongController.NewRelease), nameof(SongController))">
                                 <i class="ni ni-notification-70 text-orange"></i>
