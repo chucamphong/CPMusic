@@ -50,6 +50,11 @@ namespace CPMusic.Models
         public virtual Category Category { get; set; } = null!;
 
         /// <summary>
+        /// Quốc gia của bài hát
+        /// </summary>
+        public virtual Country Country { get; set; } = null!;
+
+        /// <summary>
         /// Ngày mà bài hát được tạo trong cơ sở dữ liệu
         /// </summary>
         public DateTime CreatedAt { get; set; } = DateTime.Now;

@@ -39,7 +39,8 @@ namespace CPMusic.Data
             builder.ApplyConfiguration(new RoleConfig());
 
             builder.ApplyConfiguration(new CategoryConfig());
-            builder.ApplyConfiguration(new ArtistConfig());
+            builder.ApplyConfiguration(new CountryConfig());
+;            builder.ApplyConfiguration(new ArtistConfig());
             builder.ApplyConfiguration(new SongConfig());
             builder.ApplyConfiguration(new ArtistSongConfig());
         }

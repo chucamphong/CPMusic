@@ -22,6 +22,7 @@ namespace CPMusic.Data.Config
                 Year = 2019u,
                 Views = 3213213213ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now,
             });
             
@@ -34,6 +35,7 @@ namespace CPMusic.Data.Config
                 Year = 2018u,
                 Views = 4213219841ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now.AddMonths(2),
             });
             
@@ -46,6 +48,7 @@ namespace CPMusic.Data.Config
                 Year = 2012u,
                 Views = 42841ul,
                 CategoryId = Guid.Parse("557A2270-276B-43EB-94CB-171CBF0CC9C5"),
+                CountryId = Guid.Parse("1E2831A8-1A04-4CF4-B301-DBB25AC05856"),
                 CreatedAt = DateTime.Now.AddMonths(-3),
             });
             
@@ -58,6 +61,7 @@ namespace CPMusic.Data.Config
                 Year = 2013u,
                 Views = 42444841ul,
                 CategoryId = Guid.Parse("557A2270-276B-43EB-94CB-171CBF0CC9C5"),
+                CountryId = Guid.Parse("1E2831A8-1A04-4CF4-B301-DBB25AC05856"),
                 CreatedAt = DateTime.Now.AddMonths(-3),
             });
             
@@ -70,6 +74,7 @@ namespace CPMusic.Data.Config
                 Year = 2023u,
                 Views = 5544841ul,
                 CategoryId = Guid.Parse("557A2270-276B-43EB-94CB-171CBF0CC9C5"),
+                CountryId = Guid.Parse("1E2831A8-1A04-4CF4-B301-DBB25AC05856"),
                 CreatedAt = DateTime.Now.AddMonths(6),
             });
             
@@ -82,6 +87,7 @@ namespace CPMusic.Data.Config
                 Year = 2017u,
                 Views = 222244841ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now.AddMonths(55),
             });
             
@@ -94,6 +100,7 @@ namespace CPMusic.Data.Config
                 Year = 2015u,
                 Views = 255841ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now.AddMonths(55),
             });
             
@@ -106,6 +113,7 @@ namespace CPMusic.Data.Config
                 Year = 2012u,
                 Views = 2321321312ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now.AddMonths(12),
             });
             
@@ -118,6 +126,7 @@ namespace CPMusic.Data.Config
                 Year = 2013u,
                 Views = 2344321312ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now.AddMonths(12),
             });
             
@@ -130,6 +139,7 @@ namespace CPMusic.Data.Config
                 Year = 2011u,
                 Views = 2421312ul,
                 CategoryId = Guid.Parse("1BB78812-0C2A-4BEF-9E29-91BD45CC3311"),
+                CountryId = Guid.Parse("4B73A5C7-0623-46A5-B658-B5F8DB232498"),
                 CreatedAt = DateTime.Now.AddMonths(12),
             });
         }
