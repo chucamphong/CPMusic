@@ -15,7 +15,7 @@ namespace CPMusic.Data
 
         public static readonly ILoggerFactory LoggerFactory
             = Microsoft.Extensions.Logging.LoggerFactory.Create(builder => { builder.AddConsole(); });
-        
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -40,7 +40,7 @@ namespace CPMusic.Data
 
             builder.ApplyConfiguration(new CategoryConfig());
             builder.ApplyConfiguration(new CountryConfig());
-;            builder.ApplyConfiguration(new ArtistConfig());
+            builder.ApplyConfiguration(new ArtistConfig());
             builder.ApplyConfiguration(new SongConfig());
             builder.ApplyConfiguration(new ArtistSongConfig());
         }
