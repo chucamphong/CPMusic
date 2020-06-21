@@ -18,13 +18,21 @@ namespace CPMusic.Data.Interfaces
         /// </summary>
         /// <param name="take">Số bài hát cần lấy (tối thiểu 1)</param>
         Task<IEnumerable<Song>> Ranking(int take = 0);
-        
+
+        /// <summary>
+        /// Lấy N bài hát có lượt nghe cao nhất thuộc <paramref name="country"/>
+        /// </summary>
+        /// <param name="country">Việt Nam, Âu Mỹ, Hàn Quốc</param>
+        /// <param name="take">Số bài hát cần lấy</param>
+        /// <returns></returns>
+        Task<IEnumerable<Song>> Ranking(string country, int take = 0);
+
         /// <summary>
         /// Lấy N bài hát mới phát hành
         /// </summary>
         /// <param name="take">Số bài hát cần lấy (tối thiểu 1)</param>
         Task<IEnumerable<Song>> NewSongsReleased(int take = 0);
-        
+
         /// <summary>
         /// Lấy bản ghi có <paramref name="id"/> và tất cả mối quan hệ liên quan
         /// </summary>

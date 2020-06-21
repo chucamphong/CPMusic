@@ -73,11 +73,20 @@ namespace CPMusic.Controllers
         /// Trang chi tiết bảng xếp hạng bài hát
         /// Hiển thị tối đa 25 bài hát
         /// </summary>
-        /// TODO: Làm giao diện bảng xếp hạng
         [Route("bang-xep-hang")]
-        public IActionResult Ranking(string? country)
+        public async Task<IActionResult> Ranking(string? country)
         {
-            return Content("Bảng xếp hạng");
+            IEnumerable<Song> songs = country switch
+            {
+                "Việt Nam" => await _songRepository.Ranking("Việt Nam", 25),
+                "Âu Mỹ" => await _songRepository.Ranking("Âu Mỹ", 25),
+                "Hàn Quốc" => await _songRepository.Ranking("Hàn Quốc", 25),
+                _ => await _songRepository.Ranking(25),
+            };
+
+            var ranking = _mapper.Map<IEnumerable<SongViewModel>>(songs);
+
+            return View(ranking);
         }
     }
 }

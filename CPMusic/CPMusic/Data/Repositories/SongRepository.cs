@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using CPMusic.Data.Interfaces;
 using CPMusic.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CPMusic.Data.Repositories
 {
@@ -46,6 +45,21 @@ namespace CPMusic.Data.Repositories
                 include: query =>
                 {
                     return query.Include(song => song.ArtistSongs)
+                                .ThenInclude(artistSong => artistSong.Artist);
+                },
+                orderBy: query => query.OrderByDescending(song => song.Views),
+                take: take
+            );
+        }
+
+        public async Task<IEnumerable<Song>> Ranking(string country, int take = 0)
+        {
+            return await All(song => song,
+                query => query.Country.Name == country,
+                include: query =>
+                {
+                    return query.Include(song => song.Country)
+                                .Include(song => song.ArtistSongs)
                                 .ThenInclude(artistSong => artistSong.Artist);
                 },
                 orderBy: query => query.OrderByDescending(song => song.Views),
