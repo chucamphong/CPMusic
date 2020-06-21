@@ -41,7 +41,6 @@ namespace CPMusic.Controllers
         /// GET: /bai-hat/nghe-nhac/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f5
         /// Trang nghe nhạc
         /// </summary>
-        /// TODO: Tạo phần gợi ý bài hát
         [Route("nghe-nhac/{id}")]
         public async Task<IActionResult> Listen(Guid? id)
         {
