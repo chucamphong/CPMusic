@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using CPMusic.Data.Interfaces;
@@ -78,13 +79,13 @@ namespace CPMusic.Controllers
         {
             IEnumerable<Song> songs = country switch
             {
-                "Việt Nam" => await _songRepository.Ranking("Việt Nam", 25),
-                "Âu Mỹ" => await _songRepository.Ranking("Âu Mỹ", 25),
-                "Hàn Quốc" => await _songRepository.Ranking("Hàn Quốc", 25),
+                "Việt Nam" => await _songRepository.Ranking(country, 25),
+                "Âu Mỹ" => await _songRepository.Ranking(country, 25),
+                "Hàn Quốc" => await _songRepository.Ranking(country, 25),
                 _ => await _songRepository.Ranking(25),
             };
 
-            var ranking = _mapper.Map<IEnumerable<SongViewModel>>(songs);
+            IEnumerable<SongViewModel> ranking = _mapper.Map<IEnumerable<SongViewModel>>(songs);
 
             return View(ranking);
         }
