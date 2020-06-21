@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using CPMusic.Data.Interfaces;
@@ -44,21 +43,25 @@ namespace CPMusic.Controllers
         [Route("nghe-nhac/{id}")]
         public async Task<IActionResult> Listen(Guid? id)
         {
+            // ID không hợp lệ
             if (id is null)
             {
                 return NotFound();
             }
 
             // Lấy thông tin bài hát
-            Song? song = await _songRepository.GetByIdAsyncWithRelationShip((Guid) id);
+            var song = await _songRepository.GetByIdAsyncWithRelationShip((Guid) id);
 
+            // Không tìm thấy bài hát
             if (song is null)
             {
                 return NotFound();
             }
 
+            // Lấy danh sách bài hát gợi ý
             IEnumerable<Song> randomSongs = await _songRepository.Suggestions(song, 6);
 
+            // Chuyển dữ liệu sang ViewModel để đẩy qua View
             ListenViewModel listenViewModel = new ListenViewModel()
             {
                 Song = _mapper.Map<SongViewModel>(song),
