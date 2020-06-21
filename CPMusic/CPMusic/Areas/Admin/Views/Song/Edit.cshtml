@@ -4,59 +4,59 @@
     ViewData["Title"] = "Danh sách bài hát";
 }
 
-<div class="row justify-content-center">
+<div class="justify-content-center row">
     <div class="col-12">
-        <div class="card border-0">
+        <div class="border-0 card">
             <div class="card-header">
-                <h6 class="text-uppercase ls-1 mb-1">Quản lý bài hát</h6>
+                <h6 class="ls-1 mb-1 text-uppercase">Quản lý bài hát</h6>
                 <div class="heading-title mb-0">Danh sách bài hát</div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-3 mt-md-3">
-                        <img class="img-fluid d-block mx-auto rounded-circle" src="@Model.Thumbnail" alt="@Model.Name" />
-                        <audio controls class="w-100 mt-4">
+                        <img class="d-block img-fluid mx-auto rounded-circle" src="@Model.Thumbnail" alt="@Model.Name" />
+                        <audio class="mt-4 w-100" controls>
                             <source src="@Model.Url" type="audio/mpeg" />
                         </audio>
                     </div>
                     <div class="col-12 col-md-9">
-                        <form method="post" asp-area="Admin" asp-controller="Song" asp-action="Edit">
+                        <form asp-action="Edit" asp-area="Admin" asp-controller="Song" enctype="multipart/form-data" method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
                             <div class="row">
-                                <div class="form-group col-12">
+                                <div class="col-12 form-group">
                                     <label asp-for="Name" class="control-label"></label>
                                     <input asp-for="Name" class="form-control" />
                                     <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="col-12 form-group">
                                     <label asp-for="OtherName" class="control-label"></label>
                                     <input asp-for="OtherName" class="form-control" />
                                     <span asp-validation-for="OtherName" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label asp-for="Thumbnail" class="control-label"></label>
-                                    <input asp-for="Thumbnail" class="form-control" type="file" />
-                                    <span asp-validation-for="Thumbnail" class="text-danger"></span>
+                                <div class="col-12 form-group">
+                                    <label asp-for="UploadThumbnail" class="control-label"></label>
+                                    <input asp-for="UploadThumbnail" class="form-control" type="file" />
+                                    <span asp-validation-for="UploadThumbnail" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="col-12 form-group">
                                     <label asp-for="Url" class="control-label"></label>
                                     <input asp-for="Url" class="form-control" />
                                     <span asp-validation-for="Url" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="col-12 form-group">
                                     <label asp-for="Year" class="control-label"></label>
                                     <input asp-for="Year" class="form-control" />
                                     <span asp-validation-for="Year" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="col-12 form-group">
                                     <label asp-for="CategoryId" class="control-label"></label>
                                     <select class="form-control" asp-for="CategoryId"
                                             asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
                                     </select>
                                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="col-12 form-group">
                                     <label asp-for="ArtistsId" class="control-label"></label>
                                     <select class="form-control" asp-for="ArtistsId" data-toggle="select2" name="ArtistsId[]" multiple
                                             asp-items="@(new SelectList(ViewBag.Artists, "Id", "Name"))">
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-12 d-flex justify-content-between justify-content-md-end">
                                     <a asp-action="Index" class="btn btn-outline-default">Hủy bỏ</a>
-                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                    <button class="btn btn-primary" type="submit">Cập nhật</button>
                                 </div>
                             </div>
                         </form>
@@ -78,7 +78,7 @@
 
 @section Styles
 {
-    <link rel="stylesheet" href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css">
+    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
 }
 
 @section Scripts {

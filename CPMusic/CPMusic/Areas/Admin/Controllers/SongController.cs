@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using AutoMapper;
 using CPMusic.Data;
@@ -9,8 +10,10 @@ using CPMusic.InputModels;
 using CPMusic.Models;
 using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.IO.File;
 
 namespace CPMusic.Areas.Admin.Controllers
 {
@@ -42,7 +45,7 @@ namespace CPMusic.Areas.Admin.Controllers
                 include: query =>
                     query.Include(col => col.Category)
                          .Include(col => col.ArtistSongs)
-                         .ThenInclude(artistSong => artistSong.Artist)); 
+                         .ThenInclude(artistSong => artistSong.Artist));
 
             // Chuyển đổi Domain Model -> View Model
             IEnumerable<SongViewModel> songViewModel = _mapper.Map<IEnumerable<SongViewModel>>(songs);
@@ -128,9 +131,11 @@ namespace CPMusic.Areas.Admin.Controllers
         /// POST: Admin/Song/Edit/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f2
         /// Xử lý dữ liệu của việc chỉnh sửa bài hát, nếu hợp lệ thì chỉnh sửa không thì báo lỗi
         /// </summary>
+        /// TODO: Cập nhật đường dẫn bài hát
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, SongInputModel song)
+        public async Task<IActionResult> Edit(Guid id, SongInputModel song,
+                                              [FromServices] IWebHostEnvironment environment)
         {
             if (id != song.Id)
             {
@@ -142,6 +147,27 @@ namespace CPMusic.Areas.Admin.Controllers
                 return View(song);
             }
 
+            // Xử lý tải lên ảnh đại diện
+            await using (Stream stream = song.UploadThumbnail.OpenReadStream())
+            using (MD5 md5 = MD5.Create())
+            {
+                // Tạo checksum với MD5 để tránh trường hợp tải lên ảnh bị trùng.
+                string fileName = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                string extension = Path.GetExtension(song.UploadThumbnail.FileName);
+                string filePath = Path.Combine(environment.WebRootPath, "img/songs", $"{fileName}{extension}");
+
+                // Kiểm tra xem tệp tin đã tồn tại hay chưa
+                if (!Exists(filePath))
+                {
+                    await using var fileSteam = new FileStream(filePath, FileMode.Create);
+                    await song.UploadThumbnail.CopyToAsync(fileSteam);
+                }
+
+                // Tạo đường dẫn tương đối để lưu vào cơ sở dữ liệu
+                song.Thumbnail = filePath.Replace(environment.WebRootPath, string.Empty);
+            }
+
+            // Thực hiện cập nhật vào cơ sở dữ liệu
             try
             {
                 Song entity = _mapper.Map<Song>(song);
