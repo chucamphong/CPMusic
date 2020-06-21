@@ -10,19 +10,19 @@
         <h2 class="mb-0 text-uppercase">Bảng xếp hạng</h2>
     </div>
     <div class="col-12 col-md-6 col-xl-4 mb-2">
-        <a href="{{ route('song.top-songs', ['country' => 'Việt Nam']) }}">
+        <a asp-controller="Song" asp-action="Ranking" asp-route-country="Việt Nam">
             <img alt="Bảng xếp hạng bài hát Việt Nam" class="img-fluid"
                  src="//static-zmp3.zadn.vn/dev/skins/zmp3-v5.2/images/chart-song-vn.png">
         </a>
     </div>
     <div class="col-12 col-md-6 col-xl-4 mb-2">
-        <a href="{{ route('song.top-songs', ['country' => 'US-UK']) }}">
+        <a asp-controller="Song" asp-action="Ranking" asp-route-country="Âu Mỹ">
             <img alt="Bảng xếp hạng bài hát US-UK" class="img-fluid"
                  src="//static-zmp3.zadn.vn/dev/skins/zmp3-v5.2/images/chart-song-us.png">
         </a>
     </div>
     <div class="col-12 col-md-6 col-xl-4 d-md-none d-xl-block mb-2">
-        <a href="{{ route('song.top-songs', ['country' => 'Hàn Quốc']) }}">
+        <a asp-controller="Song" asp-action="Ranking" asp-route-country="Hàn Quốc">
             <img alt="Bảng xếp hạng bài hát Hàn Quốc" class="img-fluid"
                  src="//static-zmp3.zadn.vn/dev/skins/zmp3-v5.2/images/chart-song-kpop.png">
         </a>
