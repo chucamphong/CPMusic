@@ -34,23 +34,6 @@
         <header class="bg-primary header pb-6">
             <div class="container-fluid">
                 <div class="header-body">
-                    <div class="align-items-center py-4 row">
-                        <div class="col-12">
-                            <h6 class="d-inline-block h2 mb-0 text-white">@ViewData["Title"]</h6>
-                            <nav aria-label="breadcrumb" class="d-md-inline-block d-none ml-md-4">
-                                <ol class="breadcrumb breadcrumb-dark breadcrumb-links">
-                                    <li class="breadcrumb-item">
-                                        <a asp-action="Index" asp-area="Admin" asp-controller="Home">
-                                            <i class="fa-home fas"></i>
-                                        </a>
-                                    </li>
-                                    <li aria-current="page" class="active breadcrumb-item">
-                                        @ViewData["Title"]
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
                     <!-- Card stats -->
                     @await RenderSectionAsync("HeaderCardStats", false)
                 </div>
