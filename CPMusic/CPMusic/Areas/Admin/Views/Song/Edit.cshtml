@@ -1,4 +1,4 @@
-﻿@model SongInputModel
+﻿@model SongUpdateInputModel
 
 @{
     ViewData["Title"] = "Danh sách bài hát";
@@ -40,9 +40,9 @@
                                     <span asp-validation-for="UploadThumbnail" class="text-danger"></span>
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label asp-for="Url" class="control-label"></label>
-                                    <input asp-for="Url" class="form-control" />
-                                    <span asp-validation-for="Url" class="text-danger"></span>
+                                    <label asp-for="UploadSong" class="control-label"></label>
+                                    <input asp-for="UploadSong" class="form-control" type="file" accept="audio/mpeg" />
+                                    <span asp-validation-for="UploadSong" class="text-danger"></span>
                                 </div>
                                 <div class="col-12 form-group">
                                     <label asp-for="Year" class="control-label"></label>

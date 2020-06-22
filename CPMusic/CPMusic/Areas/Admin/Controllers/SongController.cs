@@ -121,44 +121,44 @@ namespace CPMusic.Areas.Admin.Controllers
             ViewBag.Artists = await artistRepository.All();
             ViewBag.Categories = await categoryRepository.All();
 
-            return View(_mapper.Map<SongInputModel>(song));
+            return View(_mapper.Map<SongUpdateInputModel>(song));
         }
 
         /// <summary>
         /// POST: Admin/Song/Edit/18f94f44-2cb8-4dc7-bcc5-cd721ba1e2f2
         /// Xử lý dữ liệu của việc chỉnh sửa bài hát, nếu hợp lệ thì chỉnh sửa không thì báo lỗi
         /// </summary>
-        /// TODO: Cập nhật đường dẫn bài hát
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, SongInputModel song, [FromServices] FileUpload fileUpload)
+        public async Task<IActionResult> Edit(Guid id, SongUpdateInputModel request,
+                                              [FromServices] IFileUpload fileUpload)
         {
-            if (id != song.Id)
-            {
-                return NotFound();
-            }
+            Song? song = await _songRepository.GetByIdAsync(id);
 
-            if (!ModelState.IsValid)
-            {
-                return View(song);
-            }
+            if (song is null || song.Id != request.Id) return NotFound();
 
-            // Xử lý tải lên ảnh đại diện
-            song.Thumbnail = await fileUpload.Save(song.UploadThumbnail, "img/songs");
+            if (!ModelState.IsValid) return View(request);
+
+            // Xử lý tải lên ảnh đại diện bài hát
+            request.Thumbnail = request.UploadThumbnail is null
+                ? song.Thumbnail
+                : await fileUpload.Save(request.UploadThumbnail, "img/songs");
+
+            // Xử lý tải lên bài hát
+            request.Url = request.UploadSong is null
+                ? song.Url
+                : await fileUpload.Save(request.UploadSong, "songs");
 
             // Thực hiện cập nhật vào cơ sở dữ liệu
             try
             {
-                Song entity = _mapper.Map<Song>(song);
+                Song entity = _mapper.Map<Song>(request);
 
                 await _songRepository.Update(entity);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await _songRepository.GetByIdAsync(song.Id) is null)
-                {
-                    return NotFound();
-                }
+                if (await _songRepository.GetByIdAsync(request.Id) is null) return NotFound();
 
                 throw;
             }

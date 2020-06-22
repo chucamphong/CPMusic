@@ -13,7 +13,7 @@ namespace CPMusic.Mapping
         {
             // Chuyển đổi thuộc tính từ Song -> SongInputModel
             // ArtistSong artistSongs -> Guid[] artistId
-            CreateMap<Song, SongInputModel>()
+            CreateMap<Song, SongUpdateInputModel>()
                 .ForMember(
                     viewModel => viewModel.ArtistsId,
                     song => song.MapFrom(song => song.ArtistSongs.Select(artist => artist.ArtistId).ToArray())
@@ -22,7 +22,7 @@ namespace CPMusic.Mapping
             // Chuyển đổi thuộc tính từ SongInputModel -> Song
             // String categoryId -> Category category
             // Guid[] artistId -> ArtistSong artistSongs
-            CreateMap<SongInputModel, Song>()
+            CreateMap<SongUpdateInputModel, Song>()
                 .ForMember(
                     song => song.Category,
                     vm => vm.MapFrom(vm => new Category { Id = vm.CategoryId })
