@@ -34,23 +34,24 @@ namespace CPMusic
             });
 
             services.AddDefaultIdentity<User>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequireNonAlphanumeric = false;
-            })
-                .AddRoles<Role>()
-                .AddErrorDescriber<CustomIdentityErrorDescriber>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+                    {
+                        options.User.RequireUniqueEmail = true;
+                        options.Password.RequireNonAlphanumeric = false;
+                    })
+                    .AddRoles<Role>()
+                    .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
-            
+
             services.AddRazorPages();
-            
+
             services.AddMvc()
-                .AddDataAnnotationsLocalization(options => {
-                    options.DataAnnotationLocalizerProvider = (type, factory) =>
-                        factory.Create(typeof(DataAnnotations));
-                });
+                    .AddDataAnnotationsLocalization(options =>
+                    {
+                        options.DataAnnotationLocalizerProvider = (type, factory) =>
+                            factory.Create(typeof(DataAnnotations));
+                    });
 
             AddRepository(services);
 
@@ -74,7 +75,7 @@ namespace CPMusic
             }
 
             app.UseStatusCodePagesWithReExecute("/Error/Error", "?statusCode={0}");
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -88,7 +89,7 @@ namespace CPMusic
                 endpoints.MapControllerRoute(
                     "areas",
                     "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                
+
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
@@ -103,6 +104,7 @@ namespace CPMusic
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFileUpload, FileUpload>();
         }
 
         private void AddAutoMapper(IServiceCollection services)

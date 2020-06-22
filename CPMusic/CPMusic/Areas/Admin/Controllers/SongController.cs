@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using AutoMapper;
 using CPMusic.Data;
 using CPMusic.Data.Interfaces;
+using CPMusic.Helpers;
 using CPMusic.InputModels;
 using CPMusic.Models;
 using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using static System.IO.File;
 
 namespace CPMusic.Areas.Admin.Controllers
 {
@@ -134,8 +131,7 @@ namespace CPMusic.Areas.Admin.Controllers
         /// TODO: Cập nhật đường dẫn bài hát
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, SongInputModel song,
-                                              [FromServices] IWebHostEnvironment environment)
+        public async Task<IActionResult> Edit(Guid id, SongInputModel song, [FromServices] FileUpload fileUpload)
         {
             if (id != song.Id)
             {
@@ -148,24 +144,7 @@ namespace CPMusic.Areas.Admin.Controllers
             }
 
             // Xử lý tải lên ảnh đại diện
-            await using (Stream stream = song.UploadThumbnail.OpenReadStream())
-            using (MD5 md5 = MD5.Create())
-            {
-                // Tạo checksum với MD5 để tránh trường hợp tải lên ảnh bị trùng.
-                string fileName = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
-                string extension = Path.GetExtension(song.UploadThumbnail.FileName);
-                string filePath = Path.Combine(environment.WebRootPath, "img/songs", $"{fileName}{extension}");
-
-                // Kiểm tra xem tệp tin đã tồn tại hay chưa
-                if (!Exists(filePath))
-                {
-                    await using var fileSteam = new FileStream(filePath, FileMode.Create);
-                    await song.UploadThumbnail.CopyToAsync(fileSteam);
-                }
-
-                // Tạo đường dẫn tương đối để lưu vào cơ sở dữ liệu
-                song.Thumbnail = filePath.Replace(environment.WebRootPath, string.Empty);
-            }
+            song.Thumbnail = await fileUpload.Save(song.UploadThumbnail, "img/songs");
 
             // Thực hiện cập nhật vào cơ sở dữ liệu
             try
