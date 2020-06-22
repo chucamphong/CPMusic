@@ -72,13 +72,14 @@ namespace CPMusic.Areas.Admin.Controllers
         /// GET: Admin/Song/Create
         /// Trạng tạo bài hát
         /// </summary>
-        /// TODO: Trả về cho view danh sách country
         public async Task<ViewResult> Create([FromServices] IArtistRepository artistRepository,
-                                             [FromServices] ICategoryRepository categoryRepository)
+                                             [FromServices] ICategoryRepository categoryRepository,
+                                             [FromServices] ICountryRepository countryRepository)
         {
             ViewBag.Artists = await artistRepository.All();
             ViewBag.Categories = await categoryRepository.All();
-
+            ViewBag.Countries = await countryRepository.All();
+            
             return View();
         }
 
@@ -86,7 +87,6 @@ namespace CPMusic.Areas.Admin.Controllers
         /// POST: Admin/Song/Create
         /// Xử lý dữ liệu của bài hát, nếu hợp lệ thì sẽ tạo bài hát và ngược lại thì trả về lỗi
         /// </summary>
-        /// TODO: Xử lý phần country
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SongCreateInputModel request, [FromServices] IFileUpload fileUpload)
@@ -98,8 +98,6 @@ namespace CPMusic.Areas.Admin.Controllers
 
             // Xử lý tải lên bài hát
             request.Url = await fileUpload.Save(request.UploadSong, "songs");
-            
-            request.CountryId = Guid.Parse("109C4273-8602-430E-8F18-63766AEE423B");
 
             await _songRepository.Add(_mapper.Map<Song>(request));
             

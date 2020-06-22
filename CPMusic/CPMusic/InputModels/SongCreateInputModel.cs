@@ -49,7 +49,9 @@ namespace CPMusic.InputModels
         [Display(Name = "Thể loại")]
         public Guid CategoryId { get; set; }
         
-        public Guid? CountryId { get; set; }
+        [Required(ErrorMessage = "Required")]
+        [Display(Name = "Quốc gia")]
+        public Guid CountryId { get; set; }
 
         // Nghệ sĩ của bài hát
         [Required(ErrorMessage = "Required")]

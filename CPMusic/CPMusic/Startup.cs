@@ -105,6 +105,7 @@ namespace CPMusic
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFileUpload, FileUpload>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
         }
 
         private void AddAutoMapper(IServiceCollection services)
