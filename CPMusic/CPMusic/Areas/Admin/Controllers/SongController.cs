@@ -72,8 +72,13 @@ namespace CPMusic.Areas.Admin.Controllers
         /// GET: Admin/Song/Create
         /// Trạng tạo bài hát
         /// </summary>
-        public IActionResult Create()
+        /// TODO: Trả về cho view danh sách country
+        public async Task<ViewResult> Create([FromServices] IArtistRepository artistRepository,
+                                             [FromServices] ICategoryRepository categoryRepository)
         {
+            ViewBag.Artists = await artistRepository.All();
+            ViewBag.Categories = await categoryRepository.All();
+
             return View();
         }
 
@@ -81,20 +86,24 @@ namespace CPMusic.Areas.Admin.Controllers
         /// POST: Admin/Song/Create
         /// Xử lý dữ liệu của bài hát, nếu hợp lệ thì sẽ tạo bài hát và ngược lại thì trả về lỗi
         /// </summary>
+        /// TODO: Xử lý phần country
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,OtherName,Thumbnail,Url,Year,Views,CreatedAt")]
-                                                Song song)
+        public async Task<IActionResult> Create(SongCreateInputModel request, [FromServices] IFileUpload fileUpload)
         {
-            if (ModelState.IsValid)
-            {
-                song.Id = Guid.NewGuid();
-                _context.Add(song);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            if (!ModelState.IsValid) return View(request);
+            
+            // Xử lý tải lên ảnh đại diện bài hát
+            request.Thumbnail = await fileUpload.Save(request.UploadThumbnail, "img/songs");
 
-            return View(song);
+            // Xử lý tải lên bài hát
+            request.Url = await fileUpload.Save(request.UploadSong, "songs");
+            
+            request.CountryId = Guid.Parse("109C4273-8602-430E-8F18-63766AEE423B");
+
+            await _songRepository.Add(_mapper.Map<Song>(request));
+            
+            return RedirectToAction(nameof(Index));
         }
 
         /// <summary>

@@ -47,11 +47,13 @@ namespace CPMusic.Models
         /// <summary>
         /// Thể loại của bài hát
         /// </summary>
+        public Guid CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
 
         /// <summary>
         /// Quốc gia của bài hát
         /// </summary>
+        public Guid CountryId { get; set; }
         public virtual Country Country { get; set; } = null!;
 
         /// <summary>

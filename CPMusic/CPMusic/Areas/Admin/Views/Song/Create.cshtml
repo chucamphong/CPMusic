@@ -1,63 +1,85 @@
-﻿@model CPMusic.Models.Song
+﻿@model SongCreateInputModel
 
 @{
-    ViewData["Title"] = "Create";
+    // TODO: Hiển thị phần nhập country
+    ViewData["Title"] = "Tạo bài hát";
 }
 
-<h1>Create</h1>
-
-<h4>Song</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="justify-content-center row">
+    <div class="col-12">
+        <div class="border-0 card">
+            <div class="card-header">
+                <h6 class="ls-1 mb-1 text-uppercase">Quản lý bài hát</h6>
+                <div class="heading-title mb-0">Tạo bài hát</div>
             </div>
-            <div class="form-group">
-                <label asp-for="OtherName" class="control-label"></label>
-                <input asp-for="OtherName" class="form-control" />
-                <span asp-validation-for="OtherName" class="text-danger"></span>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form asp-action="Create" asp-area="Admin" asp-controller="Song" enctype="multipart/form-data" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="OtherName" class="control-label"></label>
+                                    <input asp-for="OtherName" class="form-control" />
+                                    <span asp-validation-for="OtherName" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="UploadThumbnail" class="control-label"></label>
+                                    <input asp-for="UploadThumbnail" class="form-control" type="file" />
+                                    <span asp-validation-for="UploadThumbnail" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="UploadSong" class="control-label"></label>
+                                    <input asp-for="UploadSong" class="form-control" type="file" accept="audio/mpeg" />
+                                    <span asp-validation-for="UploadSong" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="Year" class="control-label"></label>
+                                    <input asp-for="Year" class="form-control" />
+                                    <span asp-validation-for="Year" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="CategoryId" class="control-label"></label>
+                                    <select class="form-control" asp-for="CategoryId"
+                                            asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                                    </select>
+                                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="ArtistsId" class="control-label"></label>
+                                    <select class="form-control" asp-for="ArtistsId" data-toggle="select2" name="ArtistsId[]" multiple
+                                            asp-items="@(new SelectList(ViewBag.Artists, "Id", "Name"))">
+                                    </select>
+                                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between justify-content-md-end">
+                                    <a asp-action="Index" class="btn btn-outline-default">Hủy bỏ</a>
+                                    <button class="btn btn-primary" type="submit">Cập nhật</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Thumbnail" class="control-label"></label>
-                <input asp-for="Thumbnail" class="form-control" />
-                <span asp-validation-for="Thumbnail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Url" class="control-label"></label>
-                <input asp-for="Url" class="form-control" />
-                <span asp-validation-for="Url" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Views" class="control-label"></label>
-                <input asp-for="Views" class="form-control" />
-                <span asp-validation-for="Views" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Styles
+{
+    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
+}
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
+
+    <!--suppress JSUnresolvedFunction -->
+    <script>
+        $('[data-toggle="select2"]').select2();
+    </script>
 }

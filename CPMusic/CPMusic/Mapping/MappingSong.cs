@@ -34,6 +34,18 @@ namespace CPMusic.Mapping
                         ArtistId = artistId,
                     }))
                 );
+            
+            // Chuyển đổi thuộc tính từ SongCreateInputModel -> Song
+            // String categoryId -> Category category
+            // Guid[] artistId -> ArtistSong artistSongs
+            CreateMap<SongCreateInputModel, Song>()
+                .ForMember(
+                    song => song.ArtistSongs,
+                    vm => vm.MapFrom(vm => vm.ArtistsId.Select(artistId => new ArtistSong
+                    {
+                        ArtistId = artistId,
+                    }))
+                );
 
             // Chuyển đổi thuộc tính từ Song -> SongViewModel
             // Guid id -> String id
