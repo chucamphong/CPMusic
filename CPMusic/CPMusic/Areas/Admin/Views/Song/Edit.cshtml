@@ -1,7 +1,7 @@
 ﻿@model SongUpdateInputModel
 
 @{
-    ViewData["Title"] = "Danh sách bài hát";
+    ViewData["Title"] = $"Chỉnh sửa bài hát {Model.Name}";
 }
 
 <div class="justify-content-center row">
@@ -9,7 +9,7 @@
         <div class="border-0 card">
             <div class="card-header">
                 <h6 class="ls-1 mb-1 text-uppercase">Quản lý bài hát</h6>
-                <div class="heading-title mb-0">Danh sách bài hát</div>
+                <div class="heading-title mb-0">Chỉnh sửa bài hát  @Model.Name</div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -84,6 +84,7 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
+    <!--suppress JSUnresolvedFunction -->
     <script>
         $('[data-toggle="select2"]').select2();
     </script>
