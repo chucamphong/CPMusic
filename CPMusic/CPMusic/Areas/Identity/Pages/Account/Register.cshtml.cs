@@ -30,6 +30,11 @@ namespace CPMusic.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required(ErrorMessage = "Required")]
+            [Display(Name = "Họ tên")]
+            [StringLength(30, MinimumLength = 6, ErrorMessage = "StringLength")]
+            public string? Name { get; set; }
+
+            [Required(ErrorMessage = "Required")]
             [Display(Name = "Tài khoản")]
             [StringLength(30, MinimumLength = 6, ErrorMessage = "StringLength")]
             public string? UserName { get; set; }
@@ -81,7 +86,7 @@ namespace CPMusic.Areas.Identity.Pages.Account
             // ReSharper disable once InvertIf
             if (ModelState.IsValid)
             {
-                User user = new User {UserName = Input.UserName, Email = Input.Email};
+                User user = new User { UserName = Input.UserName, Email = Input.Email, Name = Input.Name! };
                 IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
 
                 // Tạo tài khoản thành công thì đăng nhập
@@ -91,7 +96,7 @@ namespace CPMusic.Areas.Identity.Pages.Account
                     await _signInManager.SignInAsync(user, false);
                     return LocalRedirect(ReturnUrl);
                 }
-                
+
                 // Tạo tài khoản thất bại
                 foreach (var error in result.Errors)
                 {

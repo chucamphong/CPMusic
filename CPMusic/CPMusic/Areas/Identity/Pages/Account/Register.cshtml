@@ -11,12 +11,23 @@
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             <div class="form-group">
                 <div class="input-group input-group-alternative input-group-merge mb-3">
+                    <label asp-for="Input.Name" class="input-group-prepend mb-0">
+                        <span class="input-group-text">
+                            <i class="ni ni-badge"></i>
+                        </span>
+                    </label>
+                    <input asp-for="Input.Name" class="form-control" placeholder="Nhập họ và tên" />
+                    <span asp-validation-for="Input.Name"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative input-group-merge mb-3">
                     <label asp-for="Input.UserName" class="input-group-prepend mb-0">
                         <span class="input-group-text">
                             <i class="ni ni-single-02"></i>
                         </span>
                     </label>
-                    <input asp-for="Input.UserName" class="form-control" placeholder="Nhập họ và tên" />
+                    <input asp-for="Input.UserName" class="form-control" placeholder="Nhập tên tài khoản" />
                     <span asp-validation-for="Input.UserName"></span>
                 </div>
             </div>
