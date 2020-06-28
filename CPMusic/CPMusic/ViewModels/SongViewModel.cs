@@ -29,6 +29,9 @@ namespace CPMusic.ViewModels
         [Display(Name = "Lượt nghe")]
         public uint Views { get; set; }
 
+        [Display(Name = "Quốc gia")]
+        public string Country { get; set; } = null!;
+
         [Display(Name = "Thể loại")]
         public string Category { get; set; } = null!;
 

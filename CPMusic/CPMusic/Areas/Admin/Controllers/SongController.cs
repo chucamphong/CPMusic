@@ -41,6 +41,7 @@ namespace CPMusic.Areas.Admin.Controllers
                 col => col,
                 include: query =>
                     query.Include(col => col.Category)
+                         .Include(col => col.Country)
                          .Include(col => col.ArtistSongs)
                          .ThenInclude(artistSong => artistSong.Artist));
 

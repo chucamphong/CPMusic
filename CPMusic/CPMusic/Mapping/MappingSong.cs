@@ -63,6 +63,10 @@ namespace CPMusic.Mapping
                 .ForMember(
                     viewModel => viewModel.Artists,
                     song => song.MapFrom(song => song.ArtistSongs.Select(artistSong => artistSong.Artist))
+                )
+                .ForMember(
+                    viewModel => viewModel.Country,
+                    song => song.MapFrom(song => song.Country.Name)
                 );
         }
     }
