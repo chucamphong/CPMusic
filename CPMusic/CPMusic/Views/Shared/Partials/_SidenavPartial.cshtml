@@ -4,8 +4,8 @@
 {
     string? IsMenuSelected(string actionName, string controllerName, string className = "active")
     {
-        var conname = ViewContext.RouteData.Values["controller"].ToString()?.ToLower();
-        var actname = ViewContext.RouteData.Values["action"].ToString()?.ToLower();
+        var conname = ViewContext.RouteData.Values["controller"]?.ToString()?.ToLower();
+        var actname = ViewContext.RouteData.Values["action"]?.ToString()?.ToLower();
         controllerName = controllerName.Replace("Controller", "");
 
         if (conname == controllerName.ToLower() && actname == actionName.ToLower())
