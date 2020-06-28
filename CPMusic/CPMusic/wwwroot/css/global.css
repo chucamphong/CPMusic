@@ -1,0 +1,22 @@
+﻿.navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
+    background: #c3e1ff;
+}
+
+.field-validation-error, .invalid-feedback
+{
+    font-size: 80%;
+    display: none;
+    width: 100%;
+    margin: .5rem;
+    color: #fb6340;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+.field-validation-error
+{
+    display: block;
+}

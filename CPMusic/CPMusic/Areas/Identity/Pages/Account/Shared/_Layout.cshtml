@@ -12,33 +12,33 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <title>CPMusic - @ViewData["Title"]</title>
-    <meta name="description" content=""/>
-    <meta name="author" content="Chu Phong">
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="~/img/brand/favicon.png" type="image/x-icon">
+    
+    @* <!-- Favicon --> *@
+    @* <link href="~/img/brand/favicon.png" rel="shortcut icon" type="image/x-icon"> *@
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
     <!-- Icons -->
     <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Stylesheets -->
     <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/argon.min.css?v=1.2.0" rel="stylesheet" type="text/css">
-    
+    <link href="~/css/global.css" rel="stylesheet">
+
     @await RenderSectionAsync("Styles", false)
 </head>
 <body class="bg-default">
     <!-- Main content -->
     <div class="main-content">
         <!-- Header -->
-        <div class="header bg-gradient-primary py-8">
+        <div class="bg-gradient-primary header py-8">
             <div class="container">
-                <div class="header-body text-center mb-7">
-                    <div class="row justify-content-center">
+                <div class="header-body mb-7 text-center">
+                    <div class="justify-content-center row">
                         <div class="col-md-10 px-5">
                             <h1 class="text-white">@ToTitleCase(ViewData["Title"].ToString() ?? "")</h1>
                             <p class="text-lead text-white">Chúc bạn một ngày tốt lành</p>
@@ -47,14 +47,14 @@
                 </div>
             </div>
             <div class="separator separator-bottom separator-skew zindex-100">
-                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <svg preserveAspectRatio="none" viewBox="0 0 2560 100" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
                     <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
                 </svg>
             </div>
         </div>
         <!-- Page content -->
         <div class="container mt--9 pb-5">
-            <div class="row justify-content-center">
+            <div class="justify-content-center row">
                 <div class="col-lg-5 col-md-7">
                     @RenderBody()
                 </div>
@@ -73,7 +73,7 @@
 
     <!-- Argon JS -->
     <script src="https://demos.creative-tim.com/argon-dashboard-pro/assets/js/argon.min.js?v=1.2.0"></script>
-    
+
     @await RenderSectionAsync("Scripts", false)
 </body>
 </html>
