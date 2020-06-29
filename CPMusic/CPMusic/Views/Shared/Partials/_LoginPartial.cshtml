@@ -64,7 +64,10 @@ else
                 </div>
                 @if (User.IsInRole("Admin"))
                 {
-                    <a asp-action="Index" asp-area="Admin" asp-controller="Home" class="dropdown-item">Trang quản trị</a>
+                    <a asp-action="Index" asp-area="Admin" asp-controller="Home" class="dropdown-item">
+                        <i class="ni ni-settings-gear-65"></i>
+                        Trang quản trị
+                    </a>
                 }
                 <a class="dropdown-item" onclick="$('#logoutFrm').submit();" type="button">
                     <i class="ni ni-user-run"></i>
