@@ -1,4 +1,9 @@
-﻿@model IEnumerable<SongViewModel>
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@using X.PagedList
+@using Microsoft.EntityFrameworkCore.Internal
+
+@model IPagedList<Song>
 
 @{
     ViewData["Title"] = "Danh sách bài hát";
@@ -13,82 +18,51 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <div>
-                        <table class="align-items-center table">
-                            <thead class="thead-light">
+                    <table class="align-items-center table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col" style="width: 10%;">Ảnh đại diện</th>
+                            <th scope="col">Tên bài hát</th>
+                            <th scope="col">Tên khác</th>
+                            <th scope="col">Năm phát hành</th>
+                            <th scope="col">Lượt nghe</th>
+                            <th scope="col">Quốc gia</th>
+                            <th scope="col">Thể loại</th>
+                            <th scope="col">Nghệ sĩ</th>
+                            <th scope="col">Chức năng</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list">
+                        @foreach (var song in Model)
+                        {
                             <tr>
-                                <th scope="col" style="width: 10%;">
-                                    @Html.DisplayNameFor(model => model.Thumbnail)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.OtherName)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Year)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Views)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Country)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Category)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.Artists)
-                                </th>
-                                <th scope="col">
-                                    @Html.DisplayNameFor(model => model.CreatedAt)
-                                </th>
-                                <th scope="col">Chức năng</th>
+                                <td>
+                                    <img class="img-fluid" src="@song.Thumbnail" alt="@song.Name" />
+                                </td>
+                                <td>@song.Name</td>
+                                <td>@song.OtherName</td>
+                                <td>@song.Year.ToString()</td>
+                                <td>@song.Views.ToString()</td>
+                                <td>@song.Country.Name</td>
+                                <td>@song.Category.Name</td>
+                                <td>@song.ArtistSongs.Select(artistSong => artistSong.Artist).Select(artist => artist.Name).Join()</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@song.Id.ToString()">Chỉnh sửa</a> |
+                                    <a asp-action="Details" asp-route-id="@song.Id.ToString()">Thông tin</a> |
+                                    <a asp-action="Delete" asp-route-id="@song.Id.ToString()">Xóa</a>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody class="list">
-                            @foreach (SongViewModel song in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <img class="img-fluid" src="@song.Thumbnail" alt="@song.Name" />
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.Name)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.OtherName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.Year)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.Views)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.Country)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.Category)
-                                    </td>
-                                    <td>
-                                        @string.Join(", ", song.Artists.Select(artist => artist?.Name))
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(_ => song.CreatedAt)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@song.Id">Chỉnh sửa</a> |
-                                        <a asp-action="Details" asp-route-id="@song.Id">Thông tin</a> |
-                                        <a asp-action="Delete" asp-route-id="@song.Id">Xóa</a>
-                                    </td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                    </div>
+                        }
+                        </tbody>
+                    </table>
                 </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                {
+                    ContainerDivClasses = new[] { "d-flex justify-content-center" },
+                    LiElementClasses = new[] { "page-item" },
+                    PageClasses = new[] { "page-link" }
+                })
             </div>
         </div>
     </div>

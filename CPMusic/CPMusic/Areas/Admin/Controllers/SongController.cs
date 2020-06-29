@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,10 +7,10 @@ using CPMusic.Data.Interfaces;
 using CPMusic.Helpers;
 using CPMusic.InputModels;
 using CPMusic.Models;
-using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace CPMusic.Areas.Admin.Controllers
 {
@@ -34,11 +33,10 @@ namespace CPMusic.Areas.Admin.Controllers
         /// GET: /Admin/Song
         /// Trang xem tất cả bài hát
         /// </summary>
-        /// TODO: Làm phân trang
-        public async Task<IActionResult> Index()
+        public async Task<ViewResult> Index(int page = 1)
         {
-            // Truy vấn lấy tất cả các cột trong bảng cùng với quan hệ của bảng thể loại và nghệ sĩ
-            IEnumerable<Song> songs = await _songRepository.All(
+            // Truy vấn lấy tất cả các cột trong bảng cùng với quan hệ
+            IQueryable<Song> songs = _songRepository.Query(
                 col => col,
                 include: query =>
                     query.Include(col => col.Category)
@@ -47,10 +45,9 @@ namespace CPMusic.Areas.Admin.Controllers
                          .ThenInclude(artistSong => artistSong.Artist),
                 orderBy: query => query.OrderByDescending(song => song.CreatedAt));
 
-            // Chuyển đổi Domain Model -> View Model
-            IEnumerable<SongViewModel> songViewModel = _mapper.Map<IEnumerable<SongViewModel>>(songs);
+            IPagedList<Song> paginated = await songs.ToPagedListAsync(page, 5);
 
-            return View(songViewModel);
+            return View(paginated);
         }
 
         /// <summary>
@@ -82,7 +79,7 @@ namespace CPMusic.Areas.Admin.Controllers
             ViewBag.Artists = await artistRepository.All();
             ViewBag.Categories = await categoryRepository.All();
             ViewBag.Countries = await countryRepository.All();
-            
+
             return View();
         }
 
@@ -95,7 +92,7 @@ namespace CPMusic.Areas.Admin.Controllers
         public async Task<IActionResult> Create(SongCreateInputModel request, [FromServices] IFileUpload fileUpload)
         {
             if (!ModelState.IsValid) return View(request);
-            
+
             // Xử lý tải lên ảnh đại diện bài hát
             request.Thumbnail = await fileUpload.Save(request.UploadThumbnail, "img/songs");
 
@@ -103,7 +100,7 @@ namespace CPMusic.Areas.Admin.Controllers
             request.Url = await fileUpload.Save(request.UploadSong, "songs");
 
             await _songRepository.Add(_mapper.Map<Song>(request));
-            
+
             return RedirectToAction(nameof(Index));
         }
 

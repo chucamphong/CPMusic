@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using AutoMapper;
+using CPMusic.InputModels;
 using CPMusic.Models;
 using CPMusic.ViewModels;
-using CPMusic.InputModels;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CPMusic.Mapping
 {
@@ -38,7 +37,7 @@ namespace CPMusic.Mapping
                     song => song.Country,
                     vm => vm.MapFrom(vm => new Country { Id = vm.CountryId })
                 );
-            
+
             // Chuyển đổi thuộc tính từ SongCreateInputModel -> Song
             // String categoryId -> Category category
             // Guid[] artistId -> ArtistSong artistSongs
