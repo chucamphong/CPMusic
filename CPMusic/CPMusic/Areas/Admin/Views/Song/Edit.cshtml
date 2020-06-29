@@ -9,7 +9,7 @@
         <div class="border-0 card">
             <div class="card-header">
                 <h6 class="ls-1 mb-1 text-uppercase">Quản lý bài hát</h6>
-                <div class="heading-title mb-0">Chỉnh sửa bài hát  @Model.Name</div>
+                <div class="heading-title mb-0">Chỉnh sửa bài hát @Model.Name</div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -48,6 +48,13 @@
                                     <label asp-for="Year" class="control-label"></label>
                                     <input asp-for="Year" class="form-control" />
                                     <span asp-validation-for="Year" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="CountryId" class="control-label"></label>
+                                    <select class="form-control" asp-for="CountryId"
+                                            asp-items="@(new SelectList(ViewBag.Countries, "Id", "Name"))">
+                                    </select>
+                                    <span asp-validation-for="CountryId" class="text-danger"></span>
                                 </div>
                                 <div class="col-12 form-group">
                                     <label asp-for="CategoryId" class="control-label"></label>

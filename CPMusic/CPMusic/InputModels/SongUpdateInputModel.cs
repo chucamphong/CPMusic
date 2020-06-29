@@ -41,6 +41,11 @@ namespace CPMusic.InputModels
         [Required(ErrorMessage = "Required")]
         [Display(Name = "Năm phát hành")]
         public uint Year { get; set; }
+        
+        // Quốc gia của bài hát
+        [Required(ErrorMessage = "Required")]
+        [Display(Name = "Quốc gia")]
+        public Guid CountryId { get; set; }
 
         // Thể loại của bài hát
         [Required(ErrorMessage = "Required")]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CPMusic.Data;
@@ -43,7 +44,8 @@ namespace CPMusic.Areas.Admin.Controllers
                     query.Include(col => col.Category)
                          .Include(col => col.Country)
                          .Include(col => col.ArtistSongs)
-                         .ThenInclude(artistSong => artistSong.Artist));
+                         .ThenInclude(artistSong => artistSong.Artist),
+                orderBy: query => query.OrderByDescending(song => song.CreatedAt));
 
             // Chuyển đổi Domain Model -> View Model
             IEnumerable<SongViewModel> songViewModel = _mapper.Map<IEnumerable<SongViewModel>>(songs);
@@ -113,7 +115,8 @@ namespace CPMusic.Areas.Admin.Controllers
         [Route("{area}/{controller}/{action}/{id}")]
         public async Task<IActionResult> Edit(Guid id,
                                               [FromServices] IArtistRepository artistRepository,
-                                              [FromServices] ICategoryRepository categoryRepository)
+                                              [FromServices] ICategoryRepository categoryRepository,
+                                              [FromServices] ICountryRepository countryRepository)
         {
             Song? song = await _songRepository.GetByIdAsync(id,
                 query => query.Include(column => column.Category)
@@ -128,6 +131,7 @@ namespace CPMusic.Areas.Admin.Controllers
 
             ViewBag.Artists = await artistRepository.All();
             ViewBag.Categories = await categoryRepository.All();
+            ViewBag.Countries = await countryRepository.All();
 
             return View(_mapper.Map<SongUpdateInputModel>(song));
         }
