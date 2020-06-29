@@ -24,10 +24,10 @@
     }
 }
 
-<ul class="navbar-nav align-items-center ml-auto ml-md-0">
-    <li class="nav-item dropdown">
-        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="media align-items-center">
+<ul class="align-items-center ml-auto ml-md-0 navbar-nav">
+    <li class="dropdown nav-item">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link pr-0" data-toggle="dropdown" href="#" role="button">
+            <div class="align-items-center media">
                 <span class="avatar avatar-sm rounded-circle">
                     @* Tài khoản không có avatar thì hiển thị icon user mặc định *@
                     @if (string.IsNullOrEmpty(user.Avatar) || !Exists(GetPathImage(user.Avatar)))
@@ -39,17 +39,18 @@
                         <img src="@user.Avatar" alt="@user.Name - @user.Email" />
                     }
                 </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-                    <span class="mb-0 text-sm font-weight-bold">@user.Name</span>
+                <div class="d-lg-block d-none media-body ml-2">
+                    <span class="font-weight-bold mb-0 text-sm">@user.Name</span>
                 </div>
             </div>
         </a>
 
         <div class="dropdown-menu dropdown-menu-right">
             <div class="dropdown-header">
-                <h6 class="text-overflow m-0">Xin chào!</h6>
+                <h6 class="m-0 text-overflow">Xin chào!</h6>
             </div>
-            <a type="button" class="dropdown-item" onclick="$('#logoutFrm').submit();">
+            <a asp-action="Index" asp-area="" asp-controller="Home" class="dropdown-item">Trang nghe nhạc</a>
+            <a class="dropdown-item" onclick="$('#logoutFrm').submit();" type="button">
                 <i class="ni ni-user-run"></i>
                 <span>Đăng xuất</span>
             </a>
