@@ -207,9 +207,7 @@ namespace CPMusic.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var song = await _context.Songs.FindAsync(id);
-            _context.Songs.Remove(song);
-            await _context.SaveChangesAsync();
+            await _songRepository.Delete(id);
             return RedirectToAction(nameof(Index));
         }
     }
