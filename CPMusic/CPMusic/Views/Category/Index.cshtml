@@ -1,0 +1,23 @@
+﻿@model IEnumerable<CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Thể loại";
+}
+<div class="row">
+    @foreach (var category in Model)
+    {
+        <div class="col-6 col-sm-4 col-xl-2">
+            <div class="card">
+                <a asp-action="Details" asp-route-id="@category.Id">
+                    <img class="card-img" src="@category.Thumbnail" alt="@category.Name">
+                    <div class="align-items-center card-img-overlay d-flex justify-content-center">
+                        <div
+                            class="card-title font-weight-bolder mb-2 text-size-md text-size-sm text-size-xs text-truncate text-white">
+                            @category.Name
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>

@@ -91,6 +91,13 @@
                                 <span class="nav-link-text">Mới phát hành</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Category" class="nav-link @IsMenuSelected(nameof(CategoryController.Index), nameof(CategoryController))">
+                                <i class="ni ni-tag text-success"></i>
+                                <span class="nav-link-text">Thể loại</span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">

@@ -11,7 +11,7 @@
 <div class="mb-4 row">
     <div class="align-items-center col-12 d-flex justify-content-between mb-2">
         <h2 class="mb-0 text-uppercase">Thể Loại</h2>
-        <h6 class="mb-0 text-uppercase">Xem thêm</h6>
+        <a asp-controller="Category" asp-action="Index" class="h6 mb-0 text-uppercase">Xem thêm</a>
     </div>
 
     @for (int i = 0; i < max; i++)
@@ -20,7 +20,7 @@
 
         <div class="col-6 col-sm-4 col-xl-2 @(i >= 4 ? "d-none d-sm-block" : null)">
             <div class="card">
-                <a href="">
+                <a asp-controller="Category" asp-action="Details" asp-route-id="@category.Id">
                     <img alt="@category.Name" class="card-img" src="@category.Thumbnail">
                     <div class="align-items-center card-img-overlay d-flex justify-content-center">
                         <div

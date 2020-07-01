@@ -1,0 +1,29 @@
+﻿@using AutoMapper
+
+@inject IMapper Mapper;
+
+@model CategoryViewModel
+
+@{
+    ViewData["Title"] = $"Thông tin thể loại {Model.Name}";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="align-items-center col-12 d-flex mb-4">
+                <div class="d-flex flex-column ml-3">
+                    <h1 class="ls-1 mb-0">@Model.Name</h1>
+                    <span>Hiện có @Model.Songs.Count().ToString() bài hát</span>
+                </div>
+            </div>
+
+            @foreach (var song in Model.Songs)
+            {
+                <div class="col-6 col-lg-2 col-sm-4">
+                    @await Component.InvokeAsync("Song", Mapper.Map<SongViewModel>(song))
+                </div>
+            }
+        </div>
+    </div>
+</div>
