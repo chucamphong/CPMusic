@@ -13,18 +13,18 @@ namespace CPMusic.Controllers
         {
             _artistRepository = artistRepository;
         }
-        
+
         /// <summary>
         /// GET: /nghe-si/{id}
         /// Trang nghệ sĩ
         /// </summary>
-        /// TODO: Làm trang nghệ sĩ
+        /// TODO: Làm phân trang
         [Route("nghe-si/{id}")]
         public async Task<IActionResult> Profile(Guid? id)
         {
             if (id is null) return NotFound();
 
-            var artist = await _artistRepository.GetByIdAsync((Guid) id);
+            var artist = await _artistRepository.GetByIdAsyncWithRelationShip((Guid) id);
 
             if (artist is null) return NotFound();
 
