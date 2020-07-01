@@ -189,14 +189,14 @@ namespace CPMusic.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Songs
-                                     .FirstOrDefaultAsync(m => m.Id == id);
+            var song = await _songRepository.GetByIdAsyncWithRelationShip((Guid) id);
+            
             if (song == null)
             {
                 return NotFound();
             }
 
-            return View(song);
+            return View(_mapper.Map<SongViewModel>(song));
         }
 
         /// <summary>
