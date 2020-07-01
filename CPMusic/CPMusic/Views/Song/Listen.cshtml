@@ -45,6 +45,13 @@
                 </div>
             }
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="fb-root"></div>
+                <div class="fb-comments" data-href="@(Url.ActionLink("Listen", "Song", new { Id = Model.Song.Id }))" data-numposts="5" data-width="100%"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -72,4 +79,6 @@
             });
         })();
     </script>
+    
+    <script async crossorigin="anonymous" defer nonce="1YzDEt2A" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=647918692473856&autoLogAppEvents=1"></script>
 }
