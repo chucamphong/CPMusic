@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CPMusic.Data.Interfaces;
+using CPMusic.Helpers;
+using CPMusic.InputModels;
 using CPMusic.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +17,12 @@ namespace CPMusic.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class ArtistController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IArtistRepository _artistRepository;
 
-        public ArtistController(IArtistRepository artistRepository)
+        public ArtistController(IMapper mapper, IArtistRepository artistRepository)
         {
+            _mapper = mapper;
             _artistRepository = artistRepository;
         }
 
@@ -47,13 +52,66 @@ namespace CPMusic.Areas.Admin.Controllers
         /// </summary>
         [HttpGet]
         [Route("{area}/{controller}/{action}/{id}")]
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid? id)
         {
-            var artist = await _artistRepository.GetByIdAsyncWithRelationShip(id);
+            if (id is null) return NotFound();
+
+            var artist = await _artistRepository.GetByIdAsyncWithRelationShip((Guid) id);
 
             if (artist is null) return NotFound();
 
             return View(artist);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (id is null) return NotFound();
+
+            var artist = await _artistRepository.GetByIdAsync((Guid) id);
+
+            if (artist is null) return NotFound();
+
+            return View(_mapper.Map<ArtistUpdateInputModel>(artist));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid? id, ArtistUpdateInputModel request,
+                                              [FromServices] IFileUpload fileUpload)
+        {
+            // Nếu ID bị null
+            if (id is null) return NotFound();
+
+            // Lấy thông tin nghệ sĩ
+            var artist = await _artistRepository.GetByIdAsync((Guid) id);
+
+            // Kiểm tra nghệ sĩ có tồn tại hay không và kiểm tra ID nghệ sĩ cần chỉnh sửa có khớp hay không
+            if (artist is null || artist.Id != id) return NotFound();
+
+            // Kiểm tra tính hợp lệ của dữ liệu
+            if (!ModelState.IsValid) return View(request);
+
+            // Xử lý tải lên ảnh đại diện của nghệ sĩ
+            request.Avatar = request.UploadAvatar is null
+                ? artist.Avatar
+                : await fileUpload.Save(request.UploadAvatar, "img/avatars/artists");
+
+            // Thực hiện cập nhật vào cơ sở dữ liệu
+            try
+            {
+                Artist entity = _mapper.Map<Artist>(request);
+
+                await _artistRepository.Update(entity);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await _artistRepository.GetByIdAsync(request.Id) is null) return NotFound();
+
+                throw;
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         /// <summary>

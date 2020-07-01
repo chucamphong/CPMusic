@@ -115,6 +115,7 @@ namespace CPMusic
                 config.AddProfile(new MappingSong());
                 config.AddProfile(new MappingUser());
                 config.AddProfile(new MappingCategory());
+                config.AddProfile(new MappingArtist());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

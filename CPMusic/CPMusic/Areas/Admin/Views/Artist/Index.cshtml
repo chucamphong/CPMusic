@@ -36,7 +36,7 @@
                                 <td>@artist.Name</td>
                                 <td>@artist.ArtistSongs.Count.ToString()</td>
                                 <td>
-                                    @* <a asp-action="Edit" asp-route-id="@artist.Id.ToString()">Chỉnh sửa</a> | *@
+                                    <a asp-action="Edit" asp-route-id="@artist.Id.ToString()">Chỉnh sửa</a> |
                                     <a asp-action="Details" asp-route-id="@artist.Id.ToString()">Thông tin</a> |
                                     <a asp-action="Delete" asp-route-id="@artist.Id.ToString()">Xóa</a>
                                 </td>
