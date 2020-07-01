@@ -434,5 +434,4 @@ $RECYCLE.BIN/
 
 ScaffoldingReadMe.txt
 
-Data/Migrations/
-Migrations/
+**/Migrations/*
