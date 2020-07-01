@@ -62,6 +62,36 @@ namespace CPMusic.Areas.Admin.Controllers
 
             return View(artist);
         }
+        
+        /// <summary>
+        /// GET: Admin/Artist/Create
+        /// Trạng tạo nghệ sĩ
+        /// </summary>
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// POST: Admin/Artist/Create
+        /// Xử lý dữ liệu của nghệ sĩ, nếu hợp lệ thì sẽ tạo nghệ sĩ và ngược lại thì trả về lỗi
+        /// </summary>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ArtistCreateInputModel request, [FromServices] IFileUpload fileUpload)
+        {
+            // Kiểm tra tính hợp lệ của dữ liệu
+            if (!ModelState.IsValid) return View(request);
+            
+            // Xử lý tải lên ảnh đại diện nghệ sĩ
+            request.Avatar = await fileUpload.Save(request.UploadAvatar, "img/avatars/artists");
+            
+            // Tạo nghệ sĩ
+            await _artistRepository.Add(_mapper.Map<Artist>(request));
+            
+            // Quay về trang danh sách nghệ sĩ
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)

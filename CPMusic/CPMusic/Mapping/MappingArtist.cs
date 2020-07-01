@@ -11,6 +11,8 @@ namespace CPMusic.Mapping
             CreateMap<Artist, ArtistUpdateInputModel>();
 
             CreateMap<ArtistUpdateInputModel, Artist>();
+            
+            CreateMap<ArtistCreateInputModel, Artist>();
         }
     }
 }

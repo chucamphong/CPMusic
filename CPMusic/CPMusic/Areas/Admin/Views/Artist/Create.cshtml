@@ -1,0 +1,40 @@
+﻿@model ArtistCreateInputModel
+
+@{
+    ViewData["Title"] = "Tạo nghệ sĩ";
+}
+
+<div class="justify-content-center row">
+    <div class="col-12">
+        <div class="border-0 card">
+            <div class="card-header">
+                <h6 class="ls-1 mb-1 text-uppercase">Quản lý nghệ sĩ</h6>
+                <div class="heading-title mb-0">Tạo nghệ sĩ</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form asp-action="Create" asp-area="Admin" asp-controller="Artist" enctype="multipart/form-data" method="post">
+                            <div class="row">
+                                <div class="col-12 form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label asp-for="UploadAvatar" class="control-label"></label>
+                                    <input asp-for="UploadAvatar" class="form-control" type="file" />
+                                    <span asp-validation-for="UploadAvatar" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 d-flex justify-content-between justify-content-md-end">
+                                    <a asp-action="Index" class="btn btn-outline-default">Hủy bỏ</a>
+                                    <button class="btn btn-primary" type="submit">Tạo nghệ sĩ</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
