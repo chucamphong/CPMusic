@@ -5,7 +5,7 @@
         <h2 class="mb-0 text-uppercase">Mới phát hành</h2>
         @if (Model.Count() <= 6)
         {
-            <h6 class="mb-0 text-uppercase">Xem thêm</h6>
+            <a asp-action="NewRelease" asp-controller="Song" class="h6 mb-0 text-uppercase">Xem thêm</a>
         }
     </div>
 
