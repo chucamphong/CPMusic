@@ -97,9 +97,16 @@ namespace CPMusic.Data.Repositories
             return entity;
         }
 
-        public Task<TEntity> Delete(Guid id)
+        public async Task<TEntity> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await Context.Set<TEntity>().SingleOrDefaultAsync(col => col.Id == id);
+
+            if (entity is null) return entity;
+
+            Context.Set<TEntity>().Remove(entity);
+            await Context.SaveChangesAsync();
+
+            return entity;
         }
 
         public async Task<(int, double)> GrowthRate()
