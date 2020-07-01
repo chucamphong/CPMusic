@@ -1,0 +1,58 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@using X.PagedList
+
+@model IPagedList<Artist>
+
+@{
+    ViewData["Title"] = "Danh sách nghệ sĩ";
+}
+
+<div class="justify-content-center row">
+    <div class="col-12">
+        <div class="border-0 card">
+            <div class="card-header">
+                <h6 class="ls-1 mb-1 text-uppercase">Quản lý nghệ sĩ</h6>
+                <div class="heading-title mb-0">Danh sách nghệ sĩ</div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="align-items-center table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col" style="width: 10%;">Ảnh đại diện</th>
+                            <th scope="col">Tên nghệ sĩ</th>
+                            <th scope="col">Số lượng bài hát</th>
+                            <th scope="col">Chức năng</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list">
+                        @foreach (var artist in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img class="img-fluid" src="@artist.Avatar" alt="@artist.Name" />
+                                </td>
+                                <td>@artist.Name</td>
+                                <td>@artist.ArtistSongs.Count.ToString()</td>
+                                <td>
+                                    @* <a asp-action="Edit" asp-route-id="@artist.Id.ToString()">Chỉnh sửa</a> | *@
+                                    <a asp-action="Details" asp-route-id="@artist.Id.ToString()">Thông tin</a> |
+                                    <a asp-action="Delete" asp-route-id="@artist.Id.ToString()">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                {
+                    ContainerDivClasses = new[] { "d-flex justify-content-center" },
+                    LiElementClasses = new[] { "page-item" },
+                    PageClasses = new[] { "page-link" }
+                })
+            </div>
+        </div>
+    </div>
+</div>

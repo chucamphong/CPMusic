@@ -1,0 +1,36 @@
+﻿@model Artist
+
+@{
+    ViewData["Title"] = $"Thông tin nghệ sĩ {Model.Name}";
+}
+
+<div class="justify-content-center row">
+    <div class="col-12">
+        <div class="border-0 card">
+            <div class="card-header">
+                <h6 class="ls-1 mb-1 text-uppercase">Quản lý nghệ sĩ</h6>
+                <div class="heading-title mb-0">Thông tin nghệ sĩ @Model.Name</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="@Model.Avatar" alt="@Model.Name">
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label class="control-label">Họ tên nghệ sĩ</label>
+                                <input asp-for="Name" class="form-control" disabled />
+                            </div>
+                            <div class="col-12 form-group">
+                                <label class="control-label">Số lượng bài hát</label>
+                                <input class="form-control" disabled value="@Model.ArtistSongs.Count.ToString()" />
+                            </div>
+                            <div class="col-12 d-flex justify-content-between justify-content-md-end">
+                                <a asp-action="Index" class="btn btn-outline-default">Hủy bỏ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

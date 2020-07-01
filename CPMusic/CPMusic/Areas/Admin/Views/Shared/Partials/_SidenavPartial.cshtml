@@ -27,8 +27,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a aria-controls="navbar-examples" data-toggle="collapse" href="#navbar-examples" role="button"
-                               class="nav-link">
+                            <a aria-controls="navbar-examples" class="nav-link" data-toggle="collapse" href="#navbar-examples"
+                               role="button">
                                 <i class="ni ni-ungroup text-orange"></i>
                                 <span class="nav-link-text">Quản lý bài hát</span>
                             </a>
@@ -44,6 +44,23 @@
                                         <a asp-action="Create" asp-area="Admin" asp-controller="Song" class="nav-link">
                                             <span class="sidenav-mini-icon">T</span>
                                             <span class="sidenav-normal">Tạo bài hát</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a aria-controls="sidenav-artist" class="nav-link" data-toggle="collapse" href="#sidenav-artist"
+                               role="button">
+                                <i class="ni ni-ungroup text-orange"></i>
+                                <span class="nav-link-text">Quản lý nghệ sĩ</span>
+                            </a>
+                            <div class="collapse" id="sidenav-artist">
+                                <ul class="flex-column nav nav-sm">
+                                    <li class="nav-item">
+                                        <a asp-action="Index" asp-area="Admin" asp-controller="Artist" class="nav-link">
+                                            <span class="sidenav-mini-icon">D</span>
+                                            <span class="sidenav-normal">Danh sách nghệ sĩ</span>
                                         </a>
                                     </li>
                                 </ul>
