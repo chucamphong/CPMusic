@@ -7,6 +7,7 @@ using CPMusic.Data.Interfaces;
 using CPMusic.Helpers;
 using CPMusic.InputModels;
 using CPMusic.Models;
+using CPMusic.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -56,16 +57,18 @@ namespace CPMusic.Areas.Admin.Controllers
         /// </summary>
         [HttpGet]
         [Route("{area}/{controller}/{action}/{id}")]
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid id, [FromServices] IArtistRepository artistRepository,
+                                                 [FromServices] ICategoryRepository categoryRepository,
+                                                 [FromServices] ICountryRepository countryRepository)
         {
-            Song? song = await _songRepository.GetByIdAsync(id);
+            Song? song = await _songRepository.GetByIdAsyncWithRelationShip(id);
 
             if (song is null)
             {
                 return NotFound();
             }
 
-            return View(song);
+            return View(_mapper.Map<SongViewModel>(song));
         }
 
         /// <summary>

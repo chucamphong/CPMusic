@@ -88,7 +88,8 @@ namespace CPMusic.Data.Repositories
                 {
                     return query.Include(song => song.ArtistSongs)
                                 .ThenInclude(artistSong => artistSong.Artist)
-                                .Include(song => song.Category);
+                                .Include(song => song.Category)
+                                .Include(song => song.Country);
                 }
             ).SingleOrDefaultAsync();
         }
