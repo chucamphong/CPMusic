@@ -41,7 +41,8 @@ namespace CPMusic.Helpers
             }
 
             // Trả về đường dẫn tương đối để lưu vào cơ sở dữ liệu
-            return filePath.Replace(_environment.WebRootPath, string.Empty);
+            return filePath.Replace(_environment.WebRootPath, string.Empty)
+                           .Replace("\\", "/");
         }
     }
 }
